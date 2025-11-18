@@ -14,7 +14,7 @@ public class Location {
 	private String name;
 
 	/**
-	 * 
+	 * Constructor of Location
 	 * @param name : Name of the location
 	 * @param description : Description of the location
 	 */
