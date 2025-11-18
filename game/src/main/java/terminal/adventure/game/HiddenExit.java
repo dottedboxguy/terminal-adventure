@@ -13,4 +13,8 @@ public class HiddenExit extends Exit {
 		this.isHidden = false;
 	}
 
+	public boolean isHidden(){
+		return this.isHidden;
+	}
+
 }
