@@ -1,3 +1,7 @@
+package terminal.adventure.game;
+
+package terminal.adventure.game;
+
 public class LockedExit extends Exit {
 
 	private boolean isLocked;

@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public class Exit {
 
 	private Location destination;

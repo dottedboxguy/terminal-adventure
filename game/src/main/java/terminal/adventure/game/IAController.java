@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public class IAController extends CharacterController {
 
 	public Command SelectAction() {

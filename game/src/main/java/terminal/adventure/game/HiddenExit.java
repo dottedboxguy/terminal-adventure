@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public class HiddenExit extends Exit {
 
 	private boolean isHidden;

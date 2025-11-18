@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public class Character {
 
 	private Slot inventory;

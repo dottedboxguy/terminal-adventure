@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public class PlayerController extends CharacterController {
 
 	public Command getInput() {

@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 import java.util.*;
 
 public class Location {
