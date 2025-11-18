@@ -6,21 +6,21 @@ public class Slot {
 	public final Class type;
 
 	/**
-	 * 
-	 * @param type
+	 * Constructor of Slot
+	 * @param type : Type of the slot
 	 */
 	public Slot(String type) {
-		// TODO - implement Slot.Slot
-		throw new UnsupportedOperationException();
+		this.type = type.getClass();
+		this.content = null;
 	}
 
 	/**
-	 * 
-	 * @param Item
+	 * Check if an item can be equipped in the slot
+	 * @param Item : Item to equip
+	 * @return boolean : true if the item can be equipped, false otherwise
 	 */
 	public bool canEquip(int Item) {
-		// TODO - implement Slot.canEquip
-		throw new UnsupportedOperationException();
+		
 	}
 
 	public Item unequp() {
