@@ -9,13 +9,11 @@ public class Exit {
 	 * @param dest
 	 */
 	public Exit(Location dest) {
-		// TODO - implement Exit.Exit
-		throw new UnsupportedOperationException();
+		this.destination = dest;
 	}
 
-	public void getDestination() {
-		// TODO - implement Exit.getDestination
-		throw new UnsupportedOperationException();
+	public Location getDestination() {
+		return this.destination;
 	}
 
 }
