@@ -1,6 +1,6 @@
 package terminal.adventure.game;
 
-public abstract class Interactable {
+public abstract class Interactable implements Description{
 
 	public final String description;
 	public final String name;
@@ -11,5 +11,13 @@ public abstract class Interactable {
 	}
 
 	public abstract void action();
+
+	public String getDescription(){
+		return this.description;
+	}
+
+	public String getName(){
+		return this.name;
+	}
 
 }
