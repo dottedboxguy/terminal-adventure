@@ -4,6 +4,10 @@ public class HiddenExit extends Exit {
 
 	private boolean isHidden;
 
+	/**
+	 * 
+	 * @param dest
+	 */
 	public HiddenExit(Location dest){
 		super(dest);
 		this.isHidden = true;
