@@ -4,8 +4,8 @@ public class Character {
 
 	private Slot inventory;
 	private Location position;
-	private int HP;
-	private int MP;
+	private int hp;
+	private int mp;
 	private int armor;
 
 	/**
@@ -15,7 +15,10 @@ public class Character {
 	 * @param armor
 	 */
 	public Character(int hp, int mp, int armor) {
-		// TODO - implement Character.Character
+		this.hp = hp;
+		this.mp = mp;
+		this.armor = armor;
+		// to do the rest
 		throw new UnsupportedOperationException();
 	}
 
