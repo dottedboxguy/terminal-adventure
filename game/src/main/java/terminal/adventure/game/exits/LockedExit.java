@@ -1,23 +1,37 @@
 package terminal.adventure.game.exits;
 
+import terminal.adventure.game.Item;
 import terminal.adventure.game.Location;
-import terminal.adventure.game.Player;
 
 public class LockedExit extends Exit {
-    private String requiredKey;
+    private boolean isLocked = true;
+    private final Item requiredKey;
 
-    public LockedExit(Location destination, String requiredKey) {
-        super(destination);
+    public LockedExit(Location destination, String name, Item requiredKey) {
+        super(destination, name);
         this.requiredKey = requiredKey;
     }
 
     @Override
-    public boolean canCross(Player player) {
-        return player.hasItem(requiredKey);
+    public boolean canCross(Character character) {
+        return !(this.isLocked);
     }
 
     @Override
     public String getFailMessage() {
-        return "The door is locked. You need the " + requiredKey + ".";
+        return "The door is locked. You need the " + this.requiredKey + ".";
+    }
+
+    public String unlock(Item item){
+        if (item == this.requiredKey){
+            this.isLocked = false;
+            return "This exit is unlocked, you can now cross it.";
+        }
+        return "It seems like this doesn't fit";
+    }
+
+    public String forcedUnlock(){
+        this.isLocked = false;
+        return "WOOOAAHH!!! the lock got destroyed \n You can now pass freely.";
     }
 }

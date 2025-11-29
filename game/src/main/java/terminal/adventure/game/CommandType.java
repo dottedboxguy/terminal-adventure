@@ -1,6 +1,6 @@
 package terminal.adventure.game;
 
-public enum Command {
+public enum CommandType {
 	move,
 	attack,
 	take,

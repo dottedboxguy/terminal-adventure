@@ -1,16 +1,15 @@
 package terminal.adventure.game.exits;
 
 import terminal.adventure.game.Location;
-import terminal.adventure.game.Player;
 
 public class OpenExit extends Exit {
 
-    public OpenExit(Location destination) {
-        super(destination);
+    public OpenExit(Location destination, String name) {
+        super(destination, name);
     }
 
     @Override
-    public boolean canCross(Player player) {
+    public boolean canCross(Character player) {
         return true;
     }
 
