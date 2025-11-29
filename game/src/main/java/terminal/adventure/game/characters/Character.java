@@ -1,72 +1,31 @@
 package terminal.adventure.game.characters;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import terminal.adventure.game.Stats;
+import terminal.adventure.game.inventory.Equipment;
+import terminal.adventure.game.inventory.Inventory;
+import terminal.adventure.game.inventory.items.Item;
 public class Character {
     
-    private String name;
-    private List<Stat> baseStats;
-    private List<Item> equippedItems;
-    private List<Slot> inventory;
-    
+    public final String NAME;
+    protected Inventory inventory;
+    protected Equipment equipment;
+    protected Stats baseStats;
     
     
     public Character(String name) {
-        this.name = name;
-        this.baseStats = new ArrayList<>();
-        this.inventory = new ArrayList<>();
-        
-        
-    }
-
-    public void addBaseStat(String name, int value) {
-        baseStats.add(new Stat(name, value));
+        this.NAME = name;
+        this.inventory = new Inventory();
+        this.baseStats = new Stats();
     }
 
     public void equipItem(Item item) {
-        equippedItems.add(item);
-    }
-
-    public int getTotalStatValue(String statName) {
-        int total = 0;
-
-        for (Stat stat : baseStats) {
-            if (stat.getName().equals(statName)) {
-                total += stat.getValue();
-            }
-        }
-
-        
-        for (Item item : equippedItems) {
-            for (Stat stat : item.getStats()) {
-                if (stat.getName().equals(statName)) {
-                    total += stat.getValue();
-                }
-            }
-        }
-        return total;
+        this.equipment.equip(item);
     }
 
     // Getters
-    public String getName() { return name; }
+    public String getName() { return this.NAME; }
     
     public int getTotalStat(String name) {
-    	int res = 0;
-    	
-    	// Base Stats
-    	for ( Stat stat : this.baseStats) { 
-    		if (stat.getName().equals(name)) {
-    			res += stat.getValue();
-    		}
-    	}
-    	
-    	for( Slot slot : this.inventory ) {
-    		res += slot.getStat(name);
-    	}
-    	return res;
+        // TO DO
     }
-   
-    
-    public List<Item> getEquippedItems() { return equippedItems; }
 }
