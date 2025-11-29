@@ -1,19 +1,18 @@
 package terminal.adventure.game.exits;
 
 import terminal.adventure.game.Location;
-import terminal.adventure.game.Player;
 
 public class HiddenExit extends Exit {
 
     private boolean hidden;
 
-    public HiddenExit(Location destination) {
-        super(destination);
+    public HiddenExit(Location destination, String name) {
+        super(destination, name);
         this.hidden = true;
     }
 
     /**
-     * Reveal the exit to the player.
+     * Reveal the exit to the character.
      */
     public void unveil() {
         this.hidden = false;
@@ -30,7 +29,7 @@ public class HiddenExit extends Exit {
      * A hidden exit cannot be crossed until it is unveiled.
      */
     @Override
-    public boolean canCross(Player player) {
+    public boolean canCross(Character player) {
         return !hidden;
     }
 
