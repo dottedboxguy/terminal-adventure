@@ -1,4 +1,6 @@
-package terminal.adventure.game;
+package terminal.adventure.game.exits;
+import terminal.adventure.game.Location;
+import terminal.adventure.game.Player;
 
 public abstract class Exit {
     protected Location destination;

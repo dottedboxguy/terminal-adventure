@@ -1,4 +1,7 @@
-package terminal.adventure.game;
+package terminal.adventure.game.characters;
+
+import terminal.adventure.game.Location;
+
 public class Player extends Character {
 
     private Location currentLocation;

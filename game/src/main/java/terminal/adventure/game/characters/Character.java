@@ -1,13 +1,13 @@
-package terminal.adventure.game;
+package terminal.adventure.game.characters;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Character {
+    
     private String name;
     private List<Stat> baseStats;
     private List<Item> equippedItems;
-
     private List<Slot> inventory;
     
     

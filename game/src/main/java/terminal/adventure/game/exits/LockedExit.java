@@ -1,6 +1,7 @@
-package terminal.adventure.game;
+package terminal.adventure.game.exits;
 
-
+import terminal.adventure.game.Location;
+import terminal.adventure.game.Player;
 
 public class LockedExit extends Exit {
     private String requiredKey;
