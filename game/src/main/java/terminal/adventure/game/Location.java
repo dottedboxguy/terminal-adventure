@@ -1,35 +1,27 @@
-import java.util.*;
+package terminal.adventure.game;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Location {
+    private String name;
+    private String description;
+    private Map<String, Exit> exits;
 
-	private Collection<Character> characters;
-	private Collection<Exit> exits;
-	private Collection<Interactable> Interactable;
-	private Collection<Item> availableItems;
-	private String name;
-	private String description;
+    public Location(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.exits = new HashMap<>();
+    }
 
-	/**
-	 * 
-	 * @param name
-	 * @param description
-	 */
-	public Location(String name, String description) {
-		// TODO - implement Location.Location
-		throw new UnsupportedOperationException();
-	}
+    public void addExit(String nameOfDestination, Exit exit) {
+        exits.put(nameOfDestination, exit);
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public Exit getExit(String destinationName) {
+        return exits.get(destinationName);
+    }
 
-	public String getDescription() {
-		return this.description;
-	}
+    public String getName() { return name; }
 
-	public List<Exit> getExits() {
-		// TODO - implement Location.getExits
-		throw new UnsupportedOperationException();
-	}
-
+    public String getDescription() { return description; }
 }

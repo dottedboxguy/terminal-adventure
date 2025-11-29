@@ -1,19 +1,19 @@
-public class Exit {
+package terminal.adventure.game;
 
-	private Location destination;
+public abstract class Exit {
+    protected Location destination;
 
-	/**
-	 * 
-	 * @param dest
-	 */
-	public Exit(Location dest) {
-		// TODO - implement Exit.Exit
-		throw new UnsupportedOperationException();
-	}
+    public Exit(Location destination) {
+        this.destination = destination;
+    }
 
-	public void getDestination() {
-		// TODO - implement Exit.getDestination
-		throw new UnsupportedOperationException();
-	}
+    public Location getDestination() {
+        return destination;
+    }
 
+    // Attempt to cross the exit
+    public abstract boolean canCross(Player player);
+
+    // Message to display if crossing fails
+    public abstract String getFailMessage();
 }

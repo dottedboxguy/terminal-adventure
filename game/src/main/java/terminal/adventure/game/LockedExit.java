@@ -1,24 +1,22 @@
+package terminal.adventure.game;
+
+
+
 public class LockedExit extends Exit {
+    private String requiredKey;
 
-	private boolean isLocked;
+    public LockedExit(Location destination, String requiredKey) {
+        super(destination);
+        this.requiredKey = requiredKey;
+    }
 
-	/**
-	 * 
-	 * @param dest
-	 */
-	public void Exit(Location dest) {
-		// TODO - implement LockedExit.Exit
-		throw new UnsupportedOperationException();
-	}
+    @Override
+    public boolean canCross(Player player) {
+        return player.hasItem(requiredKey);
+    }
 
-	public void getDestination() {
-		// TODO - implement LockedExit.getDestination
-		throw new UnsupportedOperationException();
-	}
-
-	public void Unlock() {
-		// TODO - implement LockedExit.Unlock
-		throw new UnsupportedOperationException();
-	}
-
+    @Override
+    public String getFailMessage() {
+        return "The door is locked. You need the " + requiredKey + ".";
+    }
 }

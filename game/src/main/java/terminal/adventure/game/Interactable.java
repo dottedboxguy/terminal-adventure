@@ -1,8 +1,23 @@
-public abstract class Interactable {
+package terminal.adventure.game;
 
-	private String description;
-	private String name;
+public abstract class Interactable implements Description{
+
+	private final String description;
+	private final String name;
+
+	public Interactable(String desc, String name){
+		this.description = desc;
+		this.name = name;
+	}
 
 	public abstract void action();
+
+	public String getDescription(){
+		return this.description;
+	}
+
+	public String getName(){
+		return this.name;
+	}
 
 }

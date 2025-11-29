@@ -1,3 +1,5 @@
+package terminal.adventure.game;
+
 public abstract class CharacterController {
 
 	private Character character;
