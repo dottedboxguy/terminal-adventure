@@ -1,37 +1,27 @@
 package terminal.adventure.game;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Location {
+    private String name;
+    private String description;
+    private Map<String, Location> exits;
 
-	private List<Character> characters;
-	private List<Interactable> Interactables;
-	private List<Item> availableItems;
-	private Map<String,Exit> exits;
-	private String name;
+    public Location(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.exits = new HashMap<>();
+    }
 
-	/**
-	 * Constructor of Location
-	 * @param name : Name of the location
-	 * @param description : Description of the location
-	 */
-	public Location(String name) {
-		this.name = name;
-		this.characters = new ArrayList<Character>();
-		this.exits = new HashMap<String,Exit>();
-		this.availableItems = new ArrayList<Item>();
-		this.Interactables = new ArrayList<Interactable>();
-	}
+    public void setExit(String direction, Location location) {
+        exits.put(direction, location);
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public Location getExit(String direction) {
+        return exits.get(direction);
+    }
 
-	public Exit getExitFromKey(String key) {
-		return this.exits.get(key);
-	}
-
+    public String getDescription() {
+        return description;
+    }
 }
