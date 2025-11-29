@@ -1,25 +1,17 @@
 package terminal.adventure.game;
 
 public abstract class Spell {
+    private String name;
+    private String description;
 
-	private String name;
-	private String description;
+    public Spell(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public String getName() { return name; }
+    public String getDescription() { return description; }
 
-	public String getDescription() {
-		return this.description;
-	}
-
-	/**
-	 * 
-	 * @param target
-	 */
-	public void cast(Character target) {
-		// TODO - implement Spell.cast
-		throw new UnsupportedOperationException();
-	}
-
+    // Main effect of the spell
+    public abstract void cast(GameState game, Player player, Object target);
 }
