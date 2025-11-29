@@ -1,4 +1,4 @@
-package terminal.adventure.game;
+package terminal.adventure.game.exits;
 import java.util.function.BooleanSupplier;
 
 public class ConditionalExit extends Exit {
