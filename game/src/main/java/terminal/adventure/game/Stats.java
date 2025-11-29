@@ -5,6 +5,8 @@ public class Stats {
 	private int strength;
 	private int speed;
 	private int armor;
+	private int currentHealth;
+	private int maxHealth;
 	//...
 	
 	public Stats() {
@@ -12,14 +14,7 @@ public class Stats {
 		this.speed = 0;
 		this.armor = 0;
 	}
-	
-	public Stats(int strength, int speed, int armor) {
-		this.strength = strength;
-		this.speed = speed;
-		this.armor = armor;
-	}
-	
-	
+		
 	public int getStrength() {
 		return strength;
 	}
