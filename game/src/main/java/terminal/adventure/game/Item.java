@@ -1,23 +1,22 @@
 package terminal.adventure.game;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Item {
-	public final String NAME;
-	Collection<Spell> spells;
-	private Map<String,Integer> stats;
-	
+public class Item {
+    private String name;
+    private List<Stat> stats;
 
-	public Item(String name) {
-		this.NAME = name;
-		this.spells = null;
-		this.stats = null;
-	}
-	public Item() {
-		this.NAME = null;
-		this.spells = null;
-		this.stats = null;
-	}
+    public Item(String name) {
+        this.name = name;
+        this.stats = new ArrayList<>();
+    }
 
+    public void addStat(Stat stat) {
+        stats.add(stat);
+    }
+
+    // Getters
+    public String getName() { return name; }
+    public List<Stat> getStats() { return stats; }
 }
