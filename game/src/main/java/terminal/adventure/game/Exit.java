@@ -1,19 +1,19 @@
 package terminal.adventure.game;
 
-public class Exit {
+public abstract class Exit {
+    protected Location destination;
 
-	private Location destination;
+    public Exit(Location destination) {
+        this.destination = destination;
+    }
 
-	/**
-	 * 
-	 * @param dest
-	 */
-	public Exit(Location dest) {
-		this.destination = dest;
-	}
+    public Location getDestination() {
+        return destination;
+    }
 
-	public Location getDestination() {
-		return this.destination;
-	}
+    // Attempt to cross the exit
+    public abstract boolean canCross(Player player);
 
+    // Message to display if crossing fails
+    public abstract String getFailMessage();
 }
