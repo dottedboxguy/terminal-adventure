@@ -5,7 +5,7 @@ import java.util.Map;
 public class Location {
     private String name;
     private String description;
-    private Map<String, Location> exits;
+    private Map<String, Exit> exits;
 
     public Location(String name, String description) {
         this.name = name;
@@ -13,15 +13,15 @@ public class Location {
         this.exits = new HashMap<>();
     }
 
-    public void setExit(String direction, Location location) {
-        exits.put(direction, location);
+    public void addExit(String nameOfDestination, Exit exit) {
+        exits.put(nameOfDestination, exit);
     }
 
-    public Location getExit(String direction) {
-        return exits.get(direction);
+    public Exit getExit(String destinationName) {
+        return exits.get(destinationName);
     }
 
-    public String getDescription() {
-        return description;
-    }
+    public String getName() { return name; }
+
+    public String getDescription() { return description; }
 }
