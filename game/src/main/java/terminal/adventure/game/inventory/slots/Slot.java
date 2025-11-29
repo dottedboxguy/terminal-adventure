@@ -29,6 +29,10 @@ public abstract class Slot {
 		return null;
 	}
 
+	public boolean isEmpty() {
+		return content == null;
+	}
+	
 	public boolean contains(Item item) {
 		
 		return this.content == item; // Checks if the actual item is contained, not just the same item
