@@ -1,22 +1,15 @@
+package terminal.adventure.game;
+
 public class Slot {
 
-	private Item content;
-	public final Class type;
+	private Item content = null;
+	public final Class<?> type;
 
-	/**
-	 * 
-	 * @param type
-	 */
-	public Slot(String type) {
-		// TODO - implement Slot.Slot
-		throw new UnsupportedOperationException();
+	public Slot(Class<?> type) {
+		this.type = type;
 	}
 
-	/**
-	 * 
-	 * @param Item
-	 */
-	public bool canEquip(int Item) {
+	public boolean canEquip(int Item) {
 		// TODO - implement Slot.canEquip
 		throw new UnsupportedOperationException();
 	}
@@ -26,13 +19,16 @@ public class Slot {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param Item
-	 */
 	public Item equip(int Item) {
 		// TODO - implement Slot.equip
 		throw new UnsupportedOperationException();
+	}
+
+	public int getStat(String name) {
+		if (this.content != null) {
+			return this.content.getStat(name);
+		}
+		return 0;
 	}
 
 }
