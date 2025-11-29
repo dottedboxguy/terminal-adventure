@@ -19,7 +19,6 @@ public class Stats {
 		this.armor = armor;
 	}
 	
-	
 	public int getStrength() {
 		return strength;
 	}
@@ -37,6 +36,17 @@ public class Stats {
 	}
 	public void setArmor(int armor) {
 		this.armor = armor;
+	}
+	
+	public Stats statsSum(Stats other) {
+		
+		Stats res = new Stats();
+		
+		res.setStrength(this.strength + other.getStrength());
+		res.setSpeed(this.speed + other.getSpeed());
+		res.setArmor(this.strength + other.getStrength());		
+		
+		return res;
 	}
 
 }
