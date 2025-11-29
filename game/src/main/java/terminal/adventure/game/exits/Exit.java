@@ -1,12 +1,13 @@
 package terminal.adventure.game.exits;
 import terminal.adventure.game.Location;
-import terminal.adventure.game.Player;
 
 public abstract class Exit {
     protected Location destination;
+    protected final String NAME;
 
-    public Exit(Location destination) {
+    public Exit(Location destination, String name) {
         this.destination = destination;
+        this.NAME = name;
     }
 
     public Location getDestination() {
@@ -14,8 +15,10 @@ public abstract class Exit {
     }
 
     // Attempt to cross the exit
-    public abstract boolean canCross(Player player);
+    public abstract boolean canCross(Character player);
 
     // Message to display if crossing fails
     public abstract String getFailMessage();
+
+    public String getName(){ return this.NAME;}
 }
