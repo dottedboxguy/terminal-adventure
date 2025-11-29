@@ -12,10 +12,23 @@ public class Item {
         this.stats = new ArrayList<>();
     }
 
-    public void addStat(Stat stat) {
-        stats.add(stat);
+    public void addStat(String name, int value) {
+        stats.add(new Stat(name, value));
     }
 
+    public int getStat(String name) {
+    	
+    	for ( Stat stat : this.stats) { 
+    		if (stat.getName().equals(name)) {
+    			return stat.getValue();
+    		}
+    	}
+    	
+    	return 0;
+    }
+    
+    
+    
     // Getters
     public String getName() { return name; }
     public List<Stat> getStats() { return stats; }

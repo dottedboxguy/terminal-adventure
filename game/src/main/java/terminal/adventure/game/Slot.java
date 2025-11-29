@@ -2,39 +2,34 @@ package terminal.adventure.game;
 
 public class Slot {
 
-	private Item content;
-	public final Class type;
+	private Item content = null;
+	public final Class<?> type;
 
-	/**
-	 * Constructor of Slot
-	 * @param type : Type of the slot
-	 */
-	public Slot(String type) {
-		this.type = type.getClass();
-		this.content = null;
+	public Slot(Class<?> type) {
+		this.type = type;
 	}
 
-	/**
-	 * Check if an item can be equipped in the slot
-	 * @param Item : Item to equip
-	 * @return boolean : true if the item can be equipped, false otherwise
-	 */
-	public bool canEquip(int Item) {
-		
+	public boolean canEquip(int Item) {
+		// TODO - implement Slot.canEquip
+		throw new UnsupportedOperationException();
 	}
+
 
 	public Item unequp() {
 		// TODO - implement Slot.unequp
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param Item
-	 */
 	public Item equip(int Item) {
 		// TODO - implement Slot.equip
 		throw new UnsupportedOperationException();
+	}
+
+	public int getStat(String name) {
+		if (this.content != null) {
+			return this.content.getStat(name);
+		}
+		return 0;
 	}
 
 }

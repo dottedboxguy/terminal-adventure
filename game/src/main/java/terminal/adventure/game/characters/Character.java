@@ -64,7 +64,6 @@ public class Character {
     	for( Slot slot : this.inventory ) {
     		res += slot.getStat(name);
     	}
-    	
     	return res;
     }
    
