@@ -32,7 +32,7 @@ public class Location implements Lookable{
 		this.actors.add(actor);
 	}
 
-	public List<Actor> getactorByName(String name){
+	public List<Actor> getActorByName(String name){
 		List<Actor> res = new ArrayList<>();
 		for (Actor actor : this.actors) {
 			if(actor.getName().equals(name)){
