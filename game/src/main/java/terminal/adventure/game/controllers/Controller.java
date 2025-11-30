@@ -2,16 +2,16 @@ package terminal.adventure.game.controllers;
 
 import java.util.List;
 
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
-import terminal.adventure.game.characters.Character;
 
 public abstract class Controller {
 
-    protected Character character;
+    protected Actor actor;
 
-    public Controller(Character character) {
-    	this.character = character;
+    public Controller(Actor actor) {
+    	this.actor = actor;
     }
     
     
@@ -19,7 +19,7 @@ public abstract class Controller {
 
 	public void equip(Item item) {
 		try {
-		this.character.equipItem(item);
+		this.actor.equipItem(item);
 		} catch (exceptions.tooManyPossibilitesException e) {
 			equipChooseSlot(item, e.getCandidates());
 		}
@@ -27,8 +27,8 @@ public abstract class Controller {
 	
 	public abstract void equipChooseSlot(Item item, List<Slot> candidates);
 	
-	public void attack(Character target) {
-		target.takeAttack( character.getTotalStats().getStrength() );
+	public void attack(Actor actor) {
+		actor.takeAttack( this.actor.getTotalStats().getStrength() );
 		
 		
 	}

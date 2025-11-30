@@ -1,4 +1,4 @@
-package terminal.adventure.game.characters;
+package terminal.adventure.game.actors;
 
 import exceptions.noPossibilitesException;
 import exceptions.tooManyPossibilitesException;
@@ -10,7 +10,7 @@ import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
 
 
-public abstract class Character implements Lookable{
+public abstract class Actor implements Lookable{
     
     public final String NAME;
     public final String DESCRIPTION;
@@ -20,7 +20,7 @@ public abstract class Character implements Lookable{
     private Location currentLocation;
     
     
-    public Character(String name, String description) {
+    public Actor(String name, String description) {
         this.NAME = name;
         this.DESCRIPTION = description;
         this.inventory = new Inventory();

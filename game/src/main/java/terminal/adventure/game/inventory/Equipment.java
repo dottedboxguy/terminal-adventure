@@ -3,12 +3,11 @@ package terminal.adventure.game.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptions.noPossibilitesException;
+import exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
-import terminal.adventure.game.characters.Character;
-import exceptions.noPossibilitesException;
-import exceptions.tooManyPossibilitesException;
 
 public class Equipment {
 

@@ -1,6 +1,6 @@
-package terminal.adventure.game.characters;
+package terminal.adventure.game.actors;
 
-public class Orc extends Character{
+public class Orc extends Actor{
     
     public Orc(String name, String description){
         super(name, description);

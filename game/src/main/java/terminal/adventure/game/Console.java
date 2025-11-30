@@ -6,15 +6,15 @@ import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandQuit;
-import terminal.adventure.game.controllers.CharacterController;
+import terminal.adventure.game.controllers.PlayerController;
 
 public class Console{
 
     private final Map<String, Command> commands = new HashMap<>();
-    private CharacterController player;
+    private PlayerController player;
 
-    public Console(CharacterController characterController){
-        this.player = characterController;
+    public Console(PlayerController player){
+        this.player = player;
         registerCommands();
     }
 

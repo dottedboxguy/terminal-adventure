@@ -1,6 +1,6 @@
-package terminal.adventure.game.characters;
+package terminal.adventure.game.actors;
 
-public class Human extends Character {
+public class Human extends Actor {
 
     public Human(String name, String description){
         super(name, description);

@@ -4,18 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import terminal.adventure.game.characters.Character;
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
 public class Location implements Lookable{
     private final String NAME;
     private final String DESCRIPTION;
-	private List<Character> characters;
+	private List<Actor> actors;
     private final Map<String, Exit> exits;
 
     public Location(String name, String description) {
         this.NAME = name;
-		this.characters = new ArrayList<>();
+		this.actors = new ArrayList<>();
         this.DESCRIPTION = description;
         this.exits = new HashMap<>();
     }
@@ -28,15 +28,15 @@ public class Location implements Lookable{
         return exits.get(destinationName);
     }
 
-	public void addCharacter(Character character){
-		characters.add(character);
+	public void addActor(Actor actor){
+		this.actors.add(actor);
 	}
 
-	public List<Character> getCharacterByName(String name){
-		List<Character> res = new ArrayList<>();
-		for (Character character : this.characters) {
-			if(character.getName().equals(name)){
-				res.add(character);
+	public List<Actor> getactorByName(String name){
+		List<Actor> res = new ArrayList<>();
+		for (Actor actor : this.actors) {
+			if(actor.getName().equals(name)){
+				res.add(actor);
 			}
 		}
 		return res;
