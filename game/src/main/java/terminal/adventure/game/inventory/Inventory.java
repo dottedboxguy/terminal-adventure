@@ -9,7 +9,7 @@ public class Inventory {
 	List<Item> items;
 	
 	public Inventory() {
-		this.items = new java.util.ArrayList<Item>();
+		this.items = new java.util.ArrayList<>();
 	}
 	
 	public void add(Item item) {

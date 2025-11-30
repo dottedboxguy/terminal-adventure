@@ -1,7 +1,7 @@
 package terminal.adventure.game.exits;
 
-import terminal.adventure.game.Item;
 import terminal.adventure.game.Location;
+import terminal.adventure.game.inventory.items.Item;
 
 public class LockedExit extends Exit {
     private boolean isLocked = true;
