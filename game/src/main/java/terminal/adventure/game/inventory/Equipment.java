@@ -6,7 +6,7 @@ import java.util.List;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
-import exceptions.invalidInputException;
+import terminal.adventure.game.characters.Character;
 import exceptions.noPossibilitesException;
 import exceptions.tooManyPossibilitesException;
 
@@ -50,10 +50,10 @@ public class Equipment {
 	public void equip(Item item) throws noPossibilitesException, tooManyPossibilitesException{
 		
 		List<Slot> s = this.findMatchingSlots(item);
-		if (s.size() == 0) {
+		if (s.isEmpty()) {
 			throw new noPossibilitesException("no matching slot in equipment.");
 		} else if (s.size() > 1) {
-			throw new tooManyPossibilitesException("several possible slots found, add to one of the possible slots, see getMatchingSlots(Item item) function");
+			throw new tooManyPossibilitesException("several possible slots found, add to one of the possible slots, see getMatchingSlots(Item item) function", s);
 		}
 		
 		s.get(0).equip(item);	

@@ -1,11 +1,12 @@
 package terminal.adventure.game.controllers;
 
-public abstract class CharacterController {
+import terminal.adventure.game.characters.Character;
 
-    protected Character character;
+
+public abstract class CharacterController extends Controller {
 
     public CharacterController(Character character) {
-        this.character = character;
+    	super(character);
     }
 
     public Character getCharacter() {

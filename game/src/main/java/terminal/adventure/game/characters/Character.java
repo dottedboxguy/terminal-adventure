@@ -9,6 +9,7 @@ import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
 
+
 public abstract class Character implements Lookable{
     
     public final String NAME;
@@ -26,19 +27,36 @@ public abstract class Character implements Lookable{
         this.baseStats = new Stats();
     }
 
-    public void equipItem(Item item) throws noPossibilitesException, tooManyPossibilitesException {
-        this.equipment.equip(item);
+    public void equipItem(Item item) throws tooManyPossibilitesException {
+    	
+    	try {
+    		this.equipment.equip(item);
+    	} catch ( noPossibilitesException e ) {
+    		System.out.println(NAME+" miserably fails to equip "+item.getName()+".");
+    	}
+
     }
 
     // Getters
     public String getName() { return this.NAME; }
     
-    public int getTotalStat(String name) {
+    public Stats getTotalStats() {
         // TO DO
+    	return null;
     }
     public Location getCurrentLocation(){
         return this.currentLocation;
     }
+    
+    public Stats getBaseStats(){
+    	return this.baseStats;
+    }
+    
+    public void takeAttack(int attackPower) {
+    	// TODO
+    }
+    
+
     @Override
     public String getDescription() {
         return this.DESCRIPTION;

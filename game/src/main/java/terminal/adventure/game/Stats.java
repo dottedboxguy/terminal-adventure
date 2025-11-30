@@ -9,12 +9,29 @@ public class Stats {
 	private int armor;
 	private int currentHealth;
 	private int maxHealth;
-	//...
+	private int currentMana;
+	private int maxMana;
 	
 	public Stats() {
 		this.strength = 0;
 		this.speed = 0;
 		this.armor = 0;
+	}
+	
+	public int getCurrentMana() {
+		return currentMana;
+	}
+
+	public void setCurrentMana(int currentMana) {
+		this.currentMana = currentMana;
+	}
+
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
 	}
 		
 	public int getStrength() {
@@ -51,7 +68,7 @@ public class Stats {
 	public void setCurrentHealth(int currentHealth) {
 		this.currentHealth = currentHealth;
 	}
-	public void subtractHealth(int damage) throws CharacterShouldDieException {
+	public void loseHealth(int damage) throws CharacterShouldDieException {
 		this.currentHealth -= damage;
 		if (this.currentHealth < 0){
 			throw new CharacterShouldDieException("character's health is dying");
