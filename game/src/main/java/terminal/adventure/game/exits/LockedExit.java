@@ -7,8 +7,8 @@ public class LockedExit extends Exit {
     private boolean isLocked = true;
     private final Item requiredKey;
 
-    public LockedExit(Location destination, String name, Item requiredKey) {
-        super(destination, name);
+    public LockedExit(Location destination, String name, Item requiredKey, String description) {
+        super(destination, name, description);
         this.requiredKey = requiredKey;
     }
 
