@@ -4,6 +4,7 @@ import java.util.List;
 
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
+import terminal.adventure.game.Fight;
 import terminal.adventure.game.characters.Character;
 
 public abstract class Controller {
@@ -15,7 +16,7 @@ public abstract class Controller {
     }
     
     
-	public abstract void FightTurn(Object combat);
+	public abstract void FightTurn(Fight fight);
 
 	public void equip(Item item) {
 		try {
@@ -28,9 +29,15 @@ public abstract class Controller {
 	public abstract void equipChooseSlot(Item item, List<Slot> candidates);
 	
 	public void attack(Character target) {
-		target.takeAttack( character.getTotalStats().getStrength() );
 		
 		
+		target.takeAttack( character.getBaseStats().getStrength() );
+		
+		
+	}
+
+	public Character getCharacter() {
+		return this.character;
 	}
 	
 }

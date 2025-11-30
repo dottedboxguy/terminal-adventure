@@ -53,10 +53,24 @@ public abstract class Character implements Lookable{
     }
     
     public void takeAttack(int attackPower) {
-    	// TODO
+    	int currentHealth = this.getBaseStats().getCurrentHealth();
+    	this.getBaseStats().setCurrentHealth(currentHealth - attackPower);
+    	
+    	if (this.isDead()) {
+    		this.die();
+    	}
+    
     }
     
+    public void die() {
+    	System.out.println(this.NAME+" died like a loser.");
+    }
 
+    public boolean isDead() {
+    	return this.getBaseStats().getCurrentHealth() <= 0;
+    }
+    
+    
     @Override
     public String getDescription() {
         return this.DESCRIPTION;
