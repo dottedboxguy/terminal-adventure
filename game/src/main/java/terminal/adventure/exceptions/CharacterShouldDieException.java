@@ -1,4 +1,4 @@
-package exceptions;
+package terminal.adventure.exceptions;
 
 public class CharacterShouldDieException extends terminalAdventureException {
 	public CharacterShouldDieException(String errorMessage) {

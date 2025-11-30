@@ -1,4 +1,4 @@
-package exceptions;
+package terminal.adventure.exceptions;
 
 public class terminalAdventureException extends Exception {
 	public terminalAdventureException(String errorMessage) {
