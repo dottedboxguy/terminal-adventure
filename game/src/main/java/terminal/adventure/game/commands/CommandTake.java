@@ -30,6 +30,6 @@ public class CommandTake implements Command {
     
     @Override
     public String help() {
-        return "\n Usage : \n LOOK \t ";
+        return "\n Usage : \n TAKE \t all \n\t <arg1> <arg2> ...";
     }
 }
