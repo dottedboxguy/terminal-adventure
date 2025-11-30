@@ -1,24 +1,26 @@
 package terminal.adventure.game.inventory.items;
 
+import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 
-public class Item {
-    private String name;
-    private String description;
+public class Item implements Lookable{
+    private final String NAME;
+    private final  String DESCRIPTION;
     private final Stats stats;
 
     public Item(String name, Stats stats) {
-        this.name = name;
+        this.NAME = name;
         this.stats = stats;
-        this.description = "<default-description>";
+        this.DESCRIPTION = "<default-description>";
     }
 
     public Stats getStats() {
     	return this.stats;
     }
-    
-    public String getName() { return name; }
-    
-    public String getDescription() {return description;}
+
+    public String getName() { return this.NAME; }
+
+    @Override
+    public String getDescription() {return this.DESCRIPTION;}
     
 }
