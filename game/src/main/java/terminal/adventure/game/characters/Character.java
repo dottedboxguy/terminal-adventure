@@ -1,5 +1,9 @@
 package terminal.adventure.game.characters;
 
+import exceptions.noPossibilitesException;
+import exceptions.tooManyPossibilitesException;
+import terminal.adventure.game.Location;
+import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Inventory;
@@ -9,16 +13,19 @@ import exceptions.tooManyPossibilitesException;
 import exceptions.noPossibilitesException;
 
 
-public class Character {
+public abstract class Character implements Lookable{
     
     public final String NAME;
+    public final String DESCRIPTION;
     protected Inventory inventory;
     protected Equipment equipment;
     protected Stats baseStats;
+    private Location currentLocation;
     
     
-    public Character(String name) {
+    public Character(String name, String description) {
         this.NAME = name;
+        this.DESCRIPTION = description;
         this.inventory = new Inventory();
         this.baseStats = new Stats();
     }
@@ -30,6 +37,7 @@ public class Character {
     	} catch ( noPossibilitesException e ) {
     		System.out.println(NAME+" miserably fails to equip "+item.getName()+".");
     	}
+
     }
 
     // Getters
@@ -48,4 +56,10 @@ public class Character {
     	// TODO
     }
     
+
+    @Override
+    public String getDescription() {
+        return this.DESCRIPTION;
+    }
+
 }

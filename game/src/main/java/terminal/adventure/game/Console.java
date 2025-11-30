@@ -2,11 +2,16 @@ package terminal.adventure.game;
 import java.util.HashMap;
 import java.util.Map;
 
-import terminal.adventure.game.commands.*;
+import terminal.adventure.game.commands.Command;
+import terminal.adventure.game.commands.CommandGo;
+import terminal.adventure.game.commands.CommandHelp;
+import terminal.adventure.game.commands.CommandQuit;
 
 
 public class Console{
+    
     private final Map<String, Command> commands = new HashMap<>();
+
     public Console(){
         registerCommands();
     }
@@ -52,7 +57,7 @@ public class Console{
 
         Command cmd = commands.get(tokens[0]); // returns null if the command does not exist
         if (cmd == null) {
-            System.out.println("Unknown command. Type 'help'.");
+            System.out.println("Unknown command. Type 'HELP'.");
             return;
         }
 
