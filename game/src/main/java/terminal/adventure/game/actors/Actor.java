@@ -70,6 +70,7 @@ public abstract class Actor implements Lookable{
     	return this.getBaseStats().getCurrentHealth() <= 0;
     }
     
+    public Inventory getInventory(){ return this.inventory; }
     
     @Override
     public String getDescription() {
