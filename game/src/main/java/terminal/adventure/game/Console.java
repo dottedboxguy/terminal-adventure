@@ -1,12 +1,15 @@
 package terminal.adventure.game;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandQuit;
 import terminal.adventure.game.controllers.PlayerController;
+import terminal.adventure.game.exits.Exit;
 
 public class Console{
 
@@ -75,9 +78,28 @@ public class Console{
     public void look(String[] args){
         if (args.length == 0) {
             // Regarder la localisation actuelle si aucun argument
-            Location currentLocation = player.getCharacter().getCurrentLocation();
+            Location currentLocation = player.getActor().getCurrentLocation();
             System.out.println(currentLocation.getDescription());
-        return;
-    }
+            return;
+        }
+        
+
+        for (String arg : args) {
+            // Chercher les personnages correspondant au nom
+            List<Actor> actors = player.getActor().getCurrentLocation().getActorByName(arg);
+            for (Actor actor : actors) {
+                System.out.println(actor.getDescription());
+            }
+            
+            // Chercher les sorties correspondant au nom
+            List<Exit> exits = player.getActor().getCurrentLocation().getExitByName(arg);
+            for (Exit exit : exits) {
+                System.out.println(exit.getDescription());
+            }
+            
+            // Si rien n'est trouvé pour cet argument
+            if (actors.isEmpty() && exits.isEmpty()) {
+                System.out.println("Aucun '" + arg + "' n'est visible ici.");
+            }
     }
 }
