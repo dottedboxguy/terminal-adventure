@@ -6,18 +6,25 @@ import java.util.Map;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
+import terminal.adventure.game.interactables.Interactable;
+import terminal.adventure.game.inventory.Inventory;
+import terminal.adventure.game.inventory.items.Item;
 
 public class Location implements Lookable{
     private final String NAME;
     private final String DESCRIPTION;
 	private List<Actor> actors;
     private final Map<String, Exit> exits;
+	private List<Interactable> interactables;
+	private Inventory inventory;
 
     public Location(String name, String description) {
         this.NAME = name;
-		this.actors = new ArrayList<>();
         this.DESCRIPTION = description;
+		this.actors = new ArrayList<>();
+		this.interactables = new ArrayList<>();
         this.exits = new HashMap<>();
+		this.inventory = new Inventory();
     }
 
     public void addExit(String nameOfDestination, Exit exit) {
@@ -30,6 +37,14 @@ public class Location implements Lookable{
 
 	public void addActor(Actor actor){
 		this.actors.add(actor);
+	}
+
+	public void addInteractable(Interactable interactable){
+		this.interactables.add(interactable);
+	}
+
+	public void addToInventory(Item item){
+		inventory.add(item);
 	}
 
 	public List<Actor> getActorByName(String name){
@@ -52,8 +67,12 @@ public class Location implements Lookable{
 		return res;
     }
 
-    public String getName() { return this.NAME; }
+	public List<Interactable> getInteractables(){
+		return this.interactables;
+	}
 
+    public String getName() { return this.NAME; }
+	public Inventory getInventory() { return this.inventory; }
 	@Override
-    public String getDescription() { return this.DESCRIPTION; }
+    public String getDescription() { return ""; }
 }
