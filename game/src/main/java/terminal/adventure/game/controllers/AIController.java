@@ -9,29 +9,44 @@ import terminal.adventure.game.inventory.slots.Slot;
 
 public class AIController extends Controller {
 
-	public AIController(Actor actor) {
-		super(actor);
+	public AIController(Actor actor, Faction faction) {
+		super(actor, faction);
 	}
 
-	@Override
-	public void FightTurn(Fight fight) {
-		
-		Controller targetController = fight.getEnnemies().get(0);
-		Actor target = targetController.getActor();
-		
-		attack(target);
-		if (target.isDead()) {
-			fight.removeEnnemy(targetController);
-		}
-		
-		System.out.println(this.actor.NAME + " attacks "+ target.NAME);
-		
-		
-	}
+
 
 	@Override
 	public void equipChooseSlot(Item item, List<Slot> candidates) {
 		candidates.get(0).equip(item);
+	}
+
+
+
+	@Override
+	public void play() {
+		Fight f = this.getFight();
+		if ( f == null) {
+			// out of fight action
+		} else {
+		
+			if (this.getFaction() == Faction.badGuys) {				
+				List<Actor> ennemies = f.getFightersByFaction(Faction.goodGuys);
+				
+				if (ennemies.size() == 0) {
+					this.leaveFight();
+				} else {
+					this.getActor().attack(ennemies.get(0));
+				}
+				
+				
+			}
+			
+			
+			
+			
+		}
+		
+		
 	}
 
 }

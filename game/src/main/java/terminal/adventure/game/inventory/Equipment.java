@@ -3,8 +3,8 @@ package terminal.adventure.game.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.noPossibilitesException;
-import exceptions.tooManyPossibilitesException;
+import terminal.adventure.exceptions.noPossibilitesException;
+import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;

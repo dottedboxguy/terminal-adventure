@@ -1,6 +1,6 @@
 package terminal.adventure.game;
 
-import exceptions.CharacterShouldDieException;
+import terminal.adventure.exceptions.CharacterShouldDieException;
 
 public class Stats {
 
