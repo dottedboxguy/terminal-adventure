@@ -6,8 +6,8 @@ public class HiddenExit extends Exit {
 
     private boolean hidden;
 
-    public HiddenExit(Location destination, String name) {
-        super(destination, name);
+    public HiddenExit(Location destination, String name, String description) {
+        super(destination, name, description);
         this.hidden = true;
     }
 
