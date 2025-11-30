@@ -22,7 +22,7 @@ public class Inventory {
 	}
 	
 	public List<Item> searchItemsByName(String name){
-		List<Item> res = new ArrayList<Item>();
+		List<Item> res = new ArrayList<>();
 		
 		for (Item i : items) {
 			if (i.getName().equals(name)) {

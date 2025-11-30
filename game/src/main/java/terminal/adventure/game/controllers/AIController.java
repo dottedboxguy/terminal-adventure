@@ -3,28 +3,28 @@ package terminal.adventure.game.controllers;
 import java.util.List;
 
 import terminal.adventure.game.Fight;
-import terminal.adventure.game.characters.Character;
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
 
 public class AIController extends Controller {
 
-	public AIController(Character character) {
-		super(character);
+	public AIController(Actor actor) {
+		super(actor);
 	}
 
 	@Override
 	public void FightTurn(Fight fight) {
 		
 		Controller targetController = fight.getEnnemies().get(0);
-		Character target = targetController.getCharacter();
+		Actor target = targetController.getActor();
 		
 		attack(target);
 		if (target.isDead()) {
 			fight.removeEnnemy(targetController);
 		}
 		
-		System.out.println(this.character.NAME + " attacks "+ target.NAME);
+		System.out.println(this.actor.NAME + " attacks "+ target.NAME);
 		
 		
 	}

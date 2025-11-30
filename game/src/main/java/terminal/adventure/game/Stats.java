@@ -68,7 +68,7 @@ public class Stats {
 	public void setCurrentHealth(int currentHealth) {
 		this.currentHealth = currentHealth;
 	}
-	public void subtractHealth(int damage) throws CharacterShouldDieException {
+	public void loseHealth(int damage) throws CharacterShouldDieException {
 		this.currentHealth -= damage;
 		if (this.currentHealth < 0){
 			throw new CharacterShouldDieException("character's health is dying");

@@ -1,6 +1,6 @@
-package terminal.adventure.game.characters;
+package terminal.adventure.game.actors;
 
-public class Goblin extends Character{
+public class Goblin extends Actor{
     
     public Goblin(String name){
         super(name, "A green filthy creature. Ew.");

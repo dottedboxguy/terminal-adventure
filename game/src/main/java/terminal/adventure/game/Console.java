@@ -6,13 +6,15 @@ import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandQuit;
-
+import terminal.adventure.game.controllers.PlayerController;
 
 public class Console{
-    
-    private final Map<String, Command> commands = new HashMap<>();
 
-    public Console(){
+    private final Map<String, Command> commands = new HashMap<>();
+    private PlayerController player;
+
+    public Console(PlayerController player){
+        this.player = player;
         registerCommands();
     }
 
@@ -70,4 +72,7 @@ public class Console{
         cmd.execute(args, this);
     }
 
+    public PlayerController getPlayer(){
+        return this.player;
+    }
 }

@@ -1,5 +1,6 @@
 package terminal.adventure.game.spells;
 
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.LockedExit;
 
 public class UnlockSpell extends Spell {
@@ -9,7 +10,7 @@ public class UnlockSpell extends Spell {
     }
 
     @Override
-    public void cast(Character character, Object target) {
+    public void cast(Actor actor, Object target) {
         if (target instanceof LockedExit) {
             ((LockedExit)target).forcedUnlock();
         } else {

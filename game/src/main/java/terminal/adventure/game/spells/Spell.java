@@ -1,5 +1,7 @@
 package terminal.adventure.game.spells;
 
+import terminal.adventure.game.actors.Actor;
+
 public abstract class Spell {
     private final String NAME;
     private final String DESCRIPTION;
@@ -13,5 +15,5 @@ public abstract class Spell {
     public String getDescription() { return this.DESCRIPTION; }
 
     // Main effect of the spell
-    public abstract void cast(Character character, Object target);
+    public abstract void cast(Actor actor, Object target);
 }

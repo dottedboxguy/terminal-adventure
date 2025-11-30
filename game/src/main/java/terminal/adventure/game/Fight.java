@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Queue;
 
 import terminal.adventure.game.controllers.Controller;
-import terminal.adventure.game.characters.Character;
+import terminal.adventure.game.actors.Actor;
 
 public class Fight {
 
@@ -61,8 +61,8 @@ public class Fight {
 	
 	public static void main(String args[]) {
 
-		Character c1 = new terminal.adventure.game.characters.Goblin("bob");
-		Character c2 = new terminal.adventure.game.characters.Goblin("bill");
+		Actor c1 = new terminal.adventure.game.actors.Goblin("bob");
+		Actor c2 = new terminal.adventure.game.actors.Goblin("bill");
 		
 		List<Controller> ops = new ArrayList<>();
 		List<Controller> allies = new ArrayList<>();
