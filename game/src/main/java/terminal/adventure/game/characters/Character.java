@@ -36,7 +36,9 @@ public abstract class Character implements Lookable{
     public int getTotalStat(String name) {
         // TO DO
     }
-
+    public Location getCurrentLocation(){
+        return this.currentLocation;
+    }
     @Override
     public String getDescription() {
         return this.DESCRIPTION;
