@@ -10,16 +10,22 @@ public class CommandTake implements Command {
 
     @Override
     public void execute(String[] args, Console console) {
-        List<Item> itemsToTake = console.getPlayer().getActor().getCurrentLocation().getInventory().getItems();
-        for (String arg : args) {
-            for (Item item : itemsToTake) {
-                if (arg.equals(item.getName())) {
-                    console.getPlayer().getActor().getInventory().add(item);
-                    console.getPlayer().getActor().getCurrentLocation().getInventory().remove(item);
+        if (args.length == 0){
+
+        }
+        else{
+            if (args.length == 1 && "all".equals(args[0])){
+                console.getPlayer().getActor().getInventory().takeAll(console.getPlayer().getActor().getCurrentLocation().getInventory());
+            }
+            else{
+                for (String arg : args){
+                    List<Item> itemsToAdd = console.getPlayer().getActor().getCurrentLocation().getInventory().searchItemsByName(arg);
+                    for (Item item : itemsToAdd) {
+                        console.getPlayer().getActor().getInventory().takeItem(console.getPlayer().getActor().getCurrentLocation().getInventory(), item);
+                    }
                 }
             }
         }
-        
     }
     
     @Override
