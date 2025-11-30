@@ -9,7 +9,7 @@ public abstract class PlayerController {
         this.actor = actor;
     }
 
-    public Actor getCharacter() {
+    public Actor getActor() {
         return this.actor;
     }
 
