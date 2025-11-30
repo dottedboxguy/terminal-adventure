@@ -6,13 +6,15 @@ import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandQuit;
-
+import terminal.adventure.game.controllers.CharacterController;
 
 public class Console{
-    
-    private final Map<String, Command> commands = new HashMap<>();
 
-    public Console(){
+    private final Map<String, Command> commands = new HashMap<>();
+    private CharacterController player;
+
+    public Console(CharacterController characterController){
+        this.player = characterController;
         registerCommands();
     }
 
@@ -70,4 +72,12 @@ public class Console{
         cmd.execute(args, this);
     }
 
+    public void look(String[] args){
+        if (args.length == 0) {
+            // Regarder la localisation actuelle si aucun argument
+            Location currentLocation = player.getCharacter().getCurrentLocation();
+            System.out.println(currentLocation.getDescription());
+        return;
+    }
+    }
 }
