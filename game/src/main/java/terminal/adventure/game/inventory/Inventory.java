@@ -36,6 +36,12 @@ public class Inventory {
 		this.add(item);
 		inventory.remove(item);
 	}
+	public void takeAll(Inventory inventory){
+		for (Item item : inventory.getItems()){
+			this.add(item);
+			inventory.remove(item);
+		}
+	}
 	
 	public List<Item> getItems(){ return this.items; }
 }
