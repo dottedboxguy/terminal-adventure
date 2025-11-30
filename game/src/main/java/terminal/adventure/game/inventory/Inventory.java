@@ -7,7 +7,7 @@ import terminal.adventure.game.inventory.items.Item;
 
 public class Inventory {
 
-	List<Item> items;
+	private List<Item> items;
 	
 	public Inventory() {
 		this.items = new java.util.ArrayList<>();
@@ -31,4 +31,11 @@ public class Inventory {
 		}
 		return res;
 	}
+
+	public void takeItem(Inventory inventory, Item item){
+		this.add(item);
+		inventory.remove(item);
+	}
+	
+	public List<Item> getItems(){ return this.items; }
 }
