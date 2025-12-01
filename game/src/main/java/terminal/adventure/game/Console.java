@@ -7,6 +7,8 @@ import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandLook;
 import terminal.adventure.game.commands.CommandQuit;
+import terminal.adventure.game.commands.CommandTake;
+import terminal.adventure.game.commands.CommandUse;
 import terminal.adventure.game.controllers.PlayerController;
 
 public class Console{
@@ -24,9 +26,11 @@ public class Console{
         commands.put("QUIT", new CommandQuit());
         commands.put("HELP", new CommandHelp());
         commands.put("LOOK", new CommandLook());
+        commands.put("TAKE", new CommandTake());
+        commands.put("USE", new CommandUse());
     }
 
-  
+    
     public Map<String, Command> getCommands() {
         return this.commands;
     }
