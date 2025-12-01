@@ -1,4 +1,4 @@
-package exceptions;
+package terminal.adventure.exceptions;
 
 import terminal.adventure.game.inventory.slots.Slot;
 import java.util.List;

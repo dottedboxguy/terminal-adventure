@@ -15,8 +15,7 @@ public abstract class PlayerController {
 
     // Basic universal actions:
     public void attack(Actor actor) {
-        System.out.println(actor.getName() + " attacks " + actor.getName());
-        actor.takeDamage(actor.getBaseStats().getStrength());
+    	//
     }
 
     // Behavior defined per type:

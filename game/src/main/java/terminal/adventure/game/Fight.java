@@ -1,81 +1,53 @@
 package terminal.adventure.game;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
 
 import terminal.adventure.game.controllers.Controller;
+import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.actors.Actor;
 
 public class Fight {
 
-	List<Controller> allies;
-	List<Controller> ennemies;
-	
-	
-	Queue<Controller> turns;
-	
-	public Fight(List<Controller> allies, List<Controller> ennemies) {
-		this.allies = allies;		
-		this.ennemies = ennemies;
+	List<Actor> fighters;
 		
-		turns = new LinkedList<>();
-		
-		turns.addAll(this.allies);
-		turns.addAll(this.ennemies);
+	public Fight() {
+		this.fighters = new ArrayList<>();
 	}
 
-	public void start() {
+	public void addFighter(Actor c) {
+		fighters.add(c);
+	}
+	
+	public void removeFighter(Actor c) {
+		fighters.remove(c);
+	}
+	
+
+	public List<Actor> getFightersByFaction(Faction fac) {
+		List<Actor> res = new ArrayList<>();
 		
-		while( ennemies.size() > 0 && allies.size() > 0) {
-			Controller current = turns.poll();
-			
-			current.FightTurn(this);
-			
-			turns.add(current);
+		for (Actor f : fighters) {
+			if (f.getController().getFaction() == fac) {
+				res.add(f);
+			}
 		}
 		
+		return res;
 	}
 
-	public void removeEnnemy(Controller c ) {
-		ennemies.remove(c);
-	}
-	
-	public List<Controller> getAllies() {
-		return allies;
-	}
-
-	public void setAllies(List<Controller> allies) {
-		this.allies = allies;
-	}
-
-	public List<Controller> getEnnemies() {
-		
-		return ennemies;
-	}
-
-	public void setEnnemies(List<Controller> ennemies) {
-		this.ennemies = ennemies;
-	}
 	
 	public static void main(String args[]) {
-
-		Actor c1 = new terminal.adventure.game.actors.Goblin("bob");
-		Actor c2 = new terminal.adventure.game.actors.Goblin("bill");
 		
-		List<Controller> ops = new ArrayList<>();
-		List<Controller> allies = new ArrayList<>();
+		Actor a1 = new terminal.adventure.game.actors.Goblin("bob");
+		Actor a2 = new terminal.adventure.game.actors.Goblin("bill");
 		
-		ops.add(new terminal.adventure.game.controllers.AIController(c2));
-		allies.add(new terminal.adventure.game.controllers.AIController(c1));
-	
-		Fight f = new Fight(allies, ops);
-		f.start();
+		Controller c1 = new terminal.adventure.game.controllers.AIController(a1, terminal.adventure.game.controllers.Faction.badGuys);
+		Controller c2 = new terminal.adventure.game.controllers.AIController(a2, terminal.adventure.game.controllers.Faction.goodGuys);
 		
+		Fight fight = new Fight();
 		
-		
+		fight.addFighter(c1);
+		fight.addFighter(c2);	
 	}
-
-	
 }

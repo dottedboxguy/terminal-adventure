@@ -1,10 +1,11 @@
 package terminal.adventure.game.actors;
 
-import exceptions.noPossibilitesException;
-import exceptions.tooManyPossibilitesException;
+import terminal.adventure.exceptions.noPossibilitesException;
+import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
+import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
@@ -19,8 +20,9 @@ public abstract class Actor implements Lookable{
     protected Stats baseStats;
     private Location currentLocation;
     
+    private Controller controller;
     
-    public Actor(String name, String description) {
+    public Actor(String name, String description, Controller controller) {
         this.NAME = name;
         this.DESCRIPTION = description;
         this.inventory = new Inventory();
@@ -63,9 +65,10 @@ public abstract class Actor implements Lookable{
     }
     
     public void die() {
-    	System.out.println(this.NAME+" died like a loser.");
+    	// Actions to perform at death (loot drop, events, etc)
+    	this.controller.die();
     }
-
+    
     public boolean isDead() {
     	return this.getBaseStats().getCurrentHealth() <= 0;
     }
@@ -77,4 +80,13 @@ public abstract class Actor implements Lookable{
         return this.DESCRIPTION;
     }
 
+	public void attack(Actor target) {
+		
+	}
+
+	public Controller getController() {
+		return this.controller;
+	}
+	
+	
 }
