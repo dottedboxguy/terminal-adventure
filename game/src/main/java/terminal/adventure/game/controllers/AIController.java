@@ -12,6 +12,10 @@ public class AIController extends Controller {
 	public AIController(Actor actor, Faction faction) {
 		super(actor, faction);
 	}
+	
+	public AIController(Faction faction) {
+		super(faction);
+	}
 
 
 
@@ -24,29 +28,11 @@ public class AIController extends Controller {
 
 	@Override
 	public void play() {
-		Fight f = this.getFight();
-		if ( f == null) {
-			// out of fight action
-		} else {
+						
+		Actor target = this.actor.getFight().getFightersByAntiFaction(this.getFaction()).get(0);
 		
-			if (this.getFaction() == Faction.badGuys) {				
-				List<Actor> ennemies = f.getFightersByFaction(Faction.goodGuys);
-				
-				if (ennemies.size() == 0) {
-					this.leaveFight();
-				} else {
-					this.getActor().attack(ennemies.get(0));
-				}
-				
-				
-			}
-			
-			
-			
-			
-		}
+		this.actor.attack(target);
 		
 		
 	}
-
 }
