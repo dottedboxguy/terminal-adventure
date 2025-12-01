@@ -18,6 +18,6 @@ public abstract class Interactable{
 
 	public String getName(){
 		return this.name;
-	}
+	} 
 
 }
