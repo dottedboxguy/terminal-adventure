@@ -67,6 +67,13 @@ public class Location implements Lookable{
 		return res;
     }
 
+	public List<Exit> getAllExits(){
+		List<Exit> res = new ArrayList<>();
+		res.addAll(this.exits.values());
+		return res;
+	}
+	
+	
 	public List<Interactable> getInteractables(){
 		return this.interactables;
 	}
