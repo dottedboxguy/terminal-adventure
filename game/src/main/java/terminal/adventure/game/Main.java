@@ -3,9 +3,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-import terminal.adventure.exceptions.actorlessControllerException;
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.controllers.AIController;
 import terminal.adventure.game.controllers.Controller;
+import terminal.adventure.game.controllers.Faction;
+import terminal.adventure.game.actors.*;
+
 
 public class Main {
 
@@ -22,28 +25,31 @@ public class Main {
 	
 	public static void main(String args[]) {
 		
-		Actor a1 = new terminal.adventure.game.actors.Goblin("bob");
-		Actor a2 = new terminal.adventure.game.actors.Goblin("bill");
 		
-		Controller c1 = new terminal.adventure.game.controllers.AIController(terminal.adventure.game.controllers.Faction.badGuys);
-		Controller c2 = new terminal.adventure.game.controllers.AIController(terminal.adventure.game.controllers.Faction.goodGuys);
-		 
+		// -------------- init ----------------
+		
+		Actor a1 = new Goblin("bob");
+		Actor a2 = new Goblin("bill");
+		
+		Controller c1 = new AIController(Faction.badGuys);
+		Controller c2 = new AIController(Faction.goodGuys);
+		c1.bindActor(a1);
+		c2.bindActor(a2);
+		
+		
 		Queue<Controller> turns = new LinkedList<>();
 		turns.add(c1);
 		turns.add(c2);
 		
-		
-		
-		c1.bindActor(a1);
-		c2.bindActor(a2);
+		//  --- 
 		
 		Fight fight = new Fight();
 		
 		a1.enterFight(fight);
 		a2.enterFight(fight);
 		
-		
-		while (turns.size() == 2) {
+				
+		while (turns.size() == 2) { // "main" loop
 			Controller c = turns.poll();
 			
 			if (c.isDead()) {
