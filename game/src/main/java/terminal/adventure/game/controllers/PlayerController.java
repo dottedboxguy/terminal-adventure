@@ -1,16 +1,12 @@
 package terminal.adventure.game.controllers;
 import terminal.adventure.game.actors.Actor;
 
-public abstract class PlayerController {
+public abstract class PlayerController extends Controller{
 
     protected Actor actor;
 
-    public PlayerController(Actor actor) {
-        this.actor = actor;
-    }
-
-    public Actor getActor() {
-        return this.actor;
+    public PlayerController(Faction faction) {
+    	super(faction);
     }
 
     // Basic universal actions:
@@ -19,5 +15,5 @@ public abstract class PlayerController {
     }
 
     // Behavior defined per type:
-    public abstract void takeTurn(GameState game, PlayerController playerController);
+    public abstract void takeTurn(/*GameState game,*/ PlayerController playerController);
 }
