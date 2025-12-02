@@ -66,7 +66,16 @@ public class Location implements Lookable{
 		}
 		return res;
     }
-
+	public Map<String, Exit> getVisibleExits() {
+        Map<String, Exit> visibleExits = new HashMap<>();
+        for (Map.Entry<String, Exit> entry : exits.entrySet()) {
+            if (!(entry.getValue() instanceof HiddenExit) || 
+                !((HiddenExit) entry.getValue()).isHidden()) {
+                visibleExits.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return visibleExits;
+    }
 	public List<Interactable> getInteractables(){
 		return this.interactables;
 	}
