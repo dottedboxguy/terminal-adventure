@@ -22,5 +22,10 @@ public class Item implements Lookable{
 
     @Override
     public String getDescription() {return this.DESCRIPTION;}
+ 
+    @Override
+    public String toString() {
+    	return "Item : ("+this.getClass().getSimpleName()+") "+this.NAME+"\n";
+    }
     
 }

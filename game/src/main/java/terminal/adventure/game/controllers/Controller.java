@@ -28,15 +28,15 @@ public abstract class Controller {
     // -------------- Inventory-related methods ----------------
     
     
-	public void equip(Item item) {
-		try {
-		this.actor.equipItem(item);
-		} catch (tooManyPossibilitesException e) {
-			equipChooseSlot(item, e.getCandidates());
-		}
+	public boolean equip(Item item) {
+		return this.equipOrder(item);
 	};
 	
-	public abstract void equipChooseSlot(Item item, List<Slot> candidates);
+	private boolean equipOrder(Item item) {
+		return this.actor.equipItem(item, this);
+	}
+	
+	public abstract int equipChooseSlot(List<String> candidatesNames); 
 	
 
 	// --------------- Faction Getter/Setter -------------------

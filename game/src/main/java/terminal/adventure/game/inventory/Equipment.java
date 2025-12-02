@@ -2,10 +2,12 @@ package terminal.adventure.game.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import terminal.adventure.exceptions.noPossibilitesException;
 import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Stats;
+import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
 
@@ -22,17 +24,49 @@ public class Equipment {
 
 	}
 	
+	public boolean equipItem(Item item, Controller controller) {
+	
+		List<Slot> matching = this.findMatchingSlots(item);
+		
+		int index = -1;
+		
+		if (matching.size() == 0) {
+			return false;
+		} else if (matching.size() == 1 )
+			index = 0;
+		else {
+		
+			List<String> choicesNames  = new ArrayList<>();
+			
+			for (Slot s : matching) {
+				if (s.isEmpty()) {
+					choicesNames.add(null);
+				} else {
+					choicesNames.add(s.getItem().getName());
+				}
+			}
+			
+			index = controller.equipChooseSlot(choicesNames);
+		
+		}
+		
+		return matching.get(index).equip(item); 
+	}
+	
+	
 	public List<Slot> findMatchingSlots(Item item){
-		List<Slot> res = new ArrayList<>();
+		List<Slot> slotRes = new ArrayList<>();		
 		
 		for (Slot s : slots) {
 			if (s.canEquip(item)) {
-				res.add(s);
+				slotRes.add(s);
 			}
 		}
 		
-		return res;
+		return slotRes;
 	}
+	
+	
 	
 	public List<Slot> findSlotsbyType(Class<? extends Slot> type){
 		List<Slot> res = new ArrayList<>();
@@ -46,28 +80,14 @@ public class Equipment {
 	}
 	
 	
-	public void equip(Item item) throws noPossibilitesException, tooManyPossibilitesException{
-		
-		List<Slot> s = this.findMatchingSlots(item);
-		if (s.isEmpty()) {
-			throw new noPossibilitesException("no matching slot in equipment.");
-		} else if (s.size() > 1) {
-			throw new tooManyPossibilitesException("several possible slots found, add to one of the possible slots, see getMatchingSlots(Item item) function", s);
-		}
-		
-		s.get(0).equip(item);	
-	}
-	
-	
 	public Stats totalStats() {
 		Stats res = new Stats(); 
 		for ( Slot s : slots) {
 			if (  !s.isEmpty() ) {
-				res.statsSum(s.getStats());
+				res = res.statsSum(s.getStats());
 			}
 		}
 		return res;
 	}
 
-	
 }

@@ -23,8 +23,14 @@ public class AIController extends Controller {
 
 
 	@Override
-	public void equipChooseSlot(Item item, List<Slot> candidates) {
-		candidates.get(0).equip(item);
+	public int equipChooseSlot(List<String> candidates) {
+		int emptySlotIndex = candidates.indexOf(null);
+		if (emptySlotIndex != -1) {
+			return emptySlotIndex;
+		}
+		else {
+			return 0;
+		}
 	}
 
 

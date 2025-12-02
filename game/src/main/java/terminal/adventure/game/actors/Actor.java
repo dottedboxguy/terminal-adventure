@@ -1,5 +1,8 @@
 package terminal.adventure.game.actors;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import terminal.adventure.exceptions.noPossibilitesException;
 import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Fight;
@@ -10,6 +13,7 @@ import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
+import terminal.adventure.game.inventory.slots.Slot;
 
 
 public abstract class Actor implements Lookable{
@@ -57,16 +61,9 @@ public abstract class Actor implements Lookable{
     	}
     	
     }
-    
-    
-    public void equipItem(Item item) throws tooManyPossibilitesException {
-    	
-    	try {
-    		this.equipment.equip(item);
-    	} catch ( noPossibilitesException e ) {
-    		System.out.println(NAME+" miserably fails to equip "+item.getName()+".");
-    	}
 
+    public boolean equipItem(Item item, Controller controller) {
+    	return this.equipment.equipItem(item, controller);
     }
 
     
@@ -123,8 +120,7 @@ public abstract class Actor implements Lookable{
 	}
 	
 	public Stats getTotalStats() {
-		// TO DO
-		return null;
+		return this.baseStats.statsSum(this.equipment.totalStats());
 	}
 	
 	public Stats getBaseStats(){
