@@ -71,15 +71,20 @@ public abstract class Actor implements Lookable{
 
     
     public void takeAttack(int attackPower) {
-    	System.out.println("DEBUG Actor.takeAttack : Ouch ! I'm "+this.NAME+" and I have "+this.getBaseStats().getCurrentHealth()+" HP remaing");
     	
     	int currentHealth = this.getBaseStats().getCurrentHealth();
     	this.getBaseStats().setCurrentHealth(currentHealth - attackPower);
     	
     	if (this.isDead()) {
+    		System.out.println("DEBUG Actor.takeAttack : OOOFFFF Im "+ this.NAME+ " and I dramatically died.");
     		this.die();
+    	} else {
+    		
+    		System.out.println("DEBUG Actor.takeAttack : Ouch ! I'm "+this.NAME+" and I have "+this.getBaseStats().getCurrentHealth()+" HP remaing");
     	}
     
+    	
+
     }
     
     public void die() {
