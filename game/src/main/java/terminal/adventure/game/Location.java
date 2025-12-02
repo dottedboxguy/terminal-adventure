@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.interactables.Interactable;
