@@ -9,7 +9,7 @@ public class OpenExit extends Exit {
     }
 
     @Override
-    public boolean canCross(Character player) {
+    public boolean canCross() {
         return true;
     }
 
