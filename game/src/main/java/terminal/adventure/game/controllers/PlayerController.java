@@ -3,8 +3,6 @@ import terminal.adventure.game.actors.Actor;
 
 public abstract class PlayerController extends Controller{
 
-    protected Actor actor;
-
     public PlayerController(Faction faction) {
     	super(faction);
     }
