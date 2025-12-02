@@ -18,7 +18,7 @@ public abstract class Exit implements Lookable{
     }
 
     // Attempt to cross the exit
-    public abstract boolean canCross(Character player);
+    public abstract boolean canCross();
 
     // Message to display if crossing fails
     public abstract String getFailMessage();
