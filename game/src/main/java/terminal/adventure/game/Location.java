@@ -6,6 +6,7 @@ import java.util.Map;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
+import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.interactables.Interactable;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
