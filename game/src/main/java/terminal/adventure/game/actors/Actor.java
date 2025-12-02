@@ -88,5 +88,7 @@ public abstract class Actor implements Lookable{
 		return this.controller;
 	}
 	
-	
+	public void setCurrentLocation(Location newLocation){
+        this.currentLocation = newLocation;
+    }
 }
