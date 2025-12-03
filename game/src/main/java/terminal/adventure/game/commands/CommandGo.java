@@ -7,10 +7,20 @@ import terminal.adventure.game.Console;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
+import terminal.adventure.game.commands.CommandType;
 
 
 public class CommandGo extends Command {
     
+	Location target = null;
+	
+	public CommandGo() {
+		this.type = CommandType.GO;
+	}
+	
+	
+	/*
+
     public void go(Actor actor, Location location) {
 
         if (args.length == 0) {
@@ -56,9 +66,41 @@ public class CommandGo extends Command {
         }
         
     }
+     */
+    
+    /**
+     * Gets the Location where the actor will go
+     * @return
+     */
+	public Location getTarget() {
+    	return this.target;
+    }
     
     @Override
     public String help() {
         return "GO <Location's name>\n you try to go to that location if an exit allows you to do so.\n";
     }
+
+	@Override
+	public Command copy() {
+		// TODO Returns a copy of this instance.
+		return this;
+	}
+
+	@Override
+	public void init(Actor actor) {
+		
+		Collection<Exit> exits = (Collection<Exit>) actor.getCurrentLocation().getVisibleExits().values();
+		
+		for(Exit e : exits) {
+			if (e.getDestination().getName().equals(this.args[0])){
+				this.target = e.getDestination();
+			}
+		}
+		
+		if (this.target == null) {
+			this.setReturnMessage("Unknown location");
+		}
+		
+	}
 }

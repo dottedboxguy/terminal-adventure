@@ -7,7 +7,7 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
-public class CommandLook implements Command {
+public class CommandLook extends Command {
 
     @Override
     public void execute(String[] args, Console console) {

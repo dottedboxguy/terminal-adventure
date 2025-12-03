@@ -1,6 +1,9 @@
 package terminal.adventure.game;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+import java.util.stream.Stream;
 
 import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
@@ -16,9 +19,14 @@ public class Console{
     private final Map<String, Command> commands = new HashMap<>();
     private PlayerController player;
 
-    public Console(PlayerController player){
-        this.player = player;
+    private final PrintStream printStream;
+    private final Scanner inputScanner;
+    
+    public Console(){
         registerCommands();
+        printStream = System.out;
+        inputScanner = new Scanner(System.in);
+        
     }
 
     private void registerCommands() {
@@ -30,31 +38,43 @@ public class Console{
         commands.put("USE", new CommandUse());
     }
 
-    
-    public Map<String, Command> getCommands() {
-        return this.commands;
-    }
     /**
-    * Parses and executes a console command entered by the user.
+     * This method is called by a Controller.
+     * @return the command to run
+     */
+    public Command getAction(){
+
+    	return getCommand();
+    }
+    
+    /**
+    * Parses and returns a console command entered by the user.
     * 
     * If the command does not exist, an error message is displayed.
-    *
-    * @param input the raw user input typed in the console
     */
-    public void runCommand(String input) {
+    public Command getCommand() {
+    	String input = this.inputScanner.nextLine();
+    	
+    	// ----------- Command identification ---------
+    	
         input = input.trim();
-        if (input.isEmpty()) return;
+        if (input.isEmpty()) return null;
 
         String[] parts = input.split("\\s+", 2);
         
         String commandName = parts[0].toUpperCase();
+        
         Command cmd = commands.get(commandName);
         
         if (cmd == null) {
             System.out.println("Unknown command. Type 'HELP'.");
-            return;
+            return null;
+        } else {
+        	cmd = cmd.copy();
         }
 
+        //------------ Argument Parsing -------------
+        
         String[] args;
         if (parts.length == 1) {
             args = new String[0];
@@ -67,14 +87,22 @@ public class Console{
             }
         }
 
-        cmd.execute(args, this);
+        System.out.println("DEBUT Console getCommand\n args : "+args+"CMD :"+cmd);
+        cmd.setArgs(args);
+        
+        return cmd;
     }
 
     public PlayerController getPlayer(){
         return this.player;
     }
 
+    public Map<String, Command> getCommands() {
+    	return this.commands;
+    }
+    
+
     public void print(String message){
-        System.out.println(message);
+        printStream.println(message);
     }
 }

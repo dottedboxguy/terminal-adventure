@@ -38,9 +38,11 @@ public class Location implements Lookable{
 
 	public void addActor(Actor actor){
 		this.actors.add(actor);
+		actor.setLocation(this);
 	}
 
 	public void removeActor(Actor actor){
+		actor.setLocation(null);
 		this.actors.remove(actor);
 	}
 

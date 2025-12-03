@@ -96,7 +96,7 @@ public abstract class Controller {
 	
 	protected abstract void play(); 
 	
-	private void playTurn() {
+	public void playTurn() {
 		if(!this.isDead()) {
 			this.play();
 		}	

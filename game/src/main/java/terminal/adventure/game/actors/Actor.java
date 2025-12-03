@@ -100,7 +100,7 @@ public abstract class Actor implements Lookable{
     }
     
     
-    //-------------- Basic Getters ------------------
+    //-------------- Basic Getters / Setters ------------------
     
     
     public boolean hasBackpack() {
@@ -126,6 +126,10 @@ public abstract class Actor implements Lookable{
 	
 	public Location getCurrentLocation(){
 		return this.currentLocation;
+	}
+	
+	public void setLocation(Location loc) {
+		this.currentLocation = loc;
 	}
 	
 	public Stats getTotalStats() {
@@ -181,5 +185,10 @@ public abstract class Actor implements Lookable{
 			return exitToCross.getMessage();
 		}
 
+	}
+
+	public String go(Location target) {
+		//TODO
+		return "I'm going to "+target.getName()+" !";
 	}
 }
