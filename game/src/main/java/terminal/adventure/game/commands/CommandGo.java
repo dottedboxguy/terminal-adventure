@@ -10,8 +10,8 @@ import terminal.adventure.game.exits.Exit;
 
 public class CommandGo extends Command {
     
-	public CommandGo() {
-		
+	public CommandGo(String[] args, boolean isTerminal){
+		super(args, isTerminal);
 	}
 
     @Override
