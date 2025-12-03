@@ -16,7 +16,7 @@ import terminal.adventure.game.inventory.slots.TorsoSlot;
 public class Cultist extends Actor{
     
     public Cultist(String name){
-        super(name, "A silouhette wrapped in red robes, you cannot see its face, but you feel its stare.");
+        super(name, "A silouhette wrapped in red robes. You cannot see their face, but you feel their stare.");
         this.baseStats.setMaxHealth(50);
         this.baseStats.setCurrentHealth(50);
         this.baseStats.setStrength(5);
