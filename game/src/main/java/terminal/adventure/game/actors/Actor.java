@@ -5,7 +5,6 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
-import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
@@ -110,18 +109,14 @@ public abstract class Actor implements Lookable{
     public Storage getFirstStorage(){ 
     	return this.equipment.getfirstStorage();
     }
-    
-    @Override
-    public String getDescription() {
-        return this.DESCRIPTION;
-    }
+	
+	public String getName() { return this.NAME; }
 
+    public String getDescription() {return this.DESCRIPTION;}
 
 	public Controller getController() {
 		return this.controller;
 	}
-	
-	public String getName() { return this.NAME; }
 	
 	
 	public Location getCurrentLocation(){
