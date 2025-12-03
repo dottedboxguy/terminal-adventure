@@ -1,16 +1,12 @@
 package terminal.adventure.game.controllers;
 
 import java.util.HashMap;
-
-import terminal.adventure.exceptions.tooManyPossibilitesException;
-
 import java.util.List;
 import java.util.Map;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.inventory.items.Item;
-import terminal.adventure.game.inventory.slots.Slot;
 
 public abstract class Controller {
 
@@ -21,21 +17,10 @@ public abstract class Controller {
     public Controller(Actor actor, Faction faction) {
     	this.actor = actor;
     	this.faction = faction;
-		registerCommands();
     }
     
     public Controller(Faction faction) {
     	this.faction = faction;
-		registerCommands();
-    }
-
-	private void registerCommands() {
-    	commands.put("GO", new CommandGo());
-        commands.put("QUIT", new CommandQuit());
-        commands.put("HELP", new CommandHelp());
-        commands.put("LOOK", new CommandLook());
-        commands.put("TAKE", new CommandTake());
-        commands.put("USE", new CommandUse());
     }
 
     public Map<String, Command> getCommands() {
@@ -47,12 +32,9 @@ public abstract class Controller {
     
     
 	public boolean equip(Item item) {
-		return this.equipOrder(item);
+		return this.actor.equip(item, this);
 	};
-	
-	private boolean equipOrder(Item item) {
-		return this.actor.equipItem(item, this);
-	}
+
 	
 	public abstract int equipChooseSlot(List<String> candidatesNames); 
 	
