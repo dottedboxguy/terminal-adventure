@@ -9,8 +9,8 @@ public class Backpack extends Item implements Storage {
 
     public Inventory inventory;
     
-    public Backpack(String name){
-        super(name, new Stats());
+    public Backpack(String name, String description){
+        super(name, description, new Stats());
         this.inventory = new Inventory();
     }
 

@@ -2,13 +2,10 @@ package terminal.adventure.game.inventory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
-import terminal.adventure.exceptions.noPossibilitesException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.items.Item;
-import terminal.adventure.game.inventory.slots.BackpackSlot;
 import terminal.adventure.game.inventory.slots.Slot;
 
 public class Equipment {

@@ -8,7 +8,6 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
-import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
@@ -166,13 +165,13 @@ public abstract class Actor implements Lookable{
     public String getDescription() {
         return this.DESCRIPTION;
     }
+	
+	public String getName() { return this.NAME; }
 
 
 	public Controller getController() {
 		return this.controller;
 	}
-	
-	public String getName() { return this.NAME; }
 	
 	
 	public Location getCurrentLocation(){
@@ -211,34 +210,6 @@ public abstract class Actor implements Lookable{
 	}
 
 	//-------------- Move methods -------------
-
-	public String Move(Location destination){
-		if (destination == null) {
-        	return "That location doesn't exist!";
-    	}
-		Exit exitToCross = null;
-
-		for (Exit exit : this.currentLocation.getVisibleExits().values()) {
-			if (exit.getDestination().equals(destination)){
-				exitToCross = exit;
-			}
-		}
-
-		if (exitToCross == null){
-			return "There are no visible exits leading to " + destination;
-		}
-
-		if (exitToCross.canCross()){
-			this.currentLocation.removeActor(this); 
-			this.currentLocation = destination;
-			this.currentLocation.addActor(this);
-			return exitToCross.getMessage();
-		}
-		else{
-			return exitToCross.getMessage();
-		}
-
-	}
 
 	public String go(Location target) {
 		//TODO

@@ -9,29 +9,13 @@ public class Stats {
 	private int armor;
 	private int currentHealth;
 	private int maxHealth;
-	private int currentMana;
-	private int maxMana;
 	
 	public Stats() {
 		this.strength = 0;
 		this.speed = 0;
 		this.armor = 0;
-	}
-	
-	public int getCurrentMana() {
-		return currentMana;
-	}
-
-	public void setCurrentMana(int currentMana) {
-		this.currentMana = currentMana;
-	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
+		this.currentHealth = 0;
+		this.maxHealth = 0;
 	}
 		
 	public int getStrength() {

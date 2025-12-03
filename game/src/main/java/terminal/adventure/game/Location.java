@@ -90,9 +90,10 @@ public class Location implements Lookable, Storage{
 
     public String getName() { return this.NAME; }
 
+    //------------------ Lookable Methods ------------
+    
     @Override
-    public String getDescription() { return ""; }
-
+    public String getDescription() { return this.DESCRIPTION; }
 	
 	//------------------- Storage Methods -------------
 	
@@ -116,4 +117,5 @@ public class Location implements Lookable, Storage{
 	public List<Item> searchItems(String itemName) {
 		return this.inventory.searchItemsByName(itemName);
 	}
+
 }

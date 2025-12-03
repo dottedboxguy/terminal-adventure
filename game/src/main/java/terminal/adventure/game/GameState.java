@@ -13,13 +13,14 @@ import terminal.adventure.game.controllers.PlayerController;
 
 public class GameState {
     
-    private List<Controller> controllers;
-    private Location map;
+    private final List<Controller> controllers;
+    @SuppressWarnings("unused") //map is stored here for serialization purposes
+    private final Location map;
     
     public GameState(PlayerController player, Location map){
         this.controllers = new LinkedList<>();
         this.controllers.add(player);
-        this.map = null;
+        this.map = map;
     }
     
     public static void saveInFile(GameState gameState , String filePath) throws FileNotFoundException, IOException {

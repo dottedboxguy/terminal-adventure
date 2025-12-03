@@ -79,9 +79,9 @@ public class Main {
 		Controller tempController;
 		
 		locs.add( new Location("Dark Room", "A dark cellar with basic furniture scattered across the floor. A thin ray of light is piercing through the roof.") );
-		locs.add( new Location("Chest Room", "A rather large circular room, in the middle lays an old chest."));
-		locs.add( new Location("Hole of Shame", "A litteral hole. You cannot climb back. Well played genius."));
-		locs.add( new Location("Ritual Altar", "A room circled by large marble pillars. The floor is covered by several layers of all shades of red. It seems to be coming from a majestuous altar in the center."));
+		locs.add( new Location("Chest Room", "A small circular room, in the center lies an old chest."));
+		locs.add( new Location("Hole of Shame", "A simple hole, just too deep to climb back up.\nYou have a hunch there's a way to get out, but you're on your own"));
+		locs.add( new Location("Ritual Altar", "A large room circled by large marble pillars.\nThe floor is covered by several layers of all shades of red. It seems to be coming from a majestuous altar in the center."));
 		
 		locs.get(0).addExit("Chest Room", new OpenExit(locs.get(1), "Ruined Door", "A small wooden door, barely holding."));
 		locs.get(0).addExit("Hole", new OpenExit(locs.get(2), "Floor Hole", "Just a hole in the ground. You think you could slip in."));
@@ -107,17 +107,13 @@ public class Main {
 		//
 		
 		// Adding Player Actor + Controller to the game
-		tempActor = new Human("You", "Just you");
+		tempActor = new Human("You", "Hero of the kingdom, you're determined to kill the blood cultists");
 		tempController = new PlayerController(Faction.goodGuys, console);
 		tempController.bindActor(tempActor);
 		
 		locs.get(0).addActor(tempActor);
 		turns.add(tempController);
 		//
-		
-		
-		
-		
 		
 		
 		return locs;
