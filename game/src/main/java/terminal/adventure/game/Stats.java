@@ -16,6 +16,9 @@ public class Stats {
 		this.strength = 0;
 		this.speed = 0;
 		this.armor = 0;
+		this.currentHealth = 0;
+		this.maxHealth = 0;
+		this.maxMana = 0;
 	}
 	
 	public int getCurrentMana() {
