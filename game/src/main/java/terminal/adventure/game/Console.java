@@ -1,8 +1,11 @@
 package terminal.adventure.game;
 import java.io.PrintStream;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import terminal.adventure.game.commands.Command;
@@ -19,7 +22,7 @@ public class Console{
     private PlayerController player;
     private final PrintStream printStream;
     private final Scanner inputScanner;
-    
+    private final Map<String, Function<String[], Command>> commands = new HashMap<>();
     public Console(){
         
         printStream = System.out;
@@ -27,7 +30,18 @@ public class Console{
         
     }
 
-    
+    private void registerCommands() throws NoSuchMethodException {
+    	commands.put("GO", CommandGo::new );
+        commands.put("QUIT", new CommandQuit());
+        commands.put("HELP", new CommandHelp());
+        commands.put("LOOK", new CommandLook());
+        commands.put("TAKE", new CommandTake());
+        commands.put("USE", new CommandUse());
+    }
+
+    public Map<String, Command> getCommands() {
+    	return this.commands;
+    }
 
     /**
      * This method is called by a Controller.
@@ -43,7 +57,7 @@ public class Console{
     * 
     * If the command does not exist, an error message is displayed.
     */
-    public Command getCommand() {
+    public Command getCommand() throws InstantiationException {
     	String input = this.inputScanner.nextLine();
     	
     	// ----------- Command identification ---------
@@ -54,15 +68,12 @@ public class Console{
         String[] parts = input.split("\\s+", 2);
         
         String commandName = parts[0].toUpperCase();
-        
-        Command cmd = commands.get(commandName);
-        
+        Function<String[], Command> cmd = commands.get(commandName);
         if (cmd == null) {
             System.out.println("Unknown command. Type 'HELP'.");
             return null;
-        } else {
-        	cmd = cmd.copy();
         }
+        
 
         //------------ Argument Parsing -------------
         
@@ -78,10 +89,9 @@ public class Console{
             }
         }
 
-        System.out.println("DEBUT Console getCommand\n args : "+args+"CMD :"+cmd);
-        cmd.setArgs(args);
+        Command command = cmd.apply(args);
         
-        return cmd;
+        return command;
     }
 
     public PlayerController getPlayer(){
