@@ -1,4 +1,4 @@
-package terminal.adventure.game;
+package terminal.adventure.game.gamestates;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -6,21 +6,40 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
+import terminal.adventure.game.Location;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.PlayerController;
 
-public class GameState {
+public abstract class GameState {
     
-    private final List<Controller> controllers;
-    @SuppressWarnings("unused") //map is stored here for serialization purposes
-    private final Location map;
+    protected final Queue<Controller> controllers;
+    protected final List<Location> map;
     
-    public GameState(PlayerController player, Location map){
-        this.controllers = new LinkedList<>();
-        this.controllers.add(player);
+    public GameState(Queue<Controller> controllers, List<Location> map){
+        this.controllers = controllers;
         this.map = map;
+    }
+
+    public void play(){
+        boolean winCondition = false;
+        boolean loseCondition = false;
+        while (!winCondition && !loseCondition ) { // "main" loop
+            Controller c = controllers.poll();
+            
+            if (c.isDead()) {
+                if (c instanceof PlayerController) loseCondition = true;
+                continue;
+            }
+        
+            System.out.println("It's "+ c.getActor().NAME+" turn");
+
+            c.playTurn();
+
+            controllers.add(c);
+        }
     }
     
     public static void saveInFile(GameState gameState , String filePath) throws FileNotFoundException, IOException {
