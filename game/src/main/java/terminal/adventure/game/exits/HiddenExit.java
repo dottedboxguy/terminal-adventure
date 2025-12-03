@@ -37,7 +37,7 @@ public class HiddenExit extends Exit {
      * Message displayed when the exit is hidden and crossing fails.
      */
     @Override
-    public String getFailMessage() {
+    public String getMessage() {
         if (hidden) {
             return "You feel around, but find no visible way to go there.";
         }

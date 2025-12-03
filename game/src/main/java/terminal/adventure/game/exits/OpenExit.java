@@ -14,7 +14,7 @@ public class OpenExit extends Exit {
     }
 
     @Override
-    public String getFailMessage() {
+    public String getMessage() {
         return "You can cross freely.";
     }
 }

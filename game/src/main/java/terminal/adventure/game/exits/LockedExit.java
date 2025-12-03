@@ -18,7 +18,7 @@ public class LockedExit extends Exit {
     }
 
     @Override
-    public String getFailMessage() {
+    public String getMessage() {
         return "The door is locked. You need the " + this.requiredKey + ".";
     }
 
