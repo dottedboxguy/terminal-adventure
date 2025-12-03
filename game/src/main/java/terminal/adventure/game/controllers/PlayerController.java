@@ -1,6 +1,8 @@
 package terminal.adventure.game.controllers;
+import java.io.Console;
 import java.util.List;
 
+import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
 
 public class PlayerController extends Controller{
@@ -25,5 +27,14 @@ public class PlayerController extends Controller{
     @Override
     protected void play() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    // ---------------------------------------
+    // ##  Methods IN GAME chat...
+    // ---------------------------------------
+
+    public void movePlayer(Actor actor, Location newLocation){
+        String message = actor.Move(newLocation);
+        this.console.print(message);
     }
 }
