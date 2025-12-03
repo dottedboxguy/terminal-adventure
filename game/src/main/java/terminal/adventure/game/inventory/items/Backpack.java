@@ -29,5 +29,9 @@ public class Backpack extends Item implements Storage {
 		this.inventory.getItems();
 		return null;
 	}
-    
+
+	@Override
+	public List<Item> searchItems(String itemName) {
+		return inventory.searchItemsByName(itemName);
+	}
 }

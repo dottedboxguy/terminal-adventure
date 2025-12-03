@@ -76,8 +76,18 @@ public class Equipment {
 		return null;
 	}
 	
+	public List<Storage> getAllStorages() {
+		List<Storage> storages = new ArrayList<>();
+		
+		for (Slot s : this.slots) {
+			if (s.getItem() instanceof Storage) {
+				storages.add((Storage) s.getItem());
+			}
+		}
+		return storages;
+	}
 	
-	
+
 	private List<Slot> findSlotsbyType(Class<? extends Slot> type){
 		List<Slot> res = new ArrayList<>();
 		

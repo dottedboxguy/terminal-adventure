@@ -1,5 +1,8 @@
 package terminal.adventure.game.actors;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import terminal.adventure.game.Fight;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
@@ -20,6 +23,7 @@ public abstract class Actor implements Lookable{
     
     private Controller controller;
     private Fight currentFight = null;
+    
     
     public Actor(String name, String description) {
         this.NAME = name;
@@ -54,10 +58,55 @@ public abstract class Actor implements Lookable{
     	
     }
 
-    public boolean equipItem(Item item, Controller controller) {
+    public boolean equip(Item item, Controller controller) {
     	return this.equipment.equipItem(item, controller);
     }
-
+    
+    
+    /**
+     * Looks for the item by name in the actor's storages, and in the Location,
+     * and tries to equip it.
+     * @param itemName
+     * @param controller
+     * @return
+     */
+    boolean equipItem(String itemName, Controller controller) {
+    	
+    	List<Item> candidates;
+    	
+    	List<Storage> sources = this.equipment.getAllStorages();
+    	
+    	if (this.getCurrentLocation() != null) {    		
+    		sources.add(this.getCurrentLocation());
+    	}
+    	
+    	
+    	
+    	for( Storage s : sources ) {
+    		
+    		candidates = s.searchItems(itemName);
+    		
+    		if (candidates.isEmpty()) {
+    			continue;
+    		}
+    			
+			Item foundItem = candidates.get(0);
+			
+			if( this.equip( foundItem, controller)) {
+				
+				s.removeItem(foundItem);
+				
+				return true;
+			} else {
+				
+				return false;
+			}
+    	}
+    	
+    	return false;
+    	
+    }
+    
     
     public void takeAttack(int attackPower) {
     	
@@ -109,10 +158,16 @@ public abstract class Actor implements Lookable{
     public Storage getFirstStorage(){ 
     	return this.equipment.getfirstStorage();
     }
+    
+    
+    
+    @Override
+    public String getDescription() {
+        return this.DESCRIPTION;
+    }
 	
 	public String getName() { return this.NAME; }
 
-    public String getDescription() {return this.DESCRIPTION;}
 
 	public Controller getController() {
 		return this.controller;
@@ -155,10 +210,6 @@ public abstract class Actor implements Lookable{
 	}
 
 	//-------------- Move methods -------------
-
-	public String Move(Location destination){
-		
-	}
 
 	public String go(Location target) {
 		//TODO
