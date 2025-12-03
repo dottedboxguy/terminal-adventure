@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import terminal.adventure.exceptions.noPossibilitesException;
-import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.items.Item;
@@ -80,8 +79,18 @@ public class Equipment {
 		return null;
 	}
 	
+	public List<Storage> getAllStorages() {
+		List<Storage> storages = new ArrayList<>();
+		
+		for (Slot s : this.slots) {
+			if (s.getItem() instanceof Storage) {
+				storages.add((Storage) s.getItem());
+			}
+		}
+		return storages;
+	}
 	
-	
+
 	private List<Slot> findSlotsbyType(Class<? extends Slot> type){
 		List<Slot> res = new ArrayList<>();
 		

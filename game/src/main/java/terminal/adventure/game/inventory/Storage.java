@@ -11,5 +11,7 @@ public interface Storage {
     public abstract void removeItem(Item item);
 	
 	public abstract List<Item> getItems();
+	
+	public abstract List<Item> searchItems(String itemName);
 
 }
