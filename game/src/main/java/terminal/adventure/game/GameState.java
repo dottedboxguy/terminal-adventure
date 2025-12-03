@@ -19,7 +19,7 @@ public class GameState {
     public GameState(PlayerController player, Location map){
         this.controllers = new LinkedList<>();
         this.controllers.add(player);
-        this.map = null;
+        this.map = map;
     }
     
     public static void saveInFile(GameState gameState , String filePath) throws FileNotFoundException, IOException {
