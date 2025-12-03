@@ -38,9 +38,6 @@ public class HiddenExit extends Exit {
      */
     @Override
     public String getMessage() {
-        if (hidden) {
-            return "You feel around, but find no visible way to go there.";
-        }
-        return "You cannot cross this exit.";
+        return "You feel around, but find no visible way to go there.";
     }
 }
