@@ -24,19 +24,23 @@ commands :
 	- LOOK :
 		shows all the visible content of the location you're currently in
 	- LOOK <args> :
-		shows the description of the elements in argument
+		shows the description of the elements specified
 	- GO <location name> :
-		try to pass through the exit going towards the location argument
+		try to pass through the exit going towards the location specified
 	- USE <things>:
-		tries to use what is specified in argument, like opening a door with a key,
+		tries to use what is specified, like opening a door with a key,
 		pulling a lever or opening a chest
 		tip : try things out !
 	- TAKE ALL :
 		tries to take all items currently in the room and puts them in your inventory
 	- TAKE <item> :
-		tries to take the item in argument and put it in your inventory
+		tries to take the item specified and put it in your inventory
 	- DROP <item> :
-		moves the item in argument to the room you're currently in
+		moves the item specified to the room you're currently in
+	- EQUIP <item> :
+		equips the item specified from your inventory
+	- UNEQUIP <item> :
+	    unequips the item specified, if it is equipped
 	- FIGHT <enemy> :
 		enters a fight with an enemy
 		/!\WARNING/!\
