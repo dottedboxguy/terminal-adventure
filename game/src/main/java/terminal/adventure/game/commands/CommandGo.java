@@ -10,8 +10,8 @@ import terminal.adventure.game.exits.Exit;
 
 public class CommandGo extends Command {
     
-	public CommandGo(String[] args, boolean isTerminal){
-		super(args, isTerminal);
+	public CommandGo(String[] args){
+		super(args, true);
 	}
 
     @Override
@@ -34,7 +34,7 @@ public class CommandGo extends Command {
         }
         
         Location newLocation = exit.getDestination();
-        actor.Move(newLocation);
+        actor.go(newLocation);
         return ("You walk through" + exit.getName() + "...\n") + ("You've arrrived at : " + newLocation.getName() +"\n" + newLocation.getDescription());
     }
     
@@ -56,4 +56,5 @@ public class CommandGo extends Command {
     public String help() {
         return "GO <Location's name>\n you try to go to that location if an exit allows you to do so.\n";
     }
+
 }
