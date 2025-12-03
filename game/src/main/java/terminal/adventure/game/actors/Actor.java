@@ -7,15 +7,14 @@ import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
-import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
+import terminal.adventure.game.inventory.Storage;
 
 
 public abstract class Actor implements Lookable{
     
     public final String NAME;
     public final String DESCRIPTION;
-    protected Inventory inventory;
     protected Equipment equipment;
     protected Stats baseStats;
     private Location currentLocation;
@@ -26,7 +25,6 @@ public abstract class Actor implements Lookable{
     public Actor(String name, String description) {
         this.NAME = name;
         this.DESCRIPTION = description;
-        this.inventory = new Inventory();
         this.baseStats = new Stats();
     }
 
@@ -92,10 +90,26 @@ public abstract class Actor implements Lookable{
     	target.takeAttack(this.getBaseStats().getStrength());
     }
 
+    public boolean takeItem(Item item) {
+    	Storage s = this.getFirstStorage();
+    	if (s != null) {
+    		s.addItem(item);
+    		return true;
+    	}
+    	return false;
+    }
+    
     
     //-------------- Basic Getters ------------------
     
-    public Inventory getInventory(){ return this.inventory; }
+    
+    public boolean hasBackpack() {
+    	return this.equipment.containsBackpack();
+    }
+    
+    public Storage getFirstStorage(){ 
+    	return this.equipment.getfirstStorage();
+    }
     
     @Override
     public String getDescription() {
