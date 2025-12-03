@@ -5,13 +5,13 @@ import java.util.Collection;
 
 import terminal.adventure.game.Console;
 import terminal.adventure.game.Location;
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
 
-public class CommandGo implements Command {
+public class CommandGo extends Command {
     
-    @Override
-    public void execute(String[] args, Console console) {
+    public void go(Actor actor, Location location) {
 
         if (args.length == 0) {
             System.out.println("Where do you wanna GO ?");
