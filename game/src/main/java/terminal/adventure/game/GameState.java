@@ -13,8 +13,9 @@ import terminal.adventure.game.controllers.PlayerController;
 
 public class GameState {
     
-    private List<Controller> controllers;
-    private Location map;
+    private final List<Controller> controllers;
+    @SuppressWarnings("unused") //map is stored here for serialization purposes
+    private final Location map;
     
     public GameState(PlayerController player, Location map){
         this.controllers = new LinkedList<>();
