@@ -1,12 +1,11 @@
 package terminal.adventure.game.controllers;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
-import terminal.adventure.game.inventory.items.Item;
-import terminal.adventure.game.inventory.slots.Slot;
 
 public class AIController extends Controller {
 
@@ -45,7 +44,7 @@ public class AIController extends Controller {
 			this.actor.attack(target);
 		} else {
 		
-			List<Exit> exits = this.actor.getCurrentLocation().getAllExits();
+			Collection<Exit> exits = this.actor.getCurrentLocation().getVisibleExits().values();
 			
 			
 			int nExits = exits.size();
