@@ -162,31 +162,7 @@ public abstract class Actor implements Lookable{
 	//-------------- Move methods -------------
 
 	public String Move(Location destination){
-		if (destination == null) {
-        	return "That location doesn't exist!";
-    	}
-		Exit exitToCross = null;
-
-		for (Exit exit : this.currentLocation.getVisibleExits().values()) {
-			if (exit.getDestination().equals(destination)){
-				exitToCross = exit;
-			}
-		}
-
-		if (exitToCross == null){
-			return "There are no visible exits leading to " + destination;
-		}
-
-		if (exitToCross.canCross()){
-			this.currentLocation.removeActor(this); 
-			this.currentLocation = destination;
-			this.currentLocation.addActor(this);
-			return exitToCross.getMessage();
-		}
-		else{
-			return exitToCross.getMessage();
-		}
-
+		
 	}
 
 	public String go(Location target) {
