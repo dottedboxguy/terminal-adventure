@@ -16,27 +16,18 @@ import terminal.adventure.game.controllers.PlayerController;
 
 public class Console{
 
-    private final Map<String, Command> commands = new HashMap<>();
     private PlayerController player;
-
     private final PrintStream printStream;
     private final Scanner inputScanner;
     
     public Console(){
-        registerCommands();
+        
         printStream = System.out;
         inputScanner = new Scanner(System.in);
         
     }
 
-    private void registerCommands() {
-        commands.put("GO", new CommandGo());
-        commands.put("QUIT", new CommandQuit());
-        commands.put("HELP", new CommandHelp());
-        commands.put("LOOK", new CommandLook());
-        commands.put("TAKE", new CommandTake());
-        commands.put("USE", new CommandUse());
-    }
+    
 
     /**
      * This method is called by a Controller.
@@ -95,12 +86,7 @@ public class Console{
 
     public PlayerController getPlayer(){
         return this.player;
-    }
-
-    public Map<String, Command> getCommands() {
-    	return this.commands;
-    }
-    
+    }  
 
     public void print(String message){
         printStream.println(message);
