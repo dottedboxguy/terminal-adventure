@@ -7,11 +7,11 @@ public class Item implements Lookable{
     private final String NAME;
     private final  String DESCRIPTION;
     private final Stats stats;
-
-    public Item(String name, Stats stats) {
+    
+    public Item(String name, String description, Stats stats) {
         this.NAME = name;
         this.stats = stats;
-        this.DESCRIPTION = "<default-description>";
+        this.DESCRIPTION = description;
     }
 
     public Stats getStats() {

@@ -1,6 +1,8 @@
 package terminal.adventure.game.interactables;
 
-public abstract class Interactable{
+import terminal.adventure.game.Lookable;
+
+public abstract class Interactable implements Lookable{
 
 	private final String DESCRIPTION;
 	private final String name;

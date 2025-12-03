@@ -87,8 +87,9 @@ public class Location implements Lookable{
 		return this.interactables;
 	}
 
-    public String getName() { return this.NAME; }
 	public Inventory getInventory() { return this.inventory; }
-	@Override
-    public String getDescription() { return ""; }
+
+    public String getName() { return this.NAME; }
+
+    public String getDescription() { return this.DESCRIPTION; }
 }

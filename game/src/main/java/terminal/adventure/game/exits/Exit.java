@@ -23,10 +23,7 @@ public abstract class Exit implements Lookable{
     // Message to display if crossing fails
     public abstract String getMessage();
 
-    @Override
-    public String getDescription(){
-        return this.DESCRIPTION;
-    }
+    public String getDescription(){return this.DESCRIPTION;}
 
-    public String getName(){ return this.NAME;}
+    public String getName(){return this.NAME;}
 }
