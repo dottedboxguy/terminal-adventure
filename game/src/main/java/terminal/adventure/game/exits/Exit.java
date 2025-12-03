@@ -3,6 +3,7 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 
 public abstract class Exit implements Lookable{
+    
     protected Location destination;
     protected final String NAME;
     private final String DESCRIPTION;
@@ -13,10 +14,6 @@ public abstract class Exit implements Lookable{
         this.DESCRIPTION = description;
     }
 
-    public Location getDestination() {
-        return destination;
-    }
-
     // Attempt to cross the exit
     public abstract boolean canCross();
 
@@ -24,9 +21,7 @@ public abstract class Exit implements Lookable{
     public abstract String getMessage();
 
     @Override
-    public String getDescription(){
-        return this.DESCRIPTION;
-    }
-
-    public String getName(){ return this.NAME;}
+    public String getDescription(){return this.DESCRIPTION;}
+    public Location getDestination(){return destination;}
+    public String getName(){return this.NAME;}
 }
