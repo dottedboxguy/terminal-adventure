@@ -3,7 +3,6 @@ package terminal.adventure.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.actors.Actor;
 
