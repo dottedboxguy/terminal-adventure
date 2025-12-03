@@ -40,6 +40,10 @@ public class Location implements Lookable{
 		this.actors.add(actor);
 	}
 
+	public void removeActor(Actor actor){
+		this.actors.remove(actor);
+	}
+
 	public void addInteractable(Interactable interactable){
 		this.interactables.add(interactable);
 	}
