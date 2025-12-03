@@ -1,16 +1,16 @@
 package terminal.adventure.game.commands;
 
-import terminal.adventure.game.Console;
+import terminal.adventure.game.actors.Actor;
 
 public class CommandHelp extends Command {
 
     @Override
-    public void execute(String[] args, Console console) {
+    public String execute(Actor actor, String[] args) {
+        String s = "";
+        s += "Available commands:\n";
+        for (String name : actor.getController().getCommands().keySet()) {
 
-        System.out.println("Available commands:");
-        for (String name : console.getCommands().keySet()) {
-
-            Command cmd = console.getCommands().get(name);
+            Command cmd = actor.getController().getCommands().get(name);
 
             String description = "";
             if (cmd != null) {
@@ -23,6 +23,6 @@ public class CommandHelp extends Command {
 
     @Override
     public String help() {
-        return "\n Usage : \n HELP";
+        return "\nUsage : HELP";
     }
 }
