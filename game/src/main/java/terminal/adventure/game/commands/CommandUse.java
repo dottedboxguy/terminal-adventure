@@ -5,7 +5,7 @@ import java.util.List;
 import terminal.adventure.game.Console;
 import terminal.adventure.game.interactables.Interactable;
 
-public class CommandUse implements Command {
+public class CommandUse extends Command {
 
     @Override
     public void execute(String[] args, Console console) {

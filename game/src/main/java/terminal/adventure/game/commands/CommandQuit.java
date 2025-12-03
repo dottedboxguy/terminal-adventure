@@ -2,7 +2,7 @@ package terminal.adventure.game.commands;
 
 import terminal.adventure.game.Console;
 
-public class CommandQuit implements Command {
+public class CommandQuit extends Command {
 
     @Override
     public void execute(String[] args, Console console) {

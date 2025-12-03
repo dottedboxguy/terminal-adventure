@@ -6,7 +6,7 @@ import terminal.adventure.game.Console;
 import terminal.adventure.game.inventory.items.Item;
 
 
-public class CommandTake implements Command {
+public class CommandTake extends Command {
 
     @Override
     public void execute(String[] args, Console console) {
