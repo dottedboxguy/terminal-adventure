@@ -7,8 +7,8 @@ import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
-import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.Storage;
+import terminal.adventure.game.inventory.items.Item;
 
 
 public abstract class Actor implements Lookable{
@@ -162,7 +162,9 @@ public abstract class Actor implements Lookable{
 	//-------------- Move methods -------------
 
 	public String Move(Location destination){
-
+		if (destination == null) {
+        	return "That location doesn't exist!";
+    	}
 		Exit exitToCross = null;
 
 		for (Exit exit : this.currentLocation.getVisibleExits().values()) {
