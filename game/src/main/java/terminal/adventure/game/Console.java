@@ -73,4 +73,8 @@ public class Console{
     public PlayerController getPlayer(){
         return this.player;
     }
+
+    public void print(String message){
+        System.out.println(message);
+    }
 }
