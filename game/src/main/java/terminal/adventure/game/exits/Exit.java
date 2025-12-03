@@ -21,7 +21,7 @@ public abstract class Exit implements Lookable{
     public abstract boolean canCross();
 
     // Message to display if crossing fails
-    public abstract String getFailMessage();
+    public abstract String getMessage();
 
     @Override
     public String getDescription(){
