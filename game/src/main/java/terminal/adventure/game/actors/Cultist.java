@@ -34,7 +34,6 @@ public class Cultist extends Actor{
         
         s = new Stats();
         s.setArmor(1);
-        s.setMaxMana(10);
         slotList.get(1).equip(new HeadEquipment("Cultist Hood", "Red hood worn by blood cultists, it's hard to see the face of the wearer", s ));
         
         s = new Stats();
