@@ -4,10 +4,11 @@ import java.util.Queue;
 import java.util.Scanner;
 
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.actors.Goblin;
 import terminal.adventure.game.controllers.AIController;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.Faction;
-import terminal.adventure.game.actors.*;
+import terminal.adventure.game.controllers.PlayerController;
 
 
 public class Main {
@@ -31,7 +32,7 @@ public class Main {
 		Actor a1 = new Goblin("bob");
 		Actor a2 = new Goblin("bill");
 		
-		Controller c1 = new AIController(Faction.badGuys);
+		Controller c1 = new PlayerController(Faction.badGuys);
 		Controller c2 = new AIController(Faction.goodGuys);
 		c1.bindActor(a1);
 		c2.bindActor(a2);

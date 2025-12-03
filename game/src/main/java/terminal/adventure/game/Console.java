@@ -42,21 +42,29 @@ public class Console{
     * @param input the raw user input typed in the console
     */
     public void runCommand(String input) {
+        input = input.trim();
+        if (input.isEmpty()) return;
 
-        // Split the input into tokens (first word = command name, rest = arguments)
-        String[] tokens = input.trim().split("\\s+"); // trim removes leading/trailing spaces; split separates on spaces
-        if (tokens.length == 0) return;
-
-        Command cmd = commands.get(tokens[0]); // returns null if the command does not exist
+        String[] parts = input.split("\\s+", 2);
+        
+        String commandName = parts[0].toUpperCase();
+        Command cmd = commands.get(commandName);
+        
         if (cmd == null) {
             System.out.println("Unknown command. Type 'HELP'.");
             return;
         }
 
-        // Extract the arguments (all tokens except the first one)
-        String[] args = new String[tokens.length - 1];
-        for (int i = 1; i < tokens.length; i++) {
-            args[i - 1] = tokens[i];
+        String[] args;
+        if (parts.length == 1) {
+            args = new String[0];
+        } else {
+            
+            args = parts[1].split("\\s*,\\s*");
+            
+            for (int i = 0; i < args.length; i++) {
+                args[i] = args[i].trim();
+            }
         }
 
         cmd.execute(args, this);

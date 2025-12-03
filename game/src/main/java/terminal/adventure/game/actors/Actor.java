@@ -1,19 +1,12 @@
 package terminal.adventure.game.actors;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import terminal.adventure.exceptions.noPossibilitesException;
-import terminal.adventure.exceptions.tooManyPossibilitesException;
 import terminal.adventure.game.Fight;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.Equipment;
-import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
-import terminal.adventure.game.inventory.slots.Slot;
 import terminal.adventure.game.inventory.Storage;
 
 
@@ -127,6 +120,9 @@ public abstract class Actor implements Lookable{
 		return this.controller;
 	}
 	
+	public void setCurrentLocation(Location newLocation){
+        this.currentLocation = newLocation;
+    }
 	public String getName() { return this.NAME; }
 	
 	

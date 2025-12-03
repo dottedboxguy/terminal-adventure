@@ -13,7 +13,7 @@ public class LockedExit extends Exit {
     }
 
     @Override
-    public boolean canCross(Character character) {
+    public boolean canCross() {
         return !(this.isLocked);
     }
 

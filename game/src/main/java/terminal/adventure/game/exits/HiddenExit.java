@@ -29,7 +29,7 @@ public class HiddenExit extends Exit {
      * A hidden exit cannot be crossed until it is unveiled.
      */
     @Override
-    public boolean canCross(Character player) {
+    public boolean canCross() {
         return !hidden;
     }
 

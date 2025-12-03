@@ -6,6 +6,7 @@ import java.util.Map;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
+import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.interactables.Interactable;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.items.Item;
@@ -66,14 +67,16 @@ public class Location implements Lookable{
 		}
 		return res;
     }
-
-	public List<Exit> getAllExits(){
-		List<Exit> res = new ArrayList<>();
-		res.addAll(this.exits.values());
-		return res;
-	}
-	
-	
+	public Map<String, Exit> getVisibleExits() {
+        Map<String, Exit> visibleExits = new HashMap<>();
+        for (Map.Entry<String, Exit> entry : exits.entrySet()) {
+            if (!(entry.getValue() instanceof HiddenExit) || 
+                !((HiddenExit) entry.getValue()).isHidden()) {
+                visibleExits.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return visibleExits;
+    }
 	public List<Interactable> getInteractables(){
 		return this.interactables;
 	}

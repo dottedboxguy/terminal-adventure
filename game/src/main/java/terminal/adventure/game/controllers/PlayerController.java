@@ -1,7 +1,9 @@
 package terminal.adventure.game.controllers;
+import java.util.List;
+
 import terminal.adventure.game.actors.Actor;
 
-public abstract class PlayerController extends Controller{
+public class PlayerController extends Controller{
 
     public PlayerController(Faction faction) {
     	super(faction);
@@ -13,5 +15,15 @@ public abstract class PlayerController extends Controller{
     }
 
     // Behavior defined per type:
-    public abstract void takeTurn(/*GameState game,*/ PlayerController playerController);
+    // public void takeTurn(/*GameState game,*/ PlayerController playerController);
+
+    @Override
+    public int equipChooseSlot(List<String> candidatesNames) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    protected void play() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }
