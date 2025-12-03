@@ -5,7 +5,6 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
-import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
@@ -157,12 +156,6 @@ public abstract class Actor implements Lookable{
 	
 	public Fight getFight() {
 		return this.currentFight;
-	}
-
-	//-------------- Move methods -------------
-
-	public String Move(Location destination){
-		
 	}
 
 	public String go(Location target) {
