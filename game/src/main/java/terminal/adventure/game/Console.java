@@ -54,7 +54,7 @@ public class Console{
     * 
     * If the command does not exist, an error message is displayed.
     */
-    public Command getCommand() {
+    private Command getCommand() {
     	String input = this.inputScanner.nextLine();
     	
     	// ----------- Command identification ---------
