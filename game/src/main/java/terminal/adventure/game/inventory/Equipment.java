@@ -43,7 +43,8 @@ public class Equipment {
 				}
 			}
 			
-			index = controller.equipChooseSlot(choicesNames);
+			if (controller == null) index = 0;
+			else index = controller.equipChooseSlot(choicesNames);
 		
 		}
 		
