@@ -43,7 +43,7 @@ public class CommandLook extends Command {
 
     @Override
     public String help() {
-        return "\n Usage : \n LOOK \t ";
+        return "\nLOOK <Argument> -> ";
     }
 
 	@Override
