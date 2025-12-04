@@ -1,28 +1,40 @@
 package terminal.adventure.game.commands;
 
+import terminal.adventure.game.Console;
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.controllers.PlayerController;
 
 public class CommandHelp extends Command {
 
-    @Override
-    public String execute(Actor actor, String[] args) {
-        String s = "";
-        s += "Available commands:\n";
-        for (String name : actor.getController().getCommands().keySet()) {
+    public CommandHelp(String[] args){
+		super(args, false);
+	}
 
-            Command cmd = actor.getController().getCommands().get(name);
+    @Override
+    public String execute(Actor actor) {
+        
+        String res = "Available commands:\n";
+        Console console = ((PlayerController)actor.getController()).getConsole();
+        for (String name : console.getCommands().keySet()) {
+
+            Command cmd = console.getCommands().get(name);
 
             String description = "";
             if (cmd != null) {
                 description = cmd.help();
             }
-
-            System.out.println(" - " + name + " : " + description);
+            res += (" - " + name + " : " + description + "\n");
         }
+        return res;
     }
 
     @Override
     public String help() {
-        return "\nUsage : HELP";
+        return "\n HELP -> print all the commands you can use.";
+    }
+
+    @Override
+    public boolean isTerminal(){
+        return this.isTerminal;
     }
 }
