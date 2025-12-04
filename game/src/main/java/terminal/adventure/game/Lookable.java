@@ -9,5 +9,5 @@ public interface Lookable{
 	/**
 	 * @return the object's description
 	 */
-	public abstract String getDescription();
+	public abstract String look();
 }

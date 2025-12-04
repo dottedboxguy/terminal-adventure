@@ -202,6 +202,11 @@ public abstract class Actor implements Lookable{
     public Storage getFirstStorage(){ 
     	return this.equipment.getfirstStorage();
     }
+    
+    @Override
+    public String look() {
+        return "-" + this.NAME + ":\n" + this.DESCRIPTION;
+    }
 	
     /**
      * @return this actor's name.
@@ -295,13 +300,5 @@ public abstract class Actor implements Lookable{
 		}
 		
 	}
-	
-    @Override
-    /**
-     * See {@link Lookable}
-     */
-    public String getDescription() {
-        return this.DESCRIPTION;
-    }
 	
 }

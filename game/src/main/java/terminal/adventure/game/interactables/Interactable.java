@@ -22,7 +22,7 @@ public abstract class Interactable implements Lookable{
 	/**
 	 * see {@link Lookable}
 	 */
-	public String getDescription(){
+	public String look(){
 		return this.DESCRIPTION;
 	}
 
