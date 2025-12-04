@@ -65,8 +65,12 @@ public class PlayerController extends Controller{
     // ---------------------------------------
 
     public void movePlayer(Actor actor, Location newLocation){
-        String message = actor.Move(newLocation);
+        String message = actor.go(newLocation);
         //this.console.print(message);
+    }
+    
+    public void outputMessage(String msg) {
+    	this.console.print(msg);
     }
 }
 
