@@ -24,6 +24,7 @@ public class Console{
         
         printStream = System.out;
         inputScanner = new Scanner(System.in);
+        registerCommands();
         
     }
 
@@ -90,11 +91,14 @@ public class Console{
         
         return command;
     }
-
+    public void quit(){
+        this.print("Leaving the game...");
+        System.exit(0);
+    }
     public PlayerController getPlayer(){
         return this.player;
     }  
-
+    
     public void print(String message){
         printStream.println(message);
     }

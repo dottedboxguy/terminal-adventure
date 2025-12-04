@@ -1,16 +1,9 @@
 package terminal.adventure.game.controllers;
-import terminal.adventure.exceptions.invalidInputException;
-import terminal.adventure.game.Console;
 import java.util.List;
 
-import terminal.adventure.game.Location;
-import terminal.adventure.game.actors.Actor;
+import terminal.adventure.exceptions.invalidInputException;
+import terminal.adventure.game.Console;
 import terminal.adventure.game.commands.Command;
-import terminal.adventure.game.commands.CommandGo;
-import terminal.adventure.game.commands.CommandType;
-import terminal.adventure.game.exits.Exit;
-
-import java.util.concurrent.TimeUnit;
 
 public class PlayerController extends Controller{
 
@@ -33,12 +26,12 @@ public class PlayerController extends Controller{
     protected void play() {
     	
     	boolean endTurn = false;
-    	boolean failedCommand = false;
+    	boolean failedCommand;
     	
     	while (!endTurn) {
     		
     		failedCommand = false;
-    		Command cmd = this.console.getCommand();
+    		Command cmd = this.console.getAction();
     		
     		
     		
