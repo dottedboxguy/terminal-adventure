@@ -1,12 +1,9 @@
 package terminal.adventure.game;
 import java.io.PrintStream;
-import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.commands.CommandGo;
@@ -39,14 +36,8 @@ public class Console{
         commands.put("USE" , CommandUse::new);
     }
 
-    public Map<String, Command> getCommands() {
-    	Map<String, Command> res = new HashMap<>();
-    	
-    	for (String key : commands.keySet()) {
-    		res.put(key, commands.get(key).apply(null));
-    	}
-    	
-    	return res;
+    public Map<String, Function<String[], Command>> getCommands() {
+    	return this.commands;
     }
 
     /**
