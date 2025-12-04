@@ -35,7 +35,7 @@ public class Location implements Lookable, Storage{
      * @param exit the Exit to add.
      */
     public void addExit(Exit exit) {
-        exits.put(exit.getName(), exit);
+        exits.put(exit.getDestination().getName(), exit);
     }
 
     /**
