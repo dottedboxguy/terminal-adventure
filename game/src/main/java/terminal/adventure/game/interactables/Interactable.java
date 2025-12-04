@@ -12,14 +12,25 @@ public abstract class Interactable implements Lookable{
 		this.name = name;
 	}
 
+	/**
+	 * The process in case the interactable object is used.
+	 */
 	public abstract void action();
 
+	@Override
+	/**
+	 * see {@link Lookable}
+	 */
 	public String getDescription(){
 		return this.DESCRIPTION;
 	}
 
+	/**
+	 * @return this Object's name.
+	 */
 	public String getName(){
 		return this.name;
 	} 
 
 }
+//TODO : why not an interface ?

@@ -10,6 +10,9 @@ public class InteractableChest extends Interactable{
 	}
     
     @Override
+    /**
+     * see {@link Interactable}
+     */
 	public void action(){
         this.isOpened = true;
     };
