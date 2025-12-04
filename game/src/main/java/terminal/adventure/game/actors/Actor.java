@@ -175,10 +175,11 @@ public abstract class Actor implements Lookable{
      * @param item the item to add to the inventory.
      * @return if the addition was successful. (can fail if no Storage is equipped).
      */
-    public boolean takeItem(Item item) {
-    	Storage s = this.getFirstStorage();
-    	if (s != null) {
-    		s.addItem(item);
+    public boolean takeItem(Item item, Storage source) {
+    	Storage inventory = this.getFirstStorage();
+    	if (inventory != null) {
+    		inventory.addItem(item);
+			source.removeItem(item);
     		return true;
     	}
     	return false;
