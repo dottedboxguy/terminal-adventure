@@ -34,7 +34,7 @@ public class CommandGo extends Command {
         }
         
         Location newLocation = exit.getDestination();
-        return ("You walk through" + exit.getName() + "...\n") + ("You've arrrived at : " + newLocation.getName() +"\n" + newLocation.getDescription());
+        return ("You walk through" + exit.getName() + "...\n") + ("You've arrrived at : " + newLocation.getName() +"\n" + newLocation.look());
     }
     
     private String getAvailableExits(Location location) {
@@ -45,7 +45,7 @@ public class CommandGo extends Command {
         String res = "Available exits from here :\n";
         for (Exit exit : destinations) {
             res += (" - " + exit.getDestination().getName() + " :\n");
-            res += (exit.getDestination().getDescription() + "\n");
+            res += (exit.getDestination().look() + "\n");
         }
         return res;
         

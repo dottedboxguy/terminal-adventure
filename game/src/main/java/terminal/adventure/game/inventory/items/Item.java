@@ -30,7 +30,7 @@ public class Item implements Lookable{
 	/**
 	 * see {@link Lookable}
 	 */
-    public String getDescription() {return this.DESCRIPTION;}
+    public String look() {return this.DESCRIPTION;}
  
     @Override
     /**
