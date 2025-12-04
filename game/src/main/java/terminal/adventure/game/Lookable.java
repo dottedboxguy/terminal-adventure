@@ -1,5 +1,13 @@
 package terminal.adventure.game;
 
+/**
+ * An abstract method to apply to everything that can be looked, to provide
+ * a specific description.
+ */
 public interface Lookable{
-    public abstract String getDescription();
+	
+	/**
+	 * @return the object's description
+	 */
+	public abstract String getDescription();
 }
