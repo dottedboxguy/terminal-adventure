@@ -11,6 +11,8 @@ import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
+import terminal.adventure.game.inventory.slots.BackpackSlot;
+import terminal.adventure.game.inventory.slots.Slot;
 
 
 public abstract class Actor implements Lookable{
@@ -29,7 +31,12 @@ public abstract class Actor implements Lookable{
         this.NAME = name;
         this.DESCRIPTION = description;
         this.baseStats = new Stats();
+		List<Slot> slots = makeSlots();
+		slots.add(new BackpackSlot());
+		this.equipment = new Equipment(slots);
     }
+
+	public abstract List<Slot> makeSlots();
     
     /**
      * Sets the given controller to this actor.

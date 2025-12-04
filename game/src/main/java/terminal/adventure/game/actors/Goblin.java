@@ -27,4 +27,14 @@ public class Goblin extends Actor{
         
         this.equipment = new Equipment(slotList);
     }
+
+    @Override
+    public List<Slot> makeSlots() {
+        List<Slot> slots = new ArrayList<>();
+        slots.add(new BootsSlot());
+        slots.add(new GlovesSlot());
+        slots.add(new HeadSlot());
+        slots.add(new TorsoSlot());
+        return slots;
+    }
 }
