@@ -37,20 +37,22 @@ public class PlayerController extends Controller{
     		Command cmd = this.console.getAction();
     		String message = "\n";
     		
-    		
-    		try {
+    		if (cmd != null) {
     			
-    		    message = cmd.execute(this.getActor());
-
-    		
-    		} catch (invalidInputException e) {
-    		
-    			console.print(e.getMessage());
-    			failedCommand = true;
+	    		try {
+	    			
+	    		    message = cmd.execute(this.getActor());
+	
+	    		
+	    		} catch (invalidInputException e) {
+	    		
+	    			console.print(e.getMessage());
+	    			failedCommand = true;
+	    		}
+	    		console.print(message);
+	    		
+	    		endTurn = ( !failedCommand && cmd.isTerminal() );
     		}
-    		console.print(message);
-    		
-    		endTurn = ( !failedCommand && cmd.isTerminal() );
     		
     	}
     	
