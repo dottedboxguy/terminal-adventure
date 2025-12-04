@@ -1,7 +1,6 @@
 package terminal.adventure.game.actors;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import terminal.adventure.game.Fight;
 import terminal.adventure.game.Location;

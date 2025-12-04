@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class PlayerController extends Controller{
 
-	Console console;
+	private Console console;
 	
     public PlayerController(Faction faction, Console console) {
     	super(faction);
@@ -64,13 +64,9 @@ public class PlayerController extends Controller{
     // ##  Methods IN GAME chat...
     // ---------------------------------------
 
-    public void movePlayer(Actor actor, Location newLocation){
-        String message = actor.go(newLocation);
-        //this.console.print(message);
+    public Console getConsole(){
+        return this.console;
     }
     
-    public void outputMessage(String msg) {
-    	this.console.print(msg);
-    }
 }
 
