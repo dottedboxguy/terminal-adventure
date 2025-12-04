@@ -19,13 +19,14 @@ public class HiddenExit extends Exit {
     }
 
     /**
-     * Returns whether this exit is still hidden.
+     * @return whether this exit is still hidden.
      */
     public boolean isHidden() {
         return hidden;
     }
 
     /**
+     * see {@link Exit}
      * A hidden exit cannot be crossed until it is unveiled.
      */
     @Override
@@ -34,6 +35,7 @@ public class HiddenExit extends Exit {
     }
 
     /**
+     * see {@link Exit}
      * Message displayed when the exit is hidden and crossing fails.
      */
     @Override
