@@ -38,6 +38,6 @@ public abstract class Exit implements Lookable{
     /**
      * 	see {@link Lookable}
      */
-    public String getDescription(){return this.DESCRIPTION;}
+    public String look(){return this.DESCRIPTION;}
     
 }
