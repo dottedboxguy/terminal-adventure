@@ -14,15 +14,18 @@ public class PlayerController extends Controller{
     	this.console = console;
     }
     
-    // Behavior defined per type:
-    // public void takeTurn(/*GameState game,*/ PlayerController playerController);
-
     @Override
+    /**
+     * See {@link Controller}
+     */
     public int equipChooseSlot(List<String> candidatesNames) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
+    /**
+     * See {@link Controller}
+     */
     protected void play() {
     	
     	boolean endTurn = false;
@@ -57,6 +60,9 @@ public class PlayerController extends Controller{
     // ##  Methods IN GAME chat...
     // ---------------------------------------
 
+    /**
+     * @return the console that can be asked for commands.
+     */
     public Console getConsole(){
         return this.console;
     }
