@@ -2,9 +2,6 @@ package terminal.adventure.game.commands;
 
 import java.util.List;
 
-import terminal.adventure.exceptions.invalidInputException;
-import terminal.adventure.game.Console;
-import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
@@ -35,7 +32,7 @@ public class CommandLook extends Command {
             }
             
             if (actors.isEmpty() && exits.isEmpty()) {
-                return "There is no" + arg + " in here.";
+                result += "There is no" + arg + " in here.";
             }
         }
         return result;
@@ -43,12 +40,6 @@ public class CommandLook extends Command {
 
     @Override
     public String help() {
-        return "\nLOOK <Argument> -> ";
+        return "\nLOOK -> show informations about your current Location\nLOOK <Argument> ... -> show informations about the arguments you gave";
     }
-
-	@Override
-	public String execute(Actor actor) throws invalidInputException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
