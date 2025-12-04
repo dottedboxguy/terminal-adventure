@@ -29,12 +29,11 @@ public class CommandGo extends Command {
             throw new invalidInputException("there is no location named \"" + String.join(" ", args) + "\" near." + this.getAvailableExits(actor.getCurrentLocation()));
         }
         
-        if (!exit.canCross()) {
+        if (!actor.go(exit)) {
             throw new invalidInputException(exit.getMessage());
         }
         
         Location newLocation = exit.getDestination();
-        actor.go(newLocation);
         return ("You walk through" + exit.getName() + "...\n") + ("You've arrrived at : " + newLocation.getName() +"\n" + newLocation.getDescription());
     }
     
