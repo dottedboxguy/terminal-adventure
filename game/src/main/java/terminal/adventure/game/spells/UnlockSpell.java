@@ -10,6 +10,9 @@ public class UnlockSpell extends Spell {
     }
 
     @Override
+    /**
+     * see {@link Spell}
+     */
     public void cast(Actor actor, Object target) {
         if (target instanceof LockedExit) {
             ((LockedExit)target).forcedUnlock();
