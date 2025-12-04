@@ -1,5 +1,7 @@
 package terminal.adventure.game.commands;
 
+import java.util.function.Function;
+
 import terminal.adventure.game.Console;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.controllers.PlayerController;
@@ -16,8 +18,8 @@ public class CommandHelp extends Command {
         String res = "Available commands:\n";
         Console console = ((PlayerController)actor.getController()).getConsole();
         for (String name : console.getCommands().keySet()) {
-
-            Command cmd = console.getCommands().get(name);
+            Function<String[], Command> command = console.getCommands().get(name);
+            Command cmd = command.apply(null);
 
             String description = "";
             if (cmd != null) {
