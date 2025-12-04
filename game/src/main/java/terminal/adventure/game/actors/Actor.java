@@ -173,6 +173,7 @@ public abstract class Actor implements Lookable{
     /**
      * Puts the given item in the first Storage found in the actor's Inventory.
      * @param item the item to add to the inventory.
+	 * @param source the source storage from which the item originates
      * @return if the addition was successful. (can fail if no Storage is equipped).
      */
     public boolean takeItem(Item item, Storage source) {
