@@ -9,7 +9,6 @@ import terminal.adventure.game.inventory.items.BootsEquipment;
 import terminal.adventure.game.inventory.items.HeadEquipment;
 import terminal.adventure.game.inventory.items.TorsoEquipment;
 import terminal.adventure.game.inventory.slots.BootsSlot;
-import terminal.adventure.game.inventory.slots.GlovesSlot;
 import terminal.adventure.game.inventory.slots.HeadSlot;
 import terminal.adventure.game.inventory.slots.Slot;
 import terminal.adventure.game.inventory.slots.TorsoSlot;
@@ -17,7 +16,7 @@ import terminal.adventure.game.inventory.slots.TorsoSlot;
 public class Cultist extends Actor{
     
     public Cultist(String name){
-        super(name, "A silouhette wrapped in red robes, you cannot see its face, but you feel its stare.");
+        super(name, "A silouhette wrapped in red robes. You cannot see their face, but you feel their stare.");
         this.baseStats.setMaxHealth(50);
         this.baseStats.setCurrentHealth(50);
         this.baseStats.setStrength(5);
@@ -30,15 +29,16 @@ public class Cultist extends Actor{
         
         Stats s = new Stats();
         s.setArmor(2);
-        slotList.get(0).equip(new BootsEquipment("Cultist Boots", s ));
+        s.setSpeed(1);
+        slotList.get(0).equip(new BootsEquipment("Cultist Boots", "Boots worn by low rank blood cultists, they're worn out", s ));
         
         s = new Stats();
         s.setArmor(1);
-        slotList.get(1).equip(new HeadEquipment("Cultist Hood", s ));
+        slotList.get(1).equip(new HeadEquipment("Cultist Hood", "Red hood worn by blood cultists, it's hard to see the face of the wearer", s ));
         
         s = new Stats();
         s.setArmor(3);
-        slotList.get(2).equip(new TorsoEquipment("Cultist Robe", s ));
+        slotList.get(2).equip(new TorsoEquipment("Cultist Robe", "Red robe worn by blood cultist, its golden engravings unsettle you", s ));
         
         this.equipment = new Equipment(slotList);
     }

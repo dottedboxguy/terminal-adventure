@@ -9,9 +9,10 @@ import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.interactables.Interactable;
 import terminal.adventure.game.inventory.Inventory;
+import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
-public class Location implements Lookable{
+public class Location implements Lookable, Storage{
     private final String NAME;
     private final String DESCRIPTION;
 	private List<Actor> actors;
@@ -88,7 +89,33 @@ public class Location implements Lookable{
 	}
 
     public String getName() { return this.NAME; }
-	public Inventory getInventory() { return this.inventory; }
+
+    //------------------ Lookable Methods ------------
+    
+    @Override
+    public String getDescription() { return this.DESCRIPTION; }
+	
+	//------------------- Storage Methods -------------
+	
 	@Override
-    public String getDescription() { return ""; }
+	public void addItem(Item item) {
+		this.inventory.add(item);
+		
+	}
+
+	@Override
+	public void removeItem(Item item) {
+		this.inventory.add(item);
+	}
+
+	@Override
+	public List<Item> getItems() {
+		return this.inventory.getItems();
+	}
+
+	@Override
+	public List<Item> searchItems(String itemName) {
+		return this.inventory.searchItemsByName(itemName);
+	}
+
 }

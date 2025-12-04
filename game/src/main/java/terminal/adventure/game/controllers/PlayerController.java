@@ -1,4 +1,5 @@
 package terminal.adventure.game.controllers;
+import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Console;
 import java.util.List;
 
@@ -19,12 +20,7 @@ public class PlayerController extends Controller{
     	super(faction);
     	this.console = console;
     }
-
-    // Basic universal actions:
-    public void attack(Actor actor) {
-    	//
-    }
-
+    
     // Behavior defined per type:
     // public void takeTurn(/*GameState game,*/ PlayerController playerController);
 
@@ -36,53 +32,32 @@ public class PlayerController extends Controller{
     @Override
     protected void play() {
     	
-    	System.out.println("DEBUG PlayerController play\n");
+    	boolean endTurn = false;
+    	boolean failedCommand = false;
     	
-    	for ( Exit e : this.getActor().getCurrentLocation().getVisibleExits().values() ) {
-    		System.out.println(e.getDestination().getName());
-    	}
-    	
-    	
-    	
-    	Command cmd = this.console.getAction();
-    	
-    	//TODO
-    	switch (cmd.getType()) {
-    	case GO :
-    		cmd.init(this.getActor());
-    		Location target = ((CommandGo) cmd).getTarget();
+    	while (!endTurn) {
     		
-    		System.out.println("DEBUG PlayerController play\n target :"+target);
+    		failedCommand = false;
+    		Command cmd = this.console.getCommand();
     		
-    		if(target != null) {
+    		
+    		
+    		try {
     			
-    			console.print(
-    					this.actor.go(target)
-    					);
+    			cmd.execute(this.getActor());    			
     		
-    		} else {
-    			console.print(cmd.getReturnMessage());    			
+    		} catch (invalidInputException e) {
+    		
+    			console.print(e.getMessage());
+    			failedCommand = true;
     		}
     		
     		
-    		break;
-    	case LOOK :
-    		break;
-    	case USE :
-    		break;
-    	case TAKE :
-    		break;
+    		
+    		endTurn = ( !failedCommand && cmd.isTerminal() );
+    		
     	}
     	
-    	
-    	
-    	System.out.println("DEBUG : PlayerController got command :"+cmd);
-    	
-    	try {
-			TimeUnit.SECONDS.sleep(3);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
     }
 
     // ---------------------------------------
@@ -98,3 +73,4 @@ public class PlayerController extends Controller{
         return this.console;
     }
 }
+

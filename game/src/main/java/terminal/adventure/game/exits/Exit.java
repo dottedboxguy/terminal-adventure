@@ -3,7 +3,7 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 
 public abstract class Exit implements Lookable{
-    
+
     protected Location destination;
     protected final String NAME;
     private final String DESCRIPTION;

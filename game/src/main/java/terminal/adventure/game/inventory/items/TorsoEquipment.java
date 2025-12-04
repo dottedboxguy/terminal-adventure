@@ -4,8 +4,8 @@ import terminal.adventure.game.Stats;
 
 public class TorsoEquipment extends Item{
 
-	public TorsoEquipment(String name, Stats stats) {
-		super(name, stats);
+	public TorsoEquipment(String name, String description, Stats stats) {
+		super(name, description, stats);
 	}
 	
 }
