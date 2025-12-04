@@ -2,11 +2,14 @@ package terminal.adventure.game.commands;
 
 import java.util.List;
 
+import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Console;
+import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.interactables.Interactable;
 
 public class CommandUse extends Command {
 
+	/*
     @Override
     public void execute(String[] args, Console console) {
 
@@ -22,9 +25,21 @@ public class CommandUse extends Command {
         }
         
     }
+	*/
+	
+	
+    public CommandUse(String[] args) {
+		super(args, true);
+	}
 
-    @Override
+	@Override
     public String help() {
         return "\n Usage : \n USE \t <arg> \n\t <toUse> <usedOn>";
     }
+
+	@Override
+	public String execute(Actor actor) throws invalidInputException {
+		// TODO
+		return null;
+	}
 }

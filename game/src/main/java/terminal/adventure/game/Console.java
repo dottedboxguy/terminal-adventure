@@ -31,16 +31,22 @@ public class Console{
     }
 
     private void registerCommands() {
-    	commands.put("GO", CommandGo::new );
-        commands.put("QUIT", new CommandQuit());
-        commands.put("HELP", new CommandHelp());
-        commands.put("LOOK", new CommandLook());
-        commands.put("TAKE", new CommandTake());
-        commands.put("USE", new CommandUse());
+    	commands.put("GO"  , CommandGo::new );
+        commands.put("QUIT", CommandQuit::new);
+        commands.put("HELP", CommandHelp::new);
+        commands.put("LOOK", CommandLook::new);
+        commands.put("TAKE", CommandTake::new);
+        commands.put("USE" , CommandUse::new);
     }
 
-    public Map<String, Function<String[], Command> > getCommands() {
-    	return this.commands;
+    public Map<String, Command> getCommands() {
+    	Map<String, Command> res = new HashMap<>();
+    	
+    	for (String key : commands.keySet()) {
+    		res.put(key, commands.get(key).apply(null));
+    	}
+    	
+    	return res;
     }
 
     /**

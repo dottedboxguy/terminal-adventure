@@ -2,6 +2,7 @@ package terminal.adventure.game.commands;
 
 import java.util.List;
 
+import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Console;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
@@ -9,6 +10,12 @@ import terminal.adventure.game.exits.Exit;
 
 public class CommandLook extends Command {
 
+	
+	public CommandLook(String[] args) {
+		super(args, false);
+	}
+
+	/*
     @Override
     public void execute(String[] args, Console console) {
           if (args.length == 0) {
@@ -37,9 +44,15 @@ public class CommandLook extends Command {
             }
         }
     }
-    
+    */
     @Override
     public String help() {
         return "\n Usage : \n LOOK \t ";
     }
+
+	@Override
+	public String execute(Actor actor) throws invalidInputException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
