@@ -14,16 +14,28 @@ public class Item implements Lookable{
         this.DESCRIPTION = description;
     }
 
+    /**
+     * @return this item's stats
+     */
     public Stats getStats() {
     	return this.stats;
     }
 
+    /**
+     * @return the item's name
+     */
     public String getName() { return this.NAME; }
 
     @Override
+	/**
+	 * see {@link Lookable}
+	 */
     public String getDescription() {return this.DESCRIPTION;}
  
     @Override
+    /**
+     * @return a String representing the Item
+     */
     public String toString() {
     	return "Item : ("+this.getClass().getSimpleName()+") "+this.NAME+"\n";
     }

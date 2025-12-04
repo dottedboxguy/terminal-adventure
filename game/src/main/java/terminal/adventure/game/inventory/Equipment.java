@@ -20,7 +20,12 @@ public class Equipment {
 		}
 
 	}
-	
+	/**
+	 * Tries to equip the specified item.
+	 * @param item the item to equip.
+	 * @param controller the controller to ask if several slots possibilities.
+	 * @return if the item has been successfully equipped.
+	 */
 	public boolean equipItem(Item item, Controller controller) {
 	
 		List<Slot> matching = this.findMatchingSlots(item);
@@ -43,15 +48,20 @@ public class Equipment {
 				}
 			}
 			
-			index = controller.equipChooseSlot(choicesNames);
+			if (controller == null) index = 0;
+			else index = controller.equipChooseSlot(choicesNames);
 		
 		}
 		
 		return matching.get(index).equip(item); 
 	}
 	
-	
-	public List<Slot> findMatchingSlots(Item item){
+	/**
+	 * finds Slots in the equippement that can hold the given item.
+	 * @param item the item to look slots for.
+	 * @return a list of compatible slots.
+	 */
+	private List<Slot> findMatchingSlots(Item item){
 		List<Slot> slotRes = new ArrayList<>();		
 		
 		for (Slot s : slots) {
@@ -63,10 +73,16 @@ public class Equipment {
 		return slotRes;
 	}
 	
-	public boolean containsBackpack() {
+	/**
+	 * @return if at least one Storage item is equipped.
+	 */
+	public boolean containsStorage() {
 		return this.getfirstStorage() != null;
 	}
 	
+	/**
+	 * @return the first found Storage item equipped.
+	 */
 	public Storage getfirstStorage() {
 		for (Slot s : this.slots) {
 			if (s.getItem() instanceof Storage) {
@@ -76,6 +92,9 @@ public class Equipment {
 		return null;
 	}
 	
+	/**
+	 * @return a list of all Storage items equipped.
+	 */
 	public List<Storage> getAllStorages() {
 		List<Storage> storages = new ArrayList<>();
 		
@@ -87,19 +106,10 @@ public class Equipment {
 		return storages;
 	}
 	
-
-	private List<Slot> findSlotsbyType(Class<? extends Slot> type){
-		List<Slot> res = new ArrayList<>();
-		
-		for (Slot s : slots) {
-			if (type.isInstance(s)) {
-				res.add(s);
-			}
-		}
-		return res;
-	}
-	
-	
+	/**
+	 * Adds up all of the equipped item's stats
+	 * @return the sum of all items's slots.
+	 */
 	public Stats totalStats() {
 		Stats res = new Stats(); 
 		for ( Slot s : slots) {

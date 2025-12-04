@@ -11,6 +11,8 @@ import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
+import terminal.adventure.game.inventory.slots.BackpackSlot;
+import terminal.adventure.game.inventory.slots.Slot;
 
 
 public abstract class Actor implements Lookable{
@@ -29,8 +31,19 @@ public abstract class Actor implements Lookable{
         this.NAME = name;
         this.DESCRIPTION = description;
         this.baseStats = new Stats();
+		List<Slot> slots = makeSlots();
+		slots.add(new BackpackSlot());
+		this.equipment = new Equipment(slots);
     }
 
+	public abstract List<Slot> makeSlots();
+    
+    /**
+     * Sets the given controller to this actor.
+     * Warning : will disconnect the current controller if any,
+     * along with the controller's current actor.
+     * @param c The new controller to bind.
+     */
     public void setController(Controller c) {
 
     	// Disconnecting old controller from this actor
@@ -48,6 +61,10 @@ public abstract class Actor implements Lookable{
     	
     }
     
+    /**
+     * Resets this actor's controller.
+     * will also resets the current controller's actor if present.
+     */
     public void clearController() {
     	if (this.controller != null) {
     		Controller temp = this.controller;
@@ -66,9 +83,9 @@ public abstract class Actor implements Lookable{
     /**
      * Looks for the item by name in the actor's storages, and in the Location,
      * and tries to equip it.
-     * @param itemName
-     * @param controller
-     * @return
+     * @param itemName The name of the item to look for.
+     * @param controller the controller to refer to if there is several eligible slots where it could be equipped.
+     * @return if the equip is successful.
      */
     boolean equipItem(String itemName, Controller controller) {
     	
@@ -79,7 +96,6 @@ public abstract class Actor implements Lookable{
     	if (this.getCurrentLocation() != null) {    		
     		sources.add(this.getCurrentLocation());
     	}
-    	
     	
     	
     	for( Storage s : sources ) {
@@ -108,6 +124,11 @@ public abstract class Actor implements Lookable{
     }
     
     
+    /**
+     * Allows the actor to receive an attack.
+     * The effective damage dealt can be affected by this actor's armor or speed.
+     * @param attackPower the initial amount of damage dealt.
+     */
     public void takeAttack(int attackPower) {
     	
     	int currentHealth = this.getBaseStats().getCurrentHealth();
@@ -125,23 +146,41 @@ public abstract class Actor implements Lookable{
 
     }
     
+    /**
+     * Called whenever the actor should die.
+     * Tells the controller its actor is dead, which disconnects it.
+     */
     public void die() {
     	// Actions to perform at death (loot drop, events, etc)
     	this.controller.die();
     }
     
+    /**
+     * @return If the actor's current Health is 0 or less.
+     */
     public boolean isDead() {
     	return this.getBaseStats().getCurrentHealth() <= 0;
     }
     
+    /**
+     * Triggers an attack from this actor to the given one.
+     * @param target the actor to attack.
+     */
     public void attack(Actor target) {
     	target.takeAttack(this.getBaseStats().getStrength());
     }
 
-    public boolean takeItem(Item item) {
-    	Storage s = this.getFirstStorage();
-    	if (s != null) {
-    		s.addItem(item);
+    /**
+     * Puts the given item in the first Storage found in the actor's Inventory.
+     * @param item the item to add to the inventory.
+	 * @param source the source storage from which the item originates
+     * @return if the addition was successful. (can fail if no Storage is equipped).
+     */
+    public boolean takeItem(Item item, Storage source) {
+    	Storage inventory = this.getFirstStorage();
+    	if (inventory != null) {
+    		inventory.addItem(item);
+			source.removeItem(item);
     		return true;
     	}
     	return false;
@@ -150,11 +189,16 @@ public abstract class Actor implements Lookable{
     
     //-------------- Basic Getters / Setters ------------------
     
-    
-    public boolean hasBackpack() {
-    	return this.equipment.containsBackpack();
+    /**
+     * @return if this actor has at least one storage item it its equipment.
+     */
+    public boolean hasStorage() {
+    	return this.equipment.containsStorage();
     }
     
+    /**
+     * @return returns the first storage item found in the inventory.
+     */
     public Storage getFirstStorage(){ 
     	return this.equipment.getfirstStorage();
     }
@@ -164,38 +208,64 @@ public abstract class Actor implements Lookable{
         return "-" + this.NAME + ":\n" + this.DESCRIPTION;
     }
 	
+    /**
+     * @return this actor's name.
+     */
 	public String getName() { return this.NAME; }
 
-
+	/**
+	 * @return this actor's controller, null if none
+	 */
 	public Controller getController() {
 		return this.controller;
 	}
 	
-	
+	/**
+	 * @return this actor's current location, null if none
+	 */
 	public Location getCurrentLocation(){
 		return this.currentLocation;
 	}
 	
+	/**
+	 * @param loc this new actor's location.
+	 */
 	public void setLocation(Location loc) {
 		this.currentLocation = loc;
 	}
 	
+	/**
+	 * Adds up all of the equipped items's stats and this actor's base stats.
+	 * @return the total sum of stats.
+	 */
 	public Stats getTotalStats() {
 		return this.baseStats.statsSum(this.equipment.totalStats());
 	}
 	
+	/**
+	 * @return the base stats of the actor.
+	 */
 	public Stats getBaseStats(){
 		return this.baseStats;
 	}
 	
 	//-------------- Fight-related methods -------------
 	
+	/**
+	 * Adds this actor to the specified fight and sets it
+	 * as the current actor's fight attribute.
+	 * @param f the fight to join
+	 */
 	public void enterFight(Fight f ) {
 		this.leaveFight();
 		this.currentFight = f;
 		f.addFighter(this);
 	}
 	
+	/**
+	 * Removes this actor from the specified fight and
+	 * resets the current actor's fight attribute
+	 */
 	public void leaveFight() {
 		if (this.currentFight != null) {
 			this.currentFight.removeFighter(this);
@@ -203,12 +273,22 @@ public abstract class Actor implements Lookable{
 		}
 	}
 	
+	/**
+	 * @return The current fight this actor is in.
+	 */
 	public Fight getFight() {
 		return this.currentFight;
 	}
 
 	//-------------- Move methods -------------
 
+	/**
+	 * Tries to move the actor through an exit.
+	 * if successful, the actor's location is modified
+	 * to the exit's destination.
+	 * @param the exit to go through
+	 * @return if the actor succeeded passing through the exit.
+	 */
 	public boolean go(Exit target) {
 		
 		if (target.canCross()) {
@@ -220,4 +300,5 @@ public abstract class Actor implements Lookable{
 		}
 		
 	}
+	
 }

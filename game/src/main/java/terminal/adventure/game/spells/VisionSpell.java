@@ -9,8 +9,10 @@ public class VisionSpell extends Spell {
         super("Greater Vision", "Lets you see the unseen");
     }
 
-    // will add more behaviors later
     @Override
+    /**
+     * see {@link Spell}
+     */
     public void cast(Actor actor, Object target) {
         if (target instanceof HiddenExit) {
             ((HiddenExit)target).unveil();

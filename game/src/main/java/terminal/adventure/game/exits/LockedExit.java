@@ -13,15 +13,26 @@ public class LockedExit extends Exit {
     }
 
     @Override
+    /**
+     * see {@link Exit}
+     */
     public boolean canCross() {
         return !(this.isLocked);
     }
 
     @Override
+    /**
+     * see {@link Exit}
+     */
     public String getMessage() {
         return "The door is locked. You need the " + this.requiredKey + ".";
     }
 
+    /**
+     * Unlocks the exit using an item.
+     * @param item used to try unlocking the exit.
+     * @return The fail/success message.
+     */
     public String unlock(Item item){
         if (item == this.requiredKey){
             this.isLocked = false;
@@ -30,6 +41,10 @@ public class LockedExit extends Exit {
         return "It seems like this doesn't fit";
     }
 
+    /**
+     * Unlocks the exit bypassing the need for a key item.
+     * @return the message to print after forcing an Exit.
+     */
     public String forcedUnlock(){
         this.isLocked = false;
         return "WOOOAAHH!!! the lock got destroyed \n You can now pass freely.";
