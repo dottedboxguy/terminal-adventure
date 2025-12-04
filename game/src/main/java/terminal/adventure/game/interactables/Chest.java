@@ -2,16 +2,24 @@ package terminal.adventure.game.interactables;
 
 import java.util.List;
 
+import terminal.adventure.game.Lookable;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
-public class InteractableChest extends Interactable implements Storage {
+public class Chest implements Storage, Interactable, Lookable {
+
+	private final String DESCRIPTION;
+	private final String NAME;
+
     private Inventory inventory;
     private boolean isOpened = true;
-	public InteractableChest(String description, String name, Inventory inventory){
-		super(description, name);
+
+	public Chest(String description, String name, Inventory inventory){
+		this.DESCRIPTION = description;
+		this.NAME = name;
+		this.inventory = inventory;
 	}
     
 	
@@ -38,6 +46,14 @@ public class InteractableChest extends Interactable implements Storage {
     	this.dump( actor.getCurrentLocation());        	
         
     };
+
+	@Override
+    /**
+     * see {@link Interactable}
+     */
+	public void actionWithItem(Actor actor, Item item) {
+		
+	}
     
     //------------------- Storage Methods -------------
   	// For Documentation of these methods, see Storage
@@ -93,6 +109,18 @@ public class InteractableChest extends Interactable implements Storage {
   	public void clear() {
   		this.inventory = new Inventory();
   	}
+
+	@Override
+    /**
+     * see {@link Lookable}
+     */
+	public String look() {
+		return this.DESCRIPTION;
+	}
+
+	public final String getName(){
+		return this.NAME;
+	}
   	
 
 }
