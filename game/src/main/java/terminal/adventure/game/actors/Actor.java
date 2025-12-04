@@ -7,6 +7,7 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
+import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.inventory.Equipment;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
@@ -210,8 +211,15 @@ public abstract class Actor implements Lookable{
 
 	//-------------- Move methods -------------
 
-	public String go(Location target) {
-		//TODO
-		return "I'm going to "+target.getName()+" !";
+	public boolean go(Exit target) {
+		
+		if (target.canCross()) {
+			this.setLocation(target.getDestination());
+			return true;
+			
+		} else {
+			return false;
+		}
+		
 	}
 }

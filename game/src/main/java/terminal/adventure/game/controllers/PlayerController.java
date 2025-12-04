@@ -64,13 +64,9 @@ public class PlayerController extends Controller{
     // ##  Methods IN GAME chat...
     // ---------------------------------------
 
-    public void movePlayer(Actor actor, Location newLocation){
-        String message = actor.Move(newLocation);
-        //this.console.print(message);
-    }
-
     public Console getConsole(){
         return this.console;
     }
+    
 }
 

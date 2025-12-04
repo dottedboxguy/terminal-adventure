@@ -30,7 +30,7 @@ public class Console{
         
     }
 
-    private void registerCommands() throws NoSuchMethodException {
+    private void registerCommands() {
     	commands.put("GO", CommandGo::new );
         commands.put("QUIT", new CommandQuit());
         commands.put("HELP", new CommandHelp());
@@ -57,7 +57,7 @@ public class Console{
     * 
     * If the command does not exist, an error message is displayed.
     */
-    public Command getCommand() throws InstantiationException {
+    public Command getCommand() {
     	String input = this.inputScanner.nextLine();
     	
     	// ----------- Command identification ---------
