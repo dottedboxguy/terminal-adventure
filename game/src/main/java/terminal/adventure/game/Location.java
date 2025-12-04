@@ -34,8 +34,8 @@ public class Location implements Lookable, Storage{
      * @param nameOfDestination id of the Exit in the room, preferably the destination's name.
      * @param exit the Exit to add.
      */
-    public void addExit(String nameOfDestination, Exit exit) {
-        exits.put(nameOfDestination, exit);
+    public void addExit(Exit exit) {
+        exits.put(exit.getName(), exit);
     }
 
     /**
