@@ -32,7 +32,7 @@ public class CommandLook extends Command {
             }
             
             if (actors.isEmpty() && exits.isEmpty()) {
-                result += "There is no" + arg + " in here.";
+                result += "There is nothing to show for" + arg + " in here.";
             }
         }
         return result;
