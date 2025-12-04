@@ -15,36 +15,32 @@ public class CommandLook extends Command {
 		super(args, false);
 	}
 
-	/*
+	
     @Override
-    public void execute(String[] args, Console console) {
+    public String execute(Actor actor)  {
           if (args.length == 0) {
-            // Regarder la localisation actuelle si aucun argument
-            Location currentLocation = console.getPlayer().getActor().getCurrentLocation();
-            System.out.println(currentLocation.getDescription());
-            return;
+            return actor.getCurrentLocation().look();
         }
-        
+        String result = "";
         for (String arg : args) {
-            // Chercher les personnages correspondant au nom
-            List<Actor> actors = console.getPlayer().getActor().getCurrentLocation().getActorByName(arg);
-            for (Actor actor : actors) {
-                System.out.println(actor.getDescription());
+            
+            List<Actor> actors = actor.getCurrentLocation().getActorByName(arg);
+            for (Actor a : actors) {
+                result += a.look() + "\n";
             }
             
-            // Chercher les sorties correspondant au nom
-            List<Exit> exits = console.getPlayer().getActor().getCurrentLocation().getExitByName(arg);
+            List<Exit> exits = actor.getCurrentLocation().getExitByName(arg);
             for (Exit exit : exits) {
-                System.out.println(exit.getDescription());
+                result += exit.look() + "\n";
             }
             
-            // Si rien n'est trouvé pour cet argument
             if (actors.isEmpty() && exits.isEmpty()) {
-                System.out.println("Aucun '" + arg + "' n'est visible ici.");
+                return "There is no" + arg + " in here.";
             }
         }
+        return result;
     }
-    */
+
     @Override
     public String help() {
         return "\n Usage : \n LOOK \t ";
