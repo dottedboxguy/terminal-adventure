@@ -44,7 +44,7 @@ public class CommandGo extends Command {
         Collection<Exit> destinations = location.getVisibleExits().values();
         String res = "Available exits from here :\n";
         for (Exit exit : destinations) {
-            res += (" - " + exit.getDestination().getName() + " :\n");
+            res += (" - " + exit.getDestination().getName() + "\n");
         }
         return res;
         
