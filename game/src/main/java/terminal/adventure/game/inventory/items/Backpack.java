@@ -15,22 +15,34 @@ public class Backpack extends Item implements Storage {
     }
 
 	@Override
+	/**
+	 * see {@link Storage}
+	 */
 	public void addItem(Item item) {
 		this.inventory.add(item);
 	}
 
 	@Override
+	/**
+	 * see {@link Storage}
+	 */
 	public void removeItem(Item item) {
 		this.inventory.remove(item);
 	}
 
 	@Override
+	/**
+	 * see {@link Storage}
+	 */
 	public List<Item> getItems() {
 		this.inventory.getItems();
 		return null;
 	}
 
 	@Override
+	/**
+	 * see {@link Storage}
+	 */
 	public List<Item> searchItems(String itemName) {
 		return inventory.searchItemsByName(itemName);
 	}
