@@ -21,10 +21,16 @@ public abstract class Slot implements Serializable {
 		return false;
 	}
 
+	/**
+	 * empty the slot's content
+	 */
 	public void clear() {
 		this.content = null;
 	}
 
+	/**
+	 * @return if not empty, returns the content's stats.
+	 */
 	public Stats getStats() {
 		if (this.content != null) {
 			return this.content.getStats();
@@ -33,16 +39,27 @@ public abstract class Slot implements Serializable {
 		return null;
 	}
 
+	/**
+	 * @return if the slot is empty.
+	 */
 	public boolean isEmpty() {
 		return content == null;
 	}
 	
+	/**
+	 * returns if a certain specific instance of Item is stored in the slot.
+	 * @param item the item to check for presence
+	 * @return if the item is contained.
+	 */
 	public boolean contains(Item item) {
 		
 		return this.content == item; // Checks if the actual item is contained, not just one of the same item
 
 	}
 	
+	/**
+	 * @return the slot's content
+	 */
 	public Item getItem() {
 		return this.content;
 	}

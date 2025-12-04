@@ -14,14 +14,30 @@ public abstract class Exit implements Lookable{
         this.DESCRIPTION = description;
     }
 
-    // Attempt to cross the exit
+    /**
+     * @return if the exit can be crossed
+     */
     public abstract boolean canCross();
 
-    // Message to display if crossing fails
+   /**
+    * @return the message to return if crossing fails.
+    */
     public abstract String getMessage();
 
-    @Override
-    public String getDescription(){return this.DESCRIPTION;}
+    /**
+     * @return this exit's destination.
+     */
     public Location getDestination(){return destination;}
+    
+    /**
+     * @return this exit's name.
+     */
     public String getName(){return this.NAME;}
+
+    @Override
+    /**
+     * 	see {@link Lookable}
+     */
+    public String getDescription(){return this.DESCRIPTION;}
+    
 }

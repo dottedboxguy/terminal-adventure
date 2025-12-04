@@ -11,9 +11,20 @@ public abstract class Spell {
         this.DESCRIPTION = description;
     }
 
+    /**
+     * @return the name of this spell.
+     */
     public String getName() { return this.NAME; }
+    
+    /**
+     * @return this spell's description.
+     */
     public String getDescription() { return this.DESCRIPTION; }
 
-    // Main effect of the spell
+    /**
+     * The spell's effect on the environnement.
+     * @param actor the caster actor
+     * @param target the upcasted target on which the spell is casted.
+     */
     public abstract void cast(Actor actor, Object target);
 }
