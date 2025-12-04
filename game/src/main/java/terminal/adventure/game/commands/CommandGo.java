@@ -26,7 +26,7 @@ public class CommandGo extends Command {
         Exit exit = currentLocation.getExit(this.args[0]);
         
         if (exit == null) {
-            throw new invalidInputException("there is no location named \"" + String.join(" ", args) + "\" near." + this.getAvailableExits(actor.getCurrentLocation()));
+            throw new invalidInputException("there is no location named \"" + String.join(" ", args) + "\" around here.\n" + this.getAvailableExits(actor.getCurrentLocation()));
         }
         
         if (!actor.go(exit)) {
