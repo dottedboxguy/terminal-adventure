@@ -9,11 +9,17 @@ public class OpenExit extends Exit {
     }
 
     @Override
+    /**
+     * see {@link Exit}
+     */
     public boolean canCross() {
         return true;
     }
 
     @Override
+    /**
+     * see {@link Exit}
+     */
     public String getMessage() {
         return "You can cross freely.";
     }
