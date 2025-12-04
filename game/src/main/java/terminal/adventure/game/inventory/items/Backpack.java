@@ -46,4 +46,18 @@ public class Backpack extends Item implements Storage {
 	public List<Item> searchItems(String itemName) {
 		return inventory.searchItemsByName(itemName);
 	}
+
+	@Override
+	public void dump(Storage target) {
+		for (Item item : this.getItems()){
+			target.addItem(item);
+		}
+		this.clear();
+	}		
+
+	@Override
+	public void clear() {
+		this.inventory = new Inventory();
+	}
+	
 }

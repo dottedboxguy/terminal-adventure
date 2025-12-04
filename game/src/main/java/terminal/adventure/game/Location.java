@@ -182,4 +182,23 @@ public class Location implements Lookable, Storage{
 		return this.inventory.searchItemsByName(itemName);
 	}
 
+	@Override
+	/**
+	 * See {@link Storage}
+	 */
+	public void dump(Storage target) {
+		for (Item item : this.getItems()){
+			target.addItem(item);
+		}
+		this.clear();
+	}		
+
+	@Override
+	/**
+	 * See {@link Storage}
+	 */
+	public void clear() {
+		this.inventory = new Inventory();
+	}
+	
 }
