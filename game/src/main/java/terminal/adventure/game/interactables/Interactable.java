@@ -1,6 +1,7 @@
 package terminal.adventure.game.interactables;
 
 import terminal.adventure.game.Lookable;
+import terminal.adventure.game.actors.Actor;
 
 public abstract class Interactable implements Lookable{
 
@@ -15,7 +16,7 @@ public abstract class Interactable implements Lookable{
 	/**
 	 * The process in case the interactable object is used.
 	 */
-	public abstract void action();
+	public abstract void action(Actor actor);
 
 	@Override
 	/**

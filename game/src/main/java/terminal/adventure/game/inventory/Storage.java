@@ -32,4 +32,13 @@ public interface Storage {
 	 */
 	public abstract List<Item> searchItems(String itemName);
 
+	
+	/**
+	 * Dumps all of the stored items into the target Storage.
+	 * @param target the Storage where you dump the item
+	 */
+	public abstract void dump(Storage target);
+	
+	public abstract void clear();
+	
 }
