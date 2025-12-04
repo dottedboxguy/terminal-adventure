@@ -39,7 +39,7 @@ public class Console{
         commands.put("USE", new CommandUse());
     }
 
-    public Map<String, Command> getCommands() {
+    public Map<String, Function<String[], Command> > getCommands() {
     	return this.commands;
     }
 
