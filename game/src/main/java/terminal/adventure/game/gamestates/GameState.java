@@ -23,6 +23,9 @@ public abstract class GameState {
         this.map = map;
     }
 
+    /**
+     * Starts the game loop
+     */
     public void play(){
         boolean winCondition = false;
         boolean loseCondition = false;
@@ -42,6 +45,13 @@ public abstract class GameState {
         }
     }
     
+    /**
+     * Saves the game in a file
+     * @param gameState the game to save
+     * @param filePath a path where the file will be stored.
+     * @throws FileNotFoundException
+     * @throws IOException if the creation/writing of the file fails.
+     */
     public static void saveInFile(GameState gameState , String filePath) throws FileNotFoundException, IOException {
 	
     	ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream("save.tas"));
@@ -50,7 +60,14 @@ public abstract class GameState {
     	out.close();
     }
     
-
+    /**
+     * Loads a game from a file.
+     * @param filePath the path of the save file.
+     * @return the loaded gamestate
+     * @throws FileNotFoundException if the file is not found.
+     * @throws IOException if file reading fails
+     * @throws ClassNotFoundException if the save file is invalid.
+     */
     public static GameState loadFromFile(String filePath) throws FileNotFoundException, IOException, ClassNotFoundException {
     	
     	ObjectInputStream input = new ObjectInputStream(new FileInputStream("save.tas"));
@@ -60,8 +77,5 @@ public abstract class GameState {
     	
     	return res;
     }
-
-    
-    
     
 }
