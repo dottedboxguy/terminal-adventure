@@ -143,7 +143,7 @@ public class Location implements Lookable, Storage{
      * Location Description getter.
      * @return The location's description
      */
-    public String getDescription() { return this.DESCRIPTION; }
+    public String look() { return this.DESCRIPTION; }
 	
 	//------------------- Storage Methods -------------
 	// For Documentation of these methods, see Storage
