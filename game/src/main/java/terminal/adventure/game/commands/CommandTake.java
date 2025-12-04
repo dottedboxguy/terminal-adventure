@@ -18,15 +18,15 @@ public class CommandTake extends Command {
 		for (String arg : args){
             List<Item> itemsToAdd = actor.getCurrentLocation().searchItems(arg);
             for (Item item : itemsToAdd) {
-                actor.takeItem(item);
+                actor.takeItem(item, actor.getCurrentLocation());
             }
         }
 		return null;
 	}
-    
+
     @Override
     public String help() {
-        return "\nTAKE <item> -> put the item into your inventory.";
+        return "\nTAKE <item> -> put the item from the ground and add it into your inventory.";
     }
 
 }
