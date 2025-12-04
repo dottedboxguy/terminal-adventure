@@ -48,18 +48,25 @@ public class Inventory {
 	/**
 	 * takes an Item from a source storage to this one.
 	 * @param source the source inventory.
-	 * @param item
+	 * @param item the item to take.
+	 * TODO:verify if the item is present in source beforehand.
 	 */
 	public void takeItem(Storage source, Item item){
 		this.add(item);
 		source.removeItem(item);
 	}
+	/**
+	 * Takes all items from a Storage source to this inventory.
+	 * TODO:call takeItem instead of duplicating code
+	 */
 	public void takeAll(Storage source){
 		for (Item item : source.getItems()){
 			this.add(item);
 			source.removeItem(item);
 		}
 	}
-	
+	/**
+	 * @return a list of items stored in this inventory.
+	 */
 	public List<Item> getItems(){ return this.items; }
 }
