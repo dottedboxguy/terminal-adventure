@@ -46,7 +46,13 @@ public class Location implements Lookable, Storage{
     public Exit getExit(String destinationName) {
         return exits.get(destinationName);
     }
-
+	/**
+	 * Getter of the Location's description
+	 * @return The associated description
+	 */
+	public String getDescription(){
+		return this.DESCRIPTION;
+	}
     /**
      * Places an Actor in this location, and sets the actor's location to this one.
      * @param actor The actor to add
