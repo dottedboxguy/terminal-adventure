@@ -63,7 +63,7 @@ public class Equipment {
 		return slotRes;
 	}
 	
-	public boolean containsBackpack() {
+	public boolean containsStorage() {
 		return this.getfirstStorage() != null;
 	}
 	
