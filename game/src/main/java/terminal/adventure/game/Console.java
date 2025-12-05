@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import terminal.adventure.game.commands.Command;
+import terminal.adventure.game.commands.CommandCast;
 import terminal.adventure.game.commands.CommandGo;
 import terminal.adventure.game.commands.CommandHelp;
 import terminal.adventure.game.commands.CommandLook;
@@ -35,6 +36,7 @@ public class Console{
         commands.put("LOOK", CommandLook::new);
         commands.put("TAKE", CommandTake::new);
         commands.put("USE" , CommandUse::new);
+        commands.put("CAST", CommandCast::new);
     }
 
     public Map<String, Function<String[], Command>> getCommands() {

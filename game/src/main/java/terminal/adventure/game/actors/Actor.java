@@ -1,5 +1,6 @@
 package terminal.adventure.game.actors;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import terminal.adventure.game.Fight;
@@ -13,6 +14,7 @@ import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.BackpackSlot;
 import terminal.adventure.game.inventory.slots.Slot;
+import terminal.adventure.game.spells.Spell;
 
 
 public abstract class Actor implements Lookable{
@@ -26,6 +28,8 @@ public abstract class Actor implements Lookable{
     private Controller controller;
     private Fight currentFight = null;
     
+    private List<Spell> knownSpells;
+    
     
     public Actor(String name, String description) {
         this.NAME = name;
@@ -34,7 +38,9 @@ public abstract class Actor implements Lookable{
 		List<Slot> slots = makeSlots();
 		slots.add(new BackpackSlot());
 		this.equipment = new Equipment(slots);
-    }
+		
+		this.knownSpells = new ArrayList<Spell>();
+	}
 
 	public abstract List<Slot> makeSlots();
     
@@ -203,6 +209,10 @@ public abstract class Actor implements Lookable{
     	return this.equipment.getfirstStorage();
     }
     
+    public List<Storage> getAllStorages(){
+    	return this.equipment.getAllStorages();
+    }
+    
     @Override
     public String look() {
         return "-" + this.NAME + ":\n" + this.DESCRIPTION;
@@ -248,6 +258,40 @@ public abstract class Actor implements Lookable{
 	public Stats getBaseStats(){
 		return this.baseStats;
 	}
+	
+	/**
+	 * Adds a spell to the list of known spells.
+	 * does nothing if spell already known.
+	 * @param spell
+	 */
+	public void learnSpell(Spell spell) {
+		if (!this.knownSpells.contains(spell)){
+			this.knownSpells.add(spell);
+		}
+	}
+	
+	/**
+	 * Removes a spell from the list of known spells.
+	 * does nothing if spell not known
+	 * @param spell
+	 */
+	public void forgetSpell(Spell spell) {
+		if (this.knownSpells.contains(spell)){
+			this.knownSpells.remove(spell);
+		}
+	}
+
+	/**
+	 * @return the list of known spells.
+	 */
+	public List<Spell> getSpells() {
+		return this.knownSpells;
+	}
+	
+	
+	
+	
+	
 	
 	//-------------- Fight-related methods -------------
 	

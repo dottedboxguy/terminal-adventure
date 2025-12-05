@@ -13,6 +13,8 @@ import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.controllers.PlayerController;
 import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.exits.OpenExit;
+import terminal.adventure.game.spells.UnlockSpell;
+import terminal.adventure.game.spells.VisionSpell;
 import terminal.adventure.game.Console;
 
 public class BloodCultScenario extends GameState{
@@ -59,5 +61,8 @@ public class BloodCultScenario extends GameState{
 		
 		this.map.get(0).addActor(tempActor);
 		this.controllers.add(tempController);
+		
+		tempActor.learnSpell(new UnlockSpell());
+		tempActor.learnSpell(new VisionSpell());
     }
 }
