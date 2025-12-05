@@ -18,32 +18,74 @@ import terminal.adventure.game.spells.Spell;
 
 
 public abstract class Actor implements Lookable{
-    
+
     public final String NAME;
     public final String DESCRIPTION;
     protected Equipment equipment;
     protected Stats baseStats;
     private Location currentLocation;
-    
     private Controller controller;
     private Fight currentFight = null;
-    
-    private List<Spell> knownSpells;
-    
+    private final List<Spell> knownSpells;
     
     public Actor(String name, String description) {
         this.NAME = name;
         this.DESCRIPTION = description;
         this.baseStats = new Stats();
-		List<Slot> slots = makeSlots();
-		slots.add(new BackpackSlot());
+
+		// Initialize slots first
+    	List<Slot> slots = initializeSlots();
+
+		// Always add BackpackSlot
+        slots.add(new BackpackSlot());
+
 		this.equipment = new Equipment(slots);
 		
 		this.knownSpells = new ArrayList<>();
 	}
 
-	public abstract List<Slot> makeSlots();
-    
+    /**
+	 * Initializes the slots for this actor's equipment.
+	 * The initialization process consists of two phases:
+	 *   Create base slots (empty by default)
+	 *   Allow subclasses to customize slots
+	 * 
+	 * @return A fully initialized list of slots for this actor,
+	 *         always including a BackpackSlot (added by the constructor)
+	 */
+	private List<Slot> initializeSlots() {
+		List<Slot> slots = createBaseSlots();
+		customizeSlots(slots);
+		return slots;
+	}
+
+	/**
+	 * Creates the base slots for this actor.
+	 * 
+	 * This method provides the initial, empty list of slots.
+	 * It is private to prevent subclass override, ensuring that
+	 * slot initialization always starts from a known, controlled state.
+	 * 
+	 */
+	private List<Slot> createBaseSlots() {
+		return new ArrayList<>();
+	}
+
+	/**
+	 * Allows subclasses to customize the slots for this actor.
+	 * 
+	 * This is the protected hook method that subclasses should override
+	 * to add their specific equipment slots.
+	 * 
+	 * @param slots The mutable list of slots to customize. 
+	 *              This list already contains any base slots 
+	 *   
+	 */
+	protected void customizeSlots(List<Slot> slots) {
+		// Default implementation does nothing
+		// Subclasses should override to add their specific slots
+	}
+	
     /**
      * Sets the given controller to this actor.
      * Warning : will disconnect the current controller if any,
@@ -122,7 +164,7 @@ public abstract class Actor implements Lookable{
      * @param controller the controller to refer to if there is several eligible slots where it could be equipped.
      * @return if the equip is successful.
      */
-    boolean equipItem(String itemName, Controller controller) {
+    public boolean equipItem(String itemName, Controller controller) {
     	
     	List<Item> candidates;
     	
@@ -312,6 +354,7 @@ public abstract class Actor implements Lookable{
         return "-" + this.NAME + ":\n" + this.DESCRIPTION;
     }
 	
+	@Override
     /**
      * @return this actor's name.
      */
