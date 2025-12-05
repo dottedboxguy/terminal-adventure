@@ -37,7 +37,7 @@ public abstract class GameState {
                 continue;
             }
         
-            System.out.println("It's "+ c.getActor().NAME+" turn");
+            //System.out.println("It's "+ c.getActor().NAME+" turn");
 
             c.playTurn();
 
