@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import terminal.adventure.game.commands.Command;
-import terminal.adventure.game.commands.CommandAttack;
+import terminal.adventure.game.commands.CommandFight;
 import terminal.adventure.game.commands.CommandCast;
 import terminal.adventure.game.commands.CommandEquip;
 import terminal.adventure.game.commands.CommandGo;
@@ -43,7 +43,7 @@ public class Console{
         commands.put("USE" , CommandUse::new);
         commands.put("CAST", CommandCast::new);
         commands.put("EQUIP", CommandEquip::new);
-        commands.put("ATTACK", CommandAttack::new);
+        commands.put("FIGHT", CommandFight::new);
     }
 
     public Map<String, Function<String[], Command>> getCommands() {
