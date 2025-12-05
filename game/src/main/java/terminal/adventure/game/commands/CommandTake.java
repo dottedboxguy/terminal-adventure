@@ -62,7 +62,9 @@ public class CommandTake extends Command {
             else{
                 // take each found item
                 for (Item item : itemsToAdd) {
-                    actor.takeItem(item, actor.getCurrentLocation());
+                    if (!actor.takeItem(item, actor.getCurrentLocation())) {
+                    	return "You have nowhere to store this!";
+                    };
                 }
                 result += "added\n";
             }
