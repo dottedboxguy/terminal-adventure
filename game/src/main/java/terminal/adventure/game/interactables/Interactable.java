@@ -1,12 +1,13 @@
 package terminal.adventure.game.interactables;
 
+import terminal.adventure.game.Lookable;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.items.Item;
 
-public interface Interactable {
+public interface Interactable extends Lookable{
 
-	public void action(Actor actor);
+	public String action(Actor actor);
 
-	public void actionWithItem(Actor actor, Item item);
+	public String actionWithItem(Actor actor, Item item);
 
 }
