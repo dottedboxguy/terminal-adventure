@@ -36,9 +36,6 @@ public class AIController extends Controller {
 
 	@Override
 	public void play() {
-	
-		//System.out.println("DEBUG : AIController.java play()");
-		//System.out.println(this.actor);
 		
 		if (this.actor.getFight() != null) {
 
@@ -46,8 +43,6 @@ public class AIController extends Controller {
 			
 			this.actor.attack(target);
 		} else {
-		
-			//System.out.println("Location :"+this.actor.getCurrentLocation());
 			
 			Collection<Exit> exits = this.actor.getCurrentLocation().getVisibleExits().values();
 			
@@ -61,12 +56,8 @@ public class AIController extends Controller {
 				
 			}
 			
-			//System.out.println("DEBUG:play : "+ this.actor.getName() +" . "+this.actor.getCurrentLocation().getName());
-			//System.out.println(this.actor.getCurrentLocation().getActors());
-			
 		}
 		
-		System.out.println("End Turn.");
 	}
 
 	@Override
