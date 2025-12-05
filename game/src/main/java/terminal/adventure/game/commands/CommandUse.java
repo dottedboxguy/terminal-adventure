@@ -62,7 +62,7 @@ public class CommandUse extends Command {
             for (Interactable i : interactables){
                 if (i.getName().equals(this.args[1])){
                     for (Item item : actor.getFirstStorage().getItems()){
-                        if (item.getName() == this.args[0]){
+                        if (item.getName().equals(this.args[0])){
                             return i.actionWithItem(actor, item);
                         }
                     }
