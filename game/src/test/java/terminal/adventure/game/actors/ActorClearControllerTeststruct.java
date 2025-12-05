@@ -64,18 +64,19 @@ class MockController extends Controller {
     }
 }
 
-// Concrete Actor class for testing
+// Concrete Actor class for testing with Template Method pattern
 class TestActor extends Actor {
     public TestActor(String name, String description) {
         super(name, description);
     }
     
     @Override
-    public java.util.List<terminal.adventure.game.inventory.slots.Slot> makeSlots() {
-        return new java.util.ArrayList<>();
+    protected void customizeSlots(List<terminal.adventure.game.inventory.slots.Slot> slots) {
+        // Test actors have no special slots
+        // Just use the default empty slots
     }
+    
 }
-
 public class ActorClearControllerTeststruct {
     
     private TestActor actor;
