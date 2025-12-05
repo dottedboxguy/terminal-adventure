@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import terminal.adventure.game.Console;
 import terminal.adventure.game.Location;
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.actors.Cultist;
 import terminal.adventure.game.actors.Human;
@@ -14,6 +15,10 @@ import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.controllers.PlayerController;
 import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.exits.OpenExit;
+import terminal.adventure.game.interactables.Chest;
+import terminal.adventure.game.inventory.items.Backpack;
+import terminal.adventure.game.inventory.items.HeadEquipment;
+import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.spells.UnlockSpell;
 import terminal.adventure.game.spells.VisionSpell;
 
@@ -36,8 +41,18 @@ public class BloodCultScenario extends GameState{
 		this.map.get(0).addExit(new OpenExit(this.map.get(1), "Ruined Door", "A small wooden door, barely holding."));
 		this.map.get(0).addExit(new OpenExit(this.map.get(2), "Floor Hole", "Just a hole in the ground. You think you could slip in."));
 		this.map.get(2).addExit(new HiddenExit(this.map.get(3), "Wall crack", "A crack barely visible in the Wall. You think you could crawl through."));
+
+		this.map.get(0).addItem(new Item("Rock", "Just a rock. What did you expect ?", new Stats()));
+		// Adding a chest 
+		Chest chest = new Chest("A rusty old chest, in pretty good condition nevertheless.", "Old Chest");
+
+		Stats crownStats = new Stats();
+		crownStats.setArmor(2);
+		chest.addItem(new HeadEquipment("King Crown", "Very dusty, with rust traces here and there. Still very impressive.", crownStats ));
 		
-		// Adding one Actor + Controller to the game
+		this.map.get(1).addInteractable(chest);
+		
+		// Adding one Actor + Controller to the games
 		tempActor = new Cultist("Small cultist");
 		tempController = new AIController(Faction.badGuys);
 		tempController.bindActor(tempActor);
@@ -62,6 +77,8 @@ public class BloodCultScenario extends GameState{
 		
 		this.map.get(0).addActor(tempActor);
 		this.controllers.add(tempController);
+		
+		tempActor.equip(new Backpack("Backpack", "Your Backpack your mama gave you."), tempController);
 		
 		tempActor.learnSpell(new UnlockSpell());
 		tempActor.learnSpell(new VisionSpell());
