@@ -19,7 +19,27 @@ public class PlayerController extends Controller{
      * See {@link Controller}
      */
     public int equipChooseSlot(List<String> candidatesNames) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    	String candidatesShow = "Several equippement slot possibles :\n";
+    	int nb = 0;
+    	
+    	for (String candidate : candidatesNames) {
+    		if (candidate == null ) {
+    			candidatesShow+=nb+"- <empty slot>\n";
+    		} else {
+    			candidatesShow+=nb+"- "+candidate;
+    		}    			
+    		nb++;
+    	}
+    	
+    	this.getConsole().print(candidatesShow);;
+    	
+    	int response = -1;
+    	
+    	try {
+    		response = Integer.parseInt(this.getConsole().getFreeInput());
+    	}catch(NumberFormatException e) {/* Not an Integer.*/}
+    	
+    	return response;
     }
 
     @Override
