@@ -29,6 +29,7 @@ public abstract class Exit implements Lookable{
      */
     public Location getDestination(){return destination;}
     
+    @Override
     /**
      * @return this exit's name.
      */
