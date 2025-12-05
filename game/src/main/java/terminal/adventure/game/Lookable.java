@@ -10,4 +10,6 @@ public interface Lookable{
 	 * @return the object's description
 	 */
 	public abstract String look();
+
+	public abstract String getName();
 }
