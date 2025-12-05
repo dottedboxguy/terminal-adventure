@@ -23,7 +23,7 @@ import terminal.adventure.game.inventory.slots.Slot;
 
 // Real Storage implementation for functional testing
 class FunctionalStorage implements Storage {
-    private List<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     
     public FunctionalStorage() {
     }
@@ -87,8 +87,8 @@ class FunctionalStorage implements Storage {
 
 // Real Equipment implementation for functional testing
 class FunctionalEquipment extends Equipment {
-    private List<Slot> availableSlots;
-    private List<Item> equippedItems = new ArrayList<>();
+    private final List<Slot> availableSlots;
+    private final List<Item> equippedItems = new ArrayList<>();
     
     public FunctionalEquipment(List<Slot> slots) {
         super(slots);
@@ -207,18 +207,23 @@ class FunctionalController extends Controller {
 
 // Real Actor subclass for functional testing
 class FunctionalActor extends Actor {
-    private FunctionalEquipment functionalEquipment;
+    private final FunctionalEquipment functionalEquipment;
     
-    public FunctionalActor(String name, String description, FunctionalEquipment equipment) {
+     public FunctionalActor(String name, String description, FunctionalEquipment equipment) {
         super(name, description);
         this.functionalEquipment = equipment;
-        // Replace the equipment field
+        initEquipmentField();
+    }
+    
+    private void initEquipmentField() {
         try {
             java.lang.reflect.Field field = Actor.class.getDeclaredField("equipment");
             field.setAccessible(true);
-            field.set(this, equipment);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to set functional equipment", e);
+            field.set(this, functionalEquipment);
+        } catch (NoSuchFieldException e) {
+            throw new IllegalStateException("Actor class doesn't have 'equipment' field", e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException("Cannot access 'equipment' field", e);
         }
     }
     
