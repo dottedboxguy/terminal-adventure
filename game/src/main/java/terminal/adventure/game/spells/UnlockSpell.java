@@ -29,6 +29,7 @@ public class UnlockSpell extends Spell {
     	target.forcedUnlock();
     	
     	return "Mana enters the lock of the "+target.getName()+", and you hear a faint mechanical sound.\n";
+
     }
 
 

@@ -31,6 +31,7 @@ public class VisionSpell extends Spell {
     		res+= exit.getName() + " appeared !\n";
     	}
     	return res;
+
     }
 
 

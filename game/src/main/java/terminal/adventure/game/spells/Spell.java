@@ -38,4 +38,5 @@ public abstract class Spell {
      * @return a list target Objects.
      */
     public abstract List<Object> getTargets(String[] args, Actor caster);
+
 }

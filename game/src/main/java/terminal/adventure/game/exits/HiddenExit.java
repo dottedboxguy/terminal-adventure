@@ -14,8 +14,9 @@ public class HiddenExit extends Exit {
     /**
      * Reveal the exit to the character.
      */
-    public void unveil() {
+    public String unveil() {
         this.hidden = false;
+        return "Woah, an exit has been unveiled !";
     }
 
     /**

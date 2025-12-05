@@ -7,11 +7,18 @@ import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
-public class InteractableChest extends Interactable implements Storage {
+public class Chest implements Storage, Interactable {
+
+	private final String DESCRIPTION;
+	private final String NAME;
+
     private Inventory inventory;
     private boolean isOpened = true;
-	public InteractableChest(String description, String name, Inventory inventory){
-		super(description, name);
+
+	public Chest(String description, String name, Inventory inventory){
+		this.DESCRIPTION = description;
+		this.NAME = name;
+		this.inventory = inventory;
 	}
     
 	
@@ -33,11 +40,19 @@ public class InteractableChest extends Interactable implements Storage {
     /**
      * see {@link Interactable}
      */
-	public void action(Actor actor){
+	public String action(Actor actor){
     	
     	this.dump( actor.getCurrentLocation());        	
-        
+        return "You open the chest and scatter the items on the ground to look at them";
     };
+
+	@Override
+    /**
+     * see {@link Interactable}
+     */
+	public String actionWithItem(Actor actor, Item item) {
+		return "You don't see why you would do that";
+	}
     
     //------------------- Storage Methods -------------
   	// For Documentation of these methods, see Storage
@@ -93,6 +108,18 @@ public class InteractableChest extends Interactable implements Storage {
   	public void clear() {
   		this.inventory = new Inventory();
   	}
+
+	@Override
+    /**
+     * see {@link Lookable}
+     */
+	public String look() {
+		return this.DESCRIPTION;
+	}
+
+	public final String getName(){
+		return this.NAME;
+	}
   	
 
 }

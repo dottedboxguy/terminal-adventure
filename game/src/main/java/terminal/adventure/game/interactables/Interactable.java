@@ -2,36 +2,12 @@ package terminal.adventure.game.interactables;
 
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.inventory.items.Item;
 
-public abstract class Interactable implements Lookable{
+public interface Interactable extends Lookable{
 
-	private final String DESCRIPTION;
-	private final String name;
+	public String action(Actor actor);
 
-	public Interactable(String description, String name){
-		this.DESCRIPTION = description;
-		this.name = name;
-	}
-
-	/**
-	 * The process in case the interactable object is used.
-	 */
-	public abstract void action(Actor actor);
-
-	@Override
-	/**
-	 * see {@link Lookable}
-	 */
-	public String look(){
-		return this.DESCRIPTION;
-	}
-
-	/**
-	 * @return this Object's name.
-	 */
-	public String getName(){
-		return this.name;
-	} 
+	public String actionWithItem(Actor actor, Item item);
 
 }
-//TODO : why not an interface ?

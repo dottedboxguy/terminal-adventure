@@ -1,9 +1,11 @@
 package terminal.adventure.game.exits;
 
 import terminal.adventure.game.Location;
+import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.interactables.Interactable;
 import terminal.adventure.game.inventory.items.Item;
 
-public class LockedExit extends Exit {
+public class LockedExit extends Exit implements Interactable{
     private boolean isLocked = true;
     private final Item requiredKey;
 
@@ -28,25 +30,34 @@ public class LockedExit extends Exit {
         return "The door is locked. You need the " + this.requiredKey + ".";
     }
 
+    @Override
     /**
+     * see {@link Interactable}
+     */
+    public String action(Actor actor) {
+        return "The door seems locked.";
+    }
+
+    /**
+     * see {@link Interactable}
      * Unlocks the exit using an item.
      * @param item used to try unlocking the exit.
      * @return The fail/success message.
      */
-    public String unlock(Item item){
+    @Override
+    public String actionWithItem(Actor actor, Item item) {
         if (item == this.requiredKey){
             this.isLocked = false;
-            return "This exit is unlocked, you can now cross it.";
+            return "You managed to open the door !";
         }
-        return "It seems like this doesn't fit";
-    }
-
+        return "That doesn't quite fit";
+    }    
+    
     /**
-     * Unlocks the exit bypassing the need for a key item.
-     * @return the message to print after forcing an Exit.
+     * Unlocks the door by bypassing the key Item.
      */
-    public String forcedUnlock(){
+    public void forcedUnlock(){
         this.isLocked = false;
-        return "WOOOAAHH!!! the lock got destroyed \n You can now pass freely.";
     }
+    
 }

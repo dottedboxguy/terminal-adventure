@@ -3,6 +3,7 @@ package terminal.adventure.game.gamestates;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import terminal.adventure.game.Console;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.actors.Cultist;
@@ -15,12 +16,12 @@ import terminal.adventure.game.exits.HiddenExit;
 import terminal.adventure.game.exits.OpenExit;
 import terminal.adventure.game.spells.UnlockSpell;
 import terminal.adventure.game.spells.VisionSpell;
-import terminal.adventure.game.Console;
+
 
 public class BloodCultScenario extends GameState{
     public BloodCultScenario(){
         
-        super(new LinkedList<Controller>(), new ArrayList<Location>());
+        super(new LinkedList<>(), new ArrayList<>());
 
 		Console console = new Console();
 
