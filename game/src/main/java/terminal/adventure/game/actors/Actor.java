@@ -167,20 +167,20 @@ public abstract class Actor implements Lookable{
     	int currentHealth = this.getBaseStats().getCurrentHealth();
     	
     	int damage = (attackPower - this.getTotalStats().getArmor());
+    	if (damage < 0) damage = 1;
     	
     	this.getBaseStats().setCurrentHealth(currentHealth - damage);
     	
     	if (this.isDead()) {
-    		System.out.println("DEBUG Actor.takeAttack : OOOFFFF Im "+ this.NAME+ " and I dramatically died.");
     		this.die();
-    	} else {
-    		
-    		System.out.println("DEBUG Actor.takeAttack : Ouch ! I'm "+this.NAME+" and I have "+this.getBaseStats().getCurrentHealth()+" HP remaing");
-    	}
-    
+    	}     
+    	
     	Stats ret = new Stats();
     	ret.setStrength(damage);
     	ret.setCurrentHealth(this.getBaseStats().getCurrentHealth());
+    	ret.setMaxHealth(this.getBaseStats().getMaxHealth());
+    	
+    	this.getController().takeAttackReport(ret);
     	
     	return ret;
 
@@ -200,6 +200,8 @@ public abstract class Actor implements Lookable{
     	this.getCurrentLocation().removeActor(this);
     	
     	this.controller.die();
+    	
+    	System.out.println("DEBUG Actor die() : "+ this.getFight().getFighters());
     }
     
     /**
@@ -222,7 +224,12 @@ public abstract class Actor implements Lookable{
     public Stats attack(Actor target) {
     	
     	System.out.println("DEBUG attack:"+ this.getFight() + target.getFight() );
-    	    	
+    	if (this.getFight() != null) {
+    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.goodGuys));    	
+    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.badGuys));    	    		
+    	}
+    	
+    	
     	if (this.getFight() != target.getFight() || target.getFight() == null) {
     		
     		

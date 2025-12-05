@@ -3,6 +3,7 @@ import java.util.List;
 
 import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Console;
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.commands.Command;
 
 public class PlayerController extends Controller{
@@ -82,6 +83,11 @@ public class PlayerController extends Controller{
     public Console getConsole(){
         return this.CONSOLE;
     }
+
+	@Override
+	public void takeAttackReport(Stats report) {
+		this.getConsole().print("You took "+report.getStrength()+" damage. Remaining HP : "+report.getCurrentHealth()+"/"+report.getMaxHealth()+"\n");
+	}
     
 }
 
