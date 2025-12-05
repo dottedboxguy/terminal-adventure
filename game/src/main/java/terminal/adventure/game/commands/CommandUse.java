@@ -53,14 +53,14 @@ public class CommandUse extends Command {
         List<Interactable> interactables = actor.getCurrentLocation().getInteractables();
         if (this.args.length == 1) {
             for (Interactable i : interactables){
-                if (i.getName() == this.args[0])
+                if (i.getName().equals(this.args[0]))
                     return i.action(actor);
             }
             return "hmm... you couldn't find any "+args[0]+" around";
 	    }
         if (this.args.length == 2){
             for (Interactable i : interactables){
-                if (i.getName() == this.args[1]){
+                if (i.getName().equals(this.args[1])){
                     for (Item item : actor.getFirstStorage().getItems()){
                         if (item.getName() == this.args[0]){
                             return i.actionWithItem(actor, item);
@@ -70,10 +70,10 @@ public class CommandUse extends Command {
                 }
             }
             for (Exit exit : actor.getCurrentLocation().getVisibleExits().values()) {
-                if (exit.getName() == this.args[1]){
+                if (exit.getName().equals(this.args[1])){
                     if (exit instanceof Interactable){
                         for (Item item : actor.getFirstStorage().getItems()){
-                            if (item.getName() == this.args[0]){
+                            if (item.getName().equals(this.args[0])){
                                 return ((Interactable)exit).actionWithItem(actor, item);
                             }
                         }
