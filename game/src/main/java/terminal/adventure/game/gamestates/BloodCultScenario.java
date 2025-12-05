@@ -19,6 +19,7 @@ import terminal.adventure.game.interactables.Chest;
 import terminal.adventure.game.inventory.items.Backpack;
 import terminal.adventure.game.inventory.items.HeadEquipment;
 import terminal.adventure.game.inventory.items.Item;
+import terminal.adventure.game.inventory.items.WinGem;
 import terminal.adventure.game.spells.UnlockSpell;
 import terminal.adventure.game.spells.VisionSpell;
 
@@ -65,6 +66,10 @@ public class BloodCultScenario extends GameState{
 		tempActor = new Cultist("Tall cultist");
 		tempController = new AIController(Faction.badGuys);
 		tempController.bindActor(tempActor);
+		Backpack satchel = new Backpack("Satchel", "A tiny bag");
+		satchel.addItem(new WinGem("Waterstone", "A deep Blue stone, feels wet to the touch", new Stats()));
+		tempActor.takeItem(satchel, null);
+		tempActor.equip(satchel, null);
 		
 		this.map.get(3).addActor(tempActor);
 		this.controllers.add(tempController);
