@@ -51,7 +51,10 @@ public abstract class Actor implements Lookable{
      * @param c The new controller to bind.
      */
     public void setController(Controller c) {
-
+		// if same controller nothing to do
+		if (this.controller == c) {
+        	return;  // CORRECTION : avoid disconnect/reconnect
+    	}
     	// Disconnecting old controller from this actor
     	if (this.controller != null) {
     		this.controller.unbindActor();
