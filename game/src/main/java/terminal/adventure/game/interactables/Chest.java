@@ -2,13 +2,12 @@ package terminal.adventure.game.interactables;
 
 import java.util.List;
 
-import terminal.adventure.game.Lookable;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
-public class Chest implements Storage, Interactable, Lookable {
+public class Chest implements Storage, Interactable {
 
 	private final String DESCRIPTION;
 	private final String NAME;
@@ -41,18 +40,18 @@ public class Chest implements Storage, Interactable, Lookable {
     /**
      * see {@link Interactable}
      */
-	public void action(Actor actor){
+	public String action(Actor actor){
     	
     	this.dump( actor.getCurrentLocation());        	
-        
+        return "You open the chest and scatter the items on the ground to look at them";
     };
 
 	@Override
     /**
      * see {@link Interactable}
      */
-	public void actionWithItem(Actor actor, Item item) {
-		
+	public String actionWithItem(Actor actor, Item item) {
+		return "You don't see why you would do that";
 	}
     
     //------------------- Storage Methods -------------
