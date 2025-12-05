@@ -1,11 +1,8 @@
 package terminal.adventure.game.controllers;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import terminal.adventure.game.actors.Actor;
-import terminal.adventure.game.commands.Command;
 import terminal.adventure.game.inventory.items.Item;
 
 public abstract class Controller {
