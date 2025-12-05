@@ -15,7 +15,7 @@ public class Human extends Actor {
         super(name, description);
         this.baseStats.setMaxHealth(100);
         this.baseStats.setCurrentHealth(100);
-        this.baseStats.setStrength(5);
+        this.baseStats.setStrength(10);
     }
 
     @Override

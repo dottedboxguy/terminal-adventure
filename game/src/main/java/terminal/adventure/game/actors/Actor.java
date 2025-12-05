@@ -160,11 +160,15 @@ public abstract class Actor implements Lookable{
      * Allows the actor to receive an attack.
      * The effective damage dealt can be affected by this actor's armor or speed.
      * @param attackPower the initial amount of damage dealt.
+     * @return a Stats Object, containg the remaining health, and the real damage amount as the Strength stat,
      */
-    public void takeAttack(int attackPower) {
+    public Stats takeAttack(int attackPower) {
     	
     	int currentHealth = this.getBaseStats().getCurrentHealth();
-    	this.getBaseStats().setCurrentHealth(currentHealth - attackPower);
+    	
+    	int damage = (attackPower - this.getTotalStats().getArmor());
+    	
+    	this.getBaseStats().setCurrentHealth(currentHealth - damage);
     	
     	if (this.isDead()) {
     		System.out.println("DEBUG Actor.takeAttack : OOOFFFF Im "+ this.NAME+ " and I dramatically died.");
@@ -174,7 +178,11 @@ public abstract class Actor implements Lookable{
     		System.out.println("DEBUG Actor.takeAttack : Ouch ! I'm "+this.NAME+" and I have "+this.getBaseStats().getCurrentHealth()+" HP remaing");
     	}
     
+    	Stats ret = new Stats();
+    	ret.setStrength(damage);
+    	ret.setCurrentHealth(this.getBaseStats().getCurrentHealth());
     	
+    	return ret;
 
     }
     
@@ -184,6 +192,13 @@ public abstract class Actor implements Lookable{
      */
     public void die() {
     	// Actions to perform at death (loot drop, events, etc)
+    	
+    	this.leaveFight();
+    
+    	this.getFirstStorage().dump(this.currentLocation);
+
+    	this.getCurrentLocation().removeActor(this);
+    	
     	this.controller.die();
     }
     
@@ -196,10 +211,53 @@ public abstract class Actor implements Lookable{
     
     /**
      * Triggers an attack from this actor to the given one.
+     * If either one of the attacker or defender is currently in a fight,
+     * the other one joins in.
+     * If neither of those are in a fight, they both join a new fight.
+     * If both of those are in a fight, the attacker joins the defenser's.
+     * 
      * @param target the actor to attack.
+     * @return A Stats Object containing the Remaining health, and the effective damage dealt as Strenght stat.
      */
-    public void attack(Actor target) {
-    	target.takeAttack(this.getBaseStats().getStrength());
+    public Stats attack(Actor target) {
+    	
+    	System.out.println("DEBUG attack:"+ this.getFight() + target.getFight() );
+    	    	
+    	if (this.getFight() != target.getFight() || target.getFight() == null) {
+    		
+    		
+			if ( this.getFight() == null ) {
+			
+				
+				if (target.getFight() == null) { // if none of the attacker and defender are in a fight
+					Fight f = new Fight();
+					this.enterFight(f);
+					target.enterFight(f);
+				} else { // if the defender is in a fight and not the attacker
+					
+					this.enterFight( target.getFight() );
+					
+				}
+	
+			} else {
+				
+				if (target.getFight() == null) { // if the attacker is in a fight and not the defender
+					target.enterFight(this.getFight());
+					
+				} else {
+					
+					this.enterFight(target.getFight()); // if both are in a different fight
+					
+				}
+					
+			}
+    	
+    	}
+
+    	
+    	return target.takeAttack(this.getBaseStats().getStrength());
+
+    	
     }
 
     /**
@@ -349,7 +407,8 @@ public abstract class Actor implements Lookable{
 	public Fight getFight() {
 		return this.currentFight;
 	}
-
+	
+	
 	//-------------- Move methods -------------
 
 	/**
@@ -361,7 +420,7 @@ public abstract class Actor implements Lookable{
 	 */
 	public boolean go(Exit target) {
 		
-		if (target.canCross()) {
+		if (target.canCross() && this.getFight() == null) {
 			this.setLocation(target.getDestination());
 			return true;
 			

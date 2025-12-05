@@ -36,6 +36,7 @@ public class Fight {
 	 */
 	public void removeFighter(Actor c) {
 		fighters.remove(c);
+		refreshFight();
 	}
 	
 	/**
@@ -71,6 +72,32 @@ public class Fight {
 		}
 		
 		return res;
+	}
+	
+	/**
+	 *Checks if all fighters are part of the same faction.
+	 * @return if all fighters are of the same faction.
+	 */
+	public boolean allSameFaction() {
+		Faction factionA = this.fighters.get(0).getController().getFaction();
+		
+		for (Actor a : this.fighters) {
+			if ( a.getController().getFaction() != factionA) {
+				return false;
+			}
+		}
+	return true;
+	}
+
+	public void refreshFight() {
+		if(allSameFaction()) {
+
+			for (Actor f : fighters) {
+				f.leaveFight();
+			}
+		
+		}
+
 	}
 	
 

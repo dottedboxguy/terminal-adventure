@@ -75,7 +75,6 @@ public class PlayerController extends Controller{
     		}
     		
     	}
-    	
     }
     /**
      * @return the console that can be asked for commands.
