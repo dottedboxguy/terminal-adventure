@@ -186,7 +186,8 @@ public abstract class Actor implements Lookable{
     	Storage inventory = this.getFirstStorage();
     	if (inventory != null) {
     		inventory.addItem(item);
-			source.removeItem(item);
+			if (source != null)
+				source.removeItem(item);
     		return true;
     	}
     	return false;
