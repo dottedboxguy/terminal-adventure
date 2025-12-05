@@ -3,7 +3,6 @@ package terminal.adventure.game.exits;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import terminal.adventure.game.Location;
-import terminal.adventure.game.exits.Exit;
 
 public class ExitTest {
 

@@ -7,12 +7,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import terminal.adventure.game.Location;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.controllers.PlayerController;
 import terminal.adventure.game.gamestates.GameState;
-import terminal.adventure.game.Console;
 
 public class GameStateTest {
 

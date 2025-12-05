@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 import terminal.adventure.game.actors.Actor;
-import terminal.adventure.game.spells.Spell;
 
 public class SpellTest {
 

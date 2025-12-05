@@ -3,8 +3,6 @@ package terminal.adventure.game.inventory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import java.util.List;
-import terminal.adventure.game.inventory.Inventory;
-import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.Stats;
 
