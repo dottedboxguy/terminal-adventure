@@ -21,7 +21,7 @@ public class CommandAttack extends Command{
 		
 		List<Actor> targets = actor.getCurrentLocation().getActorByName(args[0]);
 		
-		if (targets.size() == 0) {
+		if (targets.isEmpty()) {
 			return "There is no one with that name here...\n";
 		}
 		
