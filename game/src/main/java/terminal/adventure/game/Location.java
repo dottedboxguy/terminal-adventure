@@ -239,5 +239,15 @@ public class Location implements Lookable, Storage{
 	public void clear() {
 		this.inventory = new Inventory();
 	}
+
+	@Override
+	public boolean contains(Item item) {
+		for (Item i : this.getItems()) {
+			if (i == item) {				
+				return true;
+			}
+		}
+		return false;
+	}
 	
 }

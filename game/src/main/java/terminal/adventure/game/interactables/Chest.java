@@ -110,6 +110,19 @@ public class Chest implements Storage, Interactable {
   	}
 
 	@Override
+  	/**
+  	 * See {@link Storage}
+  	 */
+	public boolean contains(Item item) {
+		for (Item i : this.getItems()) {
+			if (i == item) {				
+				return true;
+			}
+		}
+		return false;
+	}
+  	
+	@Override
     /**
      * see {@link Lookable}
      */

@@ -35,8 +35,7 @@ public class Backpack extends Item implements Storage {
 	 * see {@link Storage}
 	 */
 	public List<Item> getItems() {
-		this.inventory.getItems();
-		return null;
+		return this.inventory.getItems();
 	}
 
 	@Override
@@ -58,6 +57,16 @@ public class Backpack extends Item implements Storage {
 	@Override
 	public void clear() {
 		this.inventory = new Inventory();
+	}
+
+	@Override
+	public boolean contains(Item item) {
+		for (Item i : this.getItems()) {
+			if (i == item) {				
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

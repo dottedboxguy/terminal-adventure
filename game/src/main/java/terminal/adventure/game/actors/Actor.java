@@ -81,10 +81,36 @@ public abstract class Actor implements Lookable{
     	
     }
 
+    /**
+     * Equips if possible the specified item.
+     * @param item the item to equip
+     * @param controller the controller to refer to if several possibilites
+     * @return if success
+     */
     public boolean equip(Item item, Controller controller) {
     	return this.equipment.equipItem(item, controller);
     }
     
+    /**
+     * Equips if possible the specified item if it's contained in the
+     * source storage, and removes it from this source.
+     * @param item the item to equip
+     * @param controller the controller to refer to if several possibilites
+     * @param source the Storage the item is from.
+     * @return if success
+     */
+    public boolean equipFrom(Item item, Controller controller, Storage source) {
+    
+    	if ( source.contains(item)){
+    		if (this.equipment.equipItem(item, controller)){
+	    		source.removeItem(item);
+	    		return true;
+	    	}
+    		return false;
+    	}
+    	return false;
+    	
+    }
     
     /**
      * Looks for the item by name in the actor's storages, and in the Location,
