@@ -6,9 +6,9 @@ import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 
-public class CommandAttack extends Command{
+public class CommandFight extends Command{
 
-	public CommandAttack(String[] args) {
+	public CommandFight(String[] args) {
 		super(args, true);
 	}
 
@@ -45,7 +45,7 @@ public class CommandAttack extends Command{
 
 	@Override
 	public String help() {
-		return "who do you want to ATTACK ?\nUsage : ATTACK <target name>\n";
+		return "who do you want to FIGHT ?\nUsage : FIGHT <target name>\n";
 	}
 
 }
