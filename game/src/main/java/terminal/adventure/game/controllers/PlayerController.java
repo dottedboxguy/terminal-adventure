@@ -7,11 +7,11 @@ import terminal.adventure.game.commands.Command;
 
 public class PlayerController extends Controller{
 
-	private Console console;
+	private final Console CONSOLE;
 	
     public PlayerController(Faction faction, Console console) {
     	super(faction);
-    	this.console = console;
+    	this.CONSOLE = console;
     }
     
     @Override
@@ -34,7 +34,7 @@ public class PlayerController extends Controller{
     	while (!endTurn) {
     		
     		failedCommand = false;
-    		Command cmd = this.console.getAction();
+    		Command cmd = this.CONSOLE.getAction();
     		String message = "\n";
     		
     		if (cmd != null) {
@@ -46,10 +46,10 @@ public class PlayerController extends Controller{
 	    		
 	    		} catch (invalidInputException e) {
 	    		
-	    			console.print(e.getMessage());
+	    			CONSOLE.print(e.getMessage());
 	    			failedCommand = true;
 	    		}
-	    		console.print(message);
+	    		CONSOLE.print(message);
 	    		
 	    		endTurn = ( !failedCommand && cmd.isTerminal() );
     		}
@@ -57,16 +57,11 @@ public class PlayerController extends Controller{
     	}
     	
     }
-
-    // ---------------------------------------
-    // ##  Methods IN GAME chat...
-    // ---------------------------------------
-
     /**
      * @return the console that can be asked for commands.
      */
     public Console getConsole(){
-        return this.console;
+        return this.CONSOLE;
     }
     
 }
