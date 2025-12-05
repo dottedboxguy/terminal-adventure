@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 import terminal.adventure.game.commands.Command;
+import terminal.adventure.game.commands.CommandAttack;
 import terminal.adventure.game.commands.CommandCast;
 import terminal.adventure.game.commands.CommandEquip;
 import terminal.adventure.game.commands.CommandGo;
@@ -39,6 +40,7 @@ public class Console{
         commands.put("USE" , CommandUse::new);
         commands.put("CAST", CommandCast::new);
         commands.put("EQUIP", CommandEquip::new);
+        commands.put("ATTACK", CommandAttack::new);
     }
 
     public Map<String, Function<String[], Command>> getCommands() {
@@ -60,7 +62,9 @@ public class Console{
     * If the command does not exist, an error message is displayed.
     */
     private Command getCommand() {
+    	printStream.print("\n");
     	String input = this.inputScanner.nextLine();
+    	printStream.print("\n");
     	
     	// ----------- Command identification ---------
     	
