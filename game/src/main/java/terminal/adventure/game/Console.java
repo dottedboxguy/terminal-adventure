@@ -104,4 +104,8 @@ public class Console{
     public void print(String message){
         printStream.println(message);
     }
+    
+    public String getFreeInput() {
+    	return inputScanner.nextLine();
+    }
 }
