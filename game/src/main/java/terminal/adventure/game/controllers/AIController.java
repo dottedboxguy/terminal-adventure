@@ -61,8 +61,8 @@ public class AIController extends Controller {
 				
 			}
 			
-			System.out.println("DEBUG:play : "+ this.actor.getName() +" . "+this.actor.getCurrentLocation().getName());
-			System.out.println(this.actor.getCurrentLocation().getActors());
+			//System.out.println("DEBUG:play : "+ this.actor.getName() +" . "+this.actor.getCurrentLocation().getName());
+			//System.out.println(this.actor.getCurrentLocation().getActors());
 			
 		}
 		
