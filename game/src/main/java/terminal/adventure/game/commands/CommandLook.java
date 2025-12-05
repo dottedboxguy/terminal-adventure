@@ -71,9 +71,11 @@ public class CommandLook extends Command {
                 for (Storage s : actor.getAllStorages()) {
             	
             	List<Item> items = s.getItems();
-            	
+            	if (items == null){
+                    return "There is nothing in your inventory.\n";
+                }
             	for (Item i : items) {
-            		result += i.look()+"\n";
+            		result += i.getName()+"\n";
             	}
                 return result;
             	
