@@ -4,7 +4,7 @@ import java.util.List;
 
 import terminal.adventure.game.actors.Actor;
 
-public abstract class Spell {
+public abstract class Spell implements java.io.Serializable{
     private final String NAME;
     private final String DESCRIPTION;
 

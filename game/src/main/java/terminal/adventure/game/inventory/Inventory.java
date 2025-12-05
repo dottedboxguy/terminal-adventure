@@ -5,7 +5,7 @@ import java.util.List;
 
 import terminal.adventure.game.inventory.items.Item;
 
-public class Inventory {
+public class Inventory implements java.io.Serializable{
 
 	private final List<Item> items;
 	

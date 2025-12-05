@@ -17,9 +17,8 @@ import terminal.adventure.game.commands.CommandTake;
 import terminal.adventure.game.commands.CommandUse;
 import terminal.adventure.game.controllers.PlayerController;
 
-public class Console{
+public class Console implements java.io.Serializable{
 
-    private PlayerController player;
     private final PrintStream printStream;
     private final Scanner inputScanner;
     private final Map<String, Function<String[], Command>> commands = new HashMap<>();
@@ -113,9 +112,6 @@ public class Console{
         this.print("Leaving the game...");
         System.exit(0);
     }
-    public PlayerController getPlayer(){
-        return this.player;
-    }  
     
     public void print(String message){
         printStream.println(message);

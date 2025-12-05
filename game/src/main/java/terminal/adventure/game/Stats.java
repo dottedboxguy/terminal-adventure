@@ -1,6 +1,6 @@
 package terminal.adventure.game;
 
-public class Stats {
+public class Stats implements java.io.Serializable{
 
 	private int strength;
 	private int speed;

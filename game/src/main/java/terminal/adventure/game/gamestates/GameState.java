@@ -13,14 +13,14 @@ import terminal.adventure.game.Location;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.PlayerController;
 
-public abstract class GameState {
+public abstract class GameState implements java.io.Serializable {
     
     protected final Queue<Controller> controllers;
     protected final List<Location> map;
     public static boolean winCondition = false;
     public static boolean loseCondition = false;
     
-    public GameState(Queue<Controller> controllers, List<Location> map){
+    public GameState(Queue<Controller> controllers, List<Location> map) {
         this.controllers = controllers;
         this.map = map;
     }
@@ -32,7 +32,7 @@ public abstract class GameState {
         while (!winCondition && !loseCondition ) { // "main" loop
             Controller c = controllers.poll();
             
-            if (c.isDead()) {
+            if (c == null || c.isDead()) {
                 if (c instanceof PlayerController) loseCondition = true;
                 continue;
             }
@@ -54,7 +54,7 @@ public abstract class GameState {
      */
     public static void saveInFile(GameState gameState , String filePath) throws FileNotFoundException, IOException {
 	
-    	ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream("save.tas"));
+    	ObjectOutputStream out = new ObjectOutputStream( new FileOutputStream(filePath));
     	out.writeObject(gameState);
     	
     	out.close();
@@ -70,7 +70,7 @@ public abstract class GameState {
      */
     public static GameState loadFromFile(String filePath) throws FileNotFoundException, IOException, ClassNotFoundException {
     	
-    	ObjectInputStream input = new ObjectInputStream(new FileInputStream("save.tas"));
+    	ObjectInputStream input = new ObjectInputStream(new FileInputStream(filePath));
     	GameState res = (GameState) input.readObject();
     	
     	input.close();
