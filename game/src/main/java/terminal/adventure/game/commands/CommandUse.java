@@ -9,35 +9,45 @@ import terminal.adventure.game.interactables.Interactable;
 import terminal.adventure.game.inventory.items.Item;
 
 public class CommandUse extends Command {
-
-	/*
-    @Override
-    public void execute(String[] args, Console console) {
-
-        if (args.length == 1) {
-
-            List<Interactable> interactables = console.getPlayer().getActor().getCurrentLocation().getInteractables();
-            for (Interactable interactable : interactables) {
-
-                if (interactable.getName().equals(args[0])) {
-                    interactable.action();
-                }
-            }
-        }
-        
-    }
-	*/
 	
-	
+    /**
+     * Constructs a new USE command.
+     * 
+     * The USE command is terminal, meaning execution will end the player's turn
+     *
+     * @param args either :
+     *                 [name of an interactable]
+     *                 [name of an item] [name of an interactable]
+     *                 [name of an item] [name of an interactable exit]
+     */
     public CommandUse(String[] args) {
 		super(args, true);
 	}
 
+    /**
+     * Returns help text explaining how to use the TAKE command.
+     *
+     * @return A string describing the TAKE command's syntax and functionality.
+     */
 	@Override
     public String help() {
         return "\n Usage : \n USE \t <arg> \n\t <toUse> <usedOn>";
     }
 
+    /**
+     * Executes the USE command to interact with various game elements
+     * 
+     * This method:
+     *   - Iterates through all interactables and exits in the room of the player
+     *     to find one of matching name
+     *   - Iterates through all the items of the player's inventory to find one of
+     *     matching name
+     *   - Returns a detailed result message indicating what happened after trying
+     *     to execute the command
+     *
+     * @param actor The actor attempting use whatever he wants to use. Must not be null.
+     * @return A string containing the result of the action
+     */
 	@Override
 	public String execute(Actor actor) throws invalidInputException {
         List<Interactable> interactables = actor.getCurrentLocation().getInteractables();
