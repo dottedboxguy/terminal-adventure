@@ -6,7 +6,7 @@ import java.util.List;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.controllers.Faction;
 
-public class Fight {
+public class Fight implements java.io.Serializable {
 
 	private List<Actor> fighters;
 		

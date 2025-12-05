@@ -12,7 +12,7 @@ import terminal.adventure.game.inventory.Inventory;
 import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
-public class Location implements Lookable, Storage{
+public class Location implements Lookable, Storage, java.io.Serializable{
     private final String NAME;
     private final String DESCRIPTION;
 	private List<Actor> actors;

@@ -2,7 +2,7 @@ package terminal.adventure.game.exits;
 import terminal.adventure.game.Location;
 import terminal.adventure.game.Lookable;
 
-public abstract class Exit implements Lookable{
+public abstract class Exit implements Lookable, java.io.Serializable{
 
     protected Location destination;
     protected final String NAME;

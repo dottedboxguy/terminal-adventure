@@ -8,7 +8,7 @@ import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
 
-public class Equipment {
+public class Equipment implements java.io.Serializable {
 
 	List<Slot> slots;
 	

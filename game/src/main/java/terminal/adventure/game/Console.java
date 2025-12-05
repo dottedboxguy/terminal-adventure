@@ -17,7 +17,7 @@ import terminal.adventure.game.commands.CommandTake;
 import terminal.adventure.game.commands.CommandUse;
 import terminal.adventure.game.controllers.PlayerController;
 
-public class Console{
+public class Console implements java.io.Serializable{
 
     private final PrintStream printStream;
     private final Scanner inputScanner;

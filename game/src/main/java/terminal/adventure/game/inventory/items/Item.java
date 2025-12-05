@@ -3,7 +3,7 @@ package terminal.adventure.game.inventory.items;
 import terminal.adventure.game.Lookable;
 import terminal.adventure.game.Stats;
 
-public class Item implements Lookable{
+public class Item implements Lookable, java.io.Serializable{
     private final String NAME;
     private final  String DESCRIPTION;
     private final Stats stats;

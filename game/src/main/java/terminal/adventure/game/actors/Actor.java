@@ -17,7 +17,7 @@ import terminal.adventure.game.inventory.slots.Slot;
 import terminal.adventure.game.spells.Spell;
 
 
-public abstract class Actor implements Lookable{
+public abstract class Actor implements Lookable, java.io.Serializable{
 
     public final String NAME;
     public final String DESCRIPTION;
