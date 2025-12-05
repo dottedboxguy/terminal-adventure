@@ -30,10 +30,9 @@ public class BloodCultScenario extends GameState{
 		this.map.add( new Location("Hole of Shame", "A simple hole, just too deep to climb back up.\nYou have a hunch there's a way to get out, but you're on your own"));
 		this.map.add( new Location("Ritual Altar", "A large room circled by large marble pillars.\nThe floor is covered by several layers of all shades of red. It seems to be coming from a majestuous altar in the center."));
 		
-		this.map.get(0).addExit("Chest Room", new OpenExit(this.map.get(1), "Ruined Door", "A small wooden door, barely holding."));
-		this.map.get(0).addExit("Hole", new OpenExit(this.map.get(2), "Floor Hole", "Just a hole in the ground. You think you could slip in."));
-		this.map.get(2).addExit("Wall crack", new HiddenExit(this.map.get(3),"Wall crack", "A crack barely visible in the Wall. You think you could crawl through."));
-		
+		this.map.get(0).addExit(new OpenExit(this.map.get(1), "Ruined Door", "A small wooden door, barely holding."));
+		this.map.get(0).addExit(new OpenExit(this.map.get(2), "Floor Hole", "Just a hole in the ground. You think you could slip in."));
+		this.map.get(2).addExit(new HiddenExit(this.map.get(3), "Wall crack", "A crack barely visible in the Wall. You think you could crawl through."));
 		
 		// Adding one Actor + Controller to the game
 		tempActor = new Cultist("Small cultist");
