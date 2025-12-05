@@ -6,9 +6,9 @@ import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 
-public class CommandFight extends Command{
+public class CommandAttack extends Command{
 
-	public CommandFight(String[] args) {
+	public CommandAttack(String[] args) {
 		super(args, true);
 	}
 
