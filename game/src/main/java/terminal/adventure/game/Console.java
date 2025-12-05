@@ -15,7 +15,6 @@ import terminal.adventure.game.commands.CommandLook;
 import terminal.adventure.game.commands.CommandQuit;
 import terminal.adventure.game.commands.CommandTake;
 import terminal.adventure.game.commands.CommandUse;
-import terminal.adventure.game.controllers.PlayerController;
 
 public class Console implements java.io.Serializable{
 
