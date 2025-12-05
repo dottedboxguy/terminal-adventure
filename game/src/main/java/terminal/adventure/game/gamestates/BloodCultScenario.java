@@ -146,6 +146,7 @@ public class BloodCultScenario extends GameState {
 
         Stats crownStats = new Stats();
         crownStats.setArmor(2);
+        crownStats.setStrength(30);
         
         chest.addItem(new HeadEquipment(
             "King Crown", 
