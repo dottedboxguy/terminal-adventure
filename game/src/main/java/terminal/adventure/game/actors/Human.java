@@ -12,7 +12,7 @@ import terminal.adventure.game.inventory.slots.TorsoSlot;
  * Humans have boots, gloves, head, and torso slots.
  * This class serves as a base for player characters and human NPCs.
  */
-public abstract class Human extends Actor {
+public class Human extends Actor {
 
     /**
      * Constructs a new Human with the given name and description.
@@ -21,7 +21,7 @@ public abstract class Human extends Actor {
      * @param name The name of the human
      * @param description A textual description of the human
      */
-    protected Human(String name, String description) {
+    public Human(String name, String description) {
         super(name, description);
         
         // Initialize human-specific stats
@@ -38,7 +38,7 @@ public abstract class Human extends Actor {
      *              their specific slots to this list.
      */
     @Override
-    protected void customizeSlots(List<terminal.adventure.game.inventory.slots.Slot> slots) {
+    public void customizeSlots(List<terminal.adventure.game.inventory.slots.Slot> slots) {
         slots.add(new BootsSlot());
         slots.add(new GlovesSlot());
         slots.add(new HeadSlot());
