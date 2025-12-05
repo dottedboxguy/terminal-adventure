@@ -169,6 +169,10 @@ public class BloodCultScenario extends GameState {
         
         // Second cultist in Dark Room
         Actor cultist2 = new Cultist("Tall cultist");
+		Backpack satchel = new Backpack("Satchel", "A tiny bag");
+		satchel.addItem(new WinGem("Waterstone", "A deep Blue stone, feels wet to the touch", new Stats()));
+		cultist2.takeItem(satchel, null);
+		cultist2.equip(satchel, null);
         Controller controller2 = new AIController(Faction.badGuys);
         controller2.bindActor(cultist2);
         this.map.get(0).addActor(cultist2);
