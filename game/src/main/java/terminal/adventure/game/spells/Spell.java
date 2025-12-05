@@ -26,5 +26,5 @@ public abstract class Spell {
      * @param actor the caster actor
      * @param target the upcasted target on which the spell is casted.
      */
-    public abstract void cast(Actor actor, Object target);
+    public abstract String cast(Actor actor, Object target);
 }

@@ -13,11 +13,11 @@ public class UnlockSpell extends Spell {
     /**
      * see {@link Spell}
      */
-    public void cast(Actor actor, Object target) {
+    public String cast(Actor actor, Object target) {
         if (target instanceof LockedExit) {
-            ((LockedExit)target).forcedUnlock();
+            return ((LockedExit)target).action(actor);
         } else {
-            System.out.println("You've cast such a great spell...   but nothing happened.");
+            return "You've cast such a great spell...   but nothing happened.";
         }
     }
 }
