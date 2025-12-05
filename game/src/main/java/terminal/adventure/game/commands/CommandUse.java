@@ -6,6 +6,7 @@ import terminal.adventure.exceptions.invalidInputException;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 import terminal.adventure.game.interactables.Interactable;
+import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 
 public class CommandUse extends Command {
@@ -56,7 +57,16 @@ public class CommandUse extends Command {
                 if (i.getName().equals(this.args[0]))
                     return i.action(actor);
             }
-            return "hmm... you couldn't find any "+args[0]+" around";
+            for (Storage s : actor.getAllStorages()){
+                for (Item i : s.getItems()){
+                    if (i.getName().equals(this.args[0])){
+                        if (i instanceof Interactable) return ((Interactable)i).action(actor);
+                        return "hmm... you can't find a way to interact with the "+args[0];
+                    }
+                }
+            }
+
+            return "hmm... you couldn't find any "+args[0];
 	    }
         if (this.args.length == 2){
             for (Interactable i : interactables){
