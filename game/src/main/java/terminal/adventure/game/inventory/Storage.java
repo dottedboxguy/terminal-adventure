@@ -39,6 +39,15 @@ public interface Storage {
 	 */
 	public abstract void dump(Storage target);
 	
+	/**
+	 * Clears the stored items.
+	 */
 	public abstract void clear();
 	
+	/**
+	 * Checks if a certain item is stored (same reference).
+	 * @param item the item to check
+	 * @return if the item is stored.
+	 */
+	public abstract boolean contains( Item item);
 }

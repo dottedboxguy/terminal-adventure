@@ -7,7 +7,7 @@ import terminal.adventure.game.inventory.items.Item;
 
 public class Inventory {
 
-	private List<Item> items;
+	private final List<Item> items;
 	
 	public Inventory() {
 		this.items = new java.util.ArrayList<>();
@@ -46,14 +46,32 @@ public class Inventory {
 	}
 	
 	/**
-	 * takes an Item from a source storage to this one.
-	 * @param source the source inventory.
-	 * @param item the item to take.
-	 * TODO:verify if the item is present in source beforehand.
+	 * Takes an Item from a source storage to this one.
+	 * Checks if the item is present in the source before attempting to take it.
+	 * 
+	 * @param source the source storage from which to take the item
+	 * @param item the item to take from the source
+	 * @return true if the item was successfully taken, false otherwise
+	 * @throws NullPointerException if source or item is null
 	 */
-	public void takeItem(Storage source, Item item){
+	public boolean takeItem(Storage source, Item item) {
+		// Check for null parameters
+		if (source == null || item == null) {
+			throw new NullPointerException("Parameters cannot be null");
+		}
+		
+		// Verify if the item is present in source beforehand 
+		if (!source.contains(item)) {
+			return false; // Item not in source
+		}
+		
+		// Add to this storage first (if this fails, source remains unchanged)
 		this.add(item);
+		
+		// Then remove from source
 		source.removeItem(item);
+		
+		return true;
 	}
 	
 	/**

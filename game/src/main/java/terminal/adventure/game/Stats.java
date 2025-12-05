@@ -1,7 +1,5 @@
 package terminal.adventure.game;
 
-import terminal.adventure.exceptions.CharacterShouldDieException;
-
 public class Stats {
 
 	private int strength;
@@ -84,15 +82,27 @@ public class Stats {
 	}
 	
 	/**
-	 * function called from the character to reduce current health.
-	 * @param damage the amount of damage to remove from current health.
-	 * @throws CharacterShouldDieException if the current Health is at 0 or less. //TODO: Interrogate the use of the Exception
+	 * Reduces current health by the specified damage amount.
+	 * If health reaches 0 or below, the character should die.
+	 * 
+	 * @param damage the amount of damage to remove from current health
+	 * @return true if the character's health is at 0 or below (should die),
+	 *         false if the character is still alive
 	 */
-	public void loseHealth(int damage) throws CharacterShouldDieException {
-		this.currentHealth -= damage;
-		if (this.currentHealth < 0){
-			throw new CharacterShouldDieException("character's health is dying");
+	public boolean loseHealth(int damage) {
+		if (damage < 0) {
+			throw new IllegalArgumentException("Damage cannot be negative: " + damage);
 		}
+		
+		this.currentHealth -= damage;
+		
+		// Prevent health from going below 0
+		if (this.currentHealth < 0) {
+			this.currentHealth = 0;
+		}
+		
+		// Return whether character should die
+		return this.currentHealth <= 0;
 	}
 	
 	/**

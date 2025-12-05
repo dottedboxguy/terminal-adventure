@@ -18,32 +18,74 @@ import terminal.adventure.game.spells.Spell;
 
 
 public abstract class Actor implements Lookable{
-    
+
     public final String NAME;
     public final String DESCRIPTION;
     protected Equipment equipment;
     protected Stats baseStats;
     private Location currentLocation;
-    
     private Controller controller;
     private Fight currentFight = null;
-    
-    private List<Spell> knownSpells;
-    
+    private final List<Spell> knownSpells;
     
     public Actor(String name, String description) {
         this.NAME = name;
         this.DESCRIPTION = description;
         this.baseStats = new Stats();
-		List<Slot> slots = makeSlots();
-		slots.add(new BackpackSlot());
+
+		// Initialize slots first
+    	List<Slot> slots = initializeSlots();
+
+		// Always add BackpackSlot
+        slots.add(new BackpackSlot());
+
 		this.equipment = new Equipment(slots);
 		
-		this.knownSpells = new ArrayList<Spell>();
+		this.knownSpells = new ArrayList<>();
 	}
 
-	public abstract List<Slot> makeSlots();
-    
+    /**
+	 * Initializes the slots for this actor's equipment.
+	 * The initialization process consists of two phases:
+	 *   Create base slots (empty by default)
+	 *   Allow subclasses to customize slots
+	 * 
+	 * @return A fully initialized list of slots for this actor,
+	 *         always including a BackpackSlot (added by the constructor)
+	 */
+	private List<Slot> initializeSlots() {
+		List<Slot> slots = createBaseSlots();
+		customizeSlots(slots);
+		return slots;
+	}
+
+	/**
+	 * Creates the base slots for this actor.
+	 * 
+	 * This method provides the initial, empty list of slots.
+	 * It is private to prevent subclass override, ensuring that
+	 * slot initialization always starts from a known, controlled state.
+	 * 
+	 */
+	private List<Slot> createBaseSlots() {
+		return new ArrayList<>();
+	}
+
+	/**
+	 * Allows subclasses to customize the slots for this actor.
+	 * 
+	 * This is the protected hook method that subclasses should override
+	 * to add their specific equipment slots.
+	 * 
+	 * @param slots The mutable list of slots to customize. 
+	 *              This list already contains any base slots 
+	 *   
+	 */
+	protected void customizeSlots(List<Slot> slots) {
+		// Default implementation does nothing
+		// Subclasses should override to add their specific slots
+	}
+	
     /**
      * Sets the given controller to this actor.
      * Warning : will disconnect the current controller if any,
@@ -51,7 +93,10 @@ public abstract class Actor implements Lookable{
      * @param c The new controller to bind.
      */
     public void setController(Controller c) {
-
+		// if same controller nothing to do
+		if (this.controller == c) {
+        	return;  // CORRECTION : avoid disconnect/reconnect
+    	}
     	// Disconnecting old controller from this actor
     	if (this.controller != null) {
     		this.controller.unbindActor();
@@ -81,10 +126,36 @@ public abstract class Actor implements Lookable{
     	
     }
 
+    /**
+     * Equips if possible the specified item.
+     * @param item the item to equip
+     * @param controller the controller to refer to if several possibilites
+     * @return if success
+     */
     public boolean equip(Item item, Controller controller) {
     	return this.equipment.equipItem(item, controller);
     }
     
+    /**
+     * Equips if possible the specified item if it's contained in the
+     * source storage, and removes it from this source.
+     * @param item the item to equip
+     * @param controller the controller to refer to if several possibilites
+     * @param source the Storage the item is from.
+     * @return if success
+     */
+    public boolean equipFrom(Item item, Controller controller, Storage source) {
+    
+    	if ( source.contains(item)){
+    		if (this.equipment.equipItem(item, controller)){
+	    		source.removeItem(item);
+	    		return true;
+	    	}
+    		return false;
+    	}
+    	return false;
+    	
+    }
     
     /**
      * Looks for the item by name in the actor's storages, and in the Location,
@@ -93,7 +164,7 @@ public abstract class Actor implements Lookable{
      * @param controller the controller to refer to if there is several eligible slots where it could be equipped.
      * @return if the equip is successful.
      */
-    boolean equipItem(String itemName, Controller controller) {
+    public boolean equipItem(String itemName, Controller controller) {
     	
     	List<Item> candidates;
     	
@@ -134,32 +205,80 @@ public abstract class Actor implements Lookable{
      * Allows the actor to receive an attack.
      * The effective damage dealt can be affected by this actor's armor or speed.
      * @param attackPower the initial amount of damage dealt.
+     * @return a Stats Object, containg the remaining health, and the real damage amount as the Strength stat,
      */
-    public void takeAttack(int attackPower) {
-    	
-    	int currentHealth = this.getBaseStats().getCurrentHealth();
-    	this.getBaseStats().setCurrentHealth(currentHealth - attackPower);
-    	
-    	if (this.isDead()) {
-    		System.out.println("DEBUG Actor.takeAttack : OOOFFFF Im "+ this.NAME+ " and I dramatically died.");
-    		this.die();
-    	} else {
-    		
-    		System.out.println("DEBUG Actor.takeAttack : Ouch ! I'm "+this.NAME+" and I have "+this.getBaseStats().getCurrentHealth()+" HP remaing");
-    	}
+    public Stats takeAttack(int attackPower) {
     
-    	
+		int currentHealth = this.getBaseStats().getCurrentHealth();
 
-    }
+		// Damage calcul minimum damage = 1
+		int damage = attackPower - this.getTotalStats().getArmor();
+		if (damage < 1) damage = 1;
+		
+		// apply damages
+		int newHealth = currentHealth - damage;
+		this.getBaseStats().setCurrentHealth(newHealth);
+		
+		// Debug 
+		System.out.println("DEBUG takeAttack: " + this.getName() + 
+						" took " + damage + " damage (armor=" + 
+						this.getTotalStats().getArmor() + ")" +
+						" HP: " + newHealth + "/" + this.getBaseStats().getMaxHealth());
+		
+		// CRÉER le rapport AVANT la mort
+		Stats ret = new Stats();
+		ret.setStrength(damage);
+		ret.setCurrentHealth(newHealth);
+		ret.setMaxHealth(this.getBaseStats().getMaxHealth());
+		
+		// ENVOYER le rapport AVANT la mort
+		if (this.controller != null) {
+			this.controller.takeAttackReport(ret);
+		} else {
+			System.out.println("WARN: No controller to report attack for " + this.getName());
+		}
+		
+		// Death check APRÈS avoir envoyé le rapport
+		if (newHealth <= 0) {
+			System.out.println("DEBUG: " + this.getName() + " should die now");
+			this.die();
+		}
+		
+		return ret;
+	}
     
     /**
      * Called whenever the actor should die.
      * Tells the controller its actor is dead, which disconnects it.
      */
     public void die() {
-    	// Actions to perform at death (loot drop, events, etc)
-    	this.controller.die();
-    }
+		System.out.println("DEBUG Actor die() starting for: " + this.getName());
+		
+		// 1. Leave the fight (safe)
+		if (this.currentFight != null) {
+			Fight fight = this.currentFight;
+			this.currentFight = null;  // unleach
+			fight.removeFighter(this);  // then remove
+		}
+		
+		// 2. check inventory
+		if (this.getFirstStorage() != null && this.currentLocation != null) {
+			this.getFirstStorage().dump(this.currentLocation);
+		}
+		
+		// 3. remove from location
+		if (this.getCurrentLocation() != null) {
+			this.getCurrentLocation().removeActor(this);
+		}
+		
+		// 4. tell the controller
+		if (this.controller != null) {
+			this.controller.die();
+		}
+		
+		// debug
+		System.out.println("DEBUG Actor die() completed for: " + this.getName());
+	}
     
     /**
      * @return If the actor's current Health is 0 or less.
@@ -170,10 +289,58 @@ public abstract class Actor implements Lookable{
     
     /**
      * Triggers an attack from this actor to the given one.
+     * If either one of the attacker or defender is currently in a fight,
+     * the other one joins in.
+     * If neither of those are in a fight, they both join a new fight.
+     * If both of those are in a fight, the attacker joins the defenser's.
+     * 
      * @param target the actor to attack.
+     * @return A Stats Object containing the Remaining health, and the effective damage dealt as Strenght stat.
      */
-    public void attack(Actor target) {
-    	target.takeAttack(this.getBaseStats().getStrength());
+    public Stats attack(Actor target) {
+    	
+    	System.out.println("DEBUG attack:"+ this.getFight() + target.getFight() );
+    	if (this.getFight() != null) {
+    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.goodGuys));    	
+    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.badGuys));    	    		
+    	}
+    	
+    	
+    	if (this.getFight() != target.getFight() || target.getFight() == null) {
+    		
+    		
+			if ( this.getFight() == null ) {
+			
+				
+				if (target.getFight() == null) { // if none of the attacker and defender are in a fight
+					Fight f = new Fight();
+					this.enterFight(f);
+					target.enterFight(f);
+				} else { // if the defender is in a fight and not the attacker
+					
+					this.enterFight( target.getFight() );
+					
+				}
+	
+			} else {
+				
+				if (target.getFight() == null) { // if the attacker is in a fight and not the defender
+					target.enterFight(this.getFight());
+					
+				} else {
+					
+					this.enterFight(target.getFight()); // if both are in a different fight
+					
+				}
+					
+			}
+    	
+    	}
+
+    	
+    	return target.takeAttack(this.getBaseStats().getStrength());
+
+    	
     }
 
     /**
@@ -219,6 +386,7 @@ public abstract class Actor implements Lookable{
         return "-" + this.NAME + ":\n" + this.DESCRIPTION;
     }
 	
+	@Override
     /**
      * @return this actor's name.
      */
@@ -308,14 +476,10 @@ public abstract class Actor implements Lookable{
 	}
 	
 	/**
-	 * Removes this actor from the specified fight and
-	 * resets the current actor's fight attribute
+	 * Resets the current actor's fight attribute
 	 */
 	public void leaveFight() {
-		if (this.currentFight != null) {
-			this.currentFight.removeFighter(this);
-			this.currentFight = null;
-		}
+		this.currentFight = null;
 	}
 	
 	/**
@@ -324,7 +488,8 @@ public abstract class Actor implements Lookable{
 	public Fight getFight() {
 		return this.currentFight;
 	}
-
+	
+	
 	//-------------- Move methods -------------
 
 	/**
@@ -336,7 +501,7 @@ public abstract class Actor implements Lookable{
 	 */
 	public boolean go(Exit target) {
 		
-		if (target.canCross()) {
+		if (target.canCross() && this.getFight() == null) {
 			this.setLocation(target.getDestination());
 			return true;
 			

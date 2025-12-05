@@ -2,14 +2,14 @@ package terminal.adventure.game.controllers;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Random;
 
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
 public class AIController extends Controller {
 
-	Random random = new Random();
+	//Random random = new Random();
 	
 	public AIController(Actor actor, Faction faction) {
 		super(actor, faction);
@@ -55,17 +55,20 @@ public class AIController extends Controller {
 			int nExits = exits.size();
 			if ( nExits > 0) {
 				
-				int e = random.nextInt( nExits );
+				//int e = random.nextInt( nExits );
 				
 				//this.actor.move(exits[e});
 				
 			}
 			
-			
-			
+			System.out.println("DEBUG:play : "+ this.actor.getName() +" . "+this.actor.getCurrentLocation().getName());
+			System.out.println(this.actor.getCurrentLocation().getActors());
 			
 		}
 		
 		System.out.println("End Turn.");
 	}
+
+	@Override
+	public void takeAttackReport(Stats report) {/*foo*/}
 }

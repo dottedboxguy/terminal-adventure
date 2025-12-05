@@ -20,7 +20,7 @@ public class Item implements Lookable{
     public Stats getStats() {
     	return this.stats;
     }
-
+    @Override
     /**
      * @return the item's name
      */

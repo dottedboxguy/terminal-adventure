@@ -3,12 +3,12 @@ package terminal.adventure.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.controllers.Faction;
 
 public class Fight {
 
-	List<Actor> fighters;
+	private List<Actor> fighters;
 		
 	public Fight() {
 		this.fighters = new ArrayList<>();
@@ -32,10 +32,27 @@ public class Fight {
 	 * Removes an Actor from the Fight.
 	 * Warning : the fight will not be removed from the Actor.
 	 * Will not do anything if the Actor isn't already in the fight.
+	 * if the remaining fighters are all in the same Faction,
+	 * makes everyone leave the fight.
 	 * @param c The Actor to remove.
 	 */
 	public void removeFighter(Actor c) {
 		fighters.remove(c);
+		
+		// Détacher l'acteur
+		if (c.getFight() == this) {
+			c.leaveFight();  // Maintenant safe car juste currentFight = null
+		}
+		
+		if (this.allSameFaction()) {
+			// Copie défensive
+			for (Actor f : new ArrayList<>(this.fighters)) {
+				if (f.getFight() == this) {
+					f.leaveFight();  // Safe
+				}
+			}
+			this.fighters.clear();
+		}
 	}
 	
 	/**
@@ -73,5 +90,33 @@ public class Fight {
 		return res;
 	}
 	
+	/**
+	 *Checks if all fighters are part of the same faction.
+	 * @return if all fighters are of the same faction.
+	 */
+	public boolean allSameFaction() {
+		List <Actor> fighters = this.getFighters();
+		
+		if (fighters.size() == 0) {
+			return false;
+		}
+		
+		Faction factionA = this.fighters.get(0).getController().getFaction();
+		
+		for (Actor a : this.fighters) {
+			if ( a.getController().getFaction() != factionA) {
+				return false;
+			}
+		}
+	return true;
+	}
+
+
+	/**
+	 * @return the list of fighters
+	 */
+	public List<Actor> getFighters(){
+		return this.fighters;
+	}
 
 }

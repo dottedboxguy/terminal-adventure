@@ -74,6 +74,9 @@ public class CommandGo extends Command {
         
         // Attempt to move through the exit
         if (!actor.go(exit)) {
+        	if (actor.getFight() != null) {
+        		throw new invalidInputException("You are still in a fight !\n");
+        	}
             throw new invalidInputException(exit.getMessage());
         }
         
