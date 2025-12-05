@@ -2,7 +2,11 @@ package terminal.adventure.game.actors;
 
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.After;
+import static org.junit.Assert.*;
+
 import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 
@@ -72,28 +76,27 @@ class TestActor extends Actor {
     }
 }
 
-public class ActorSetControllerTeststruct extends TestCase {
+public class ActorSetControllerTeststruct {
     
     private TestActor actor;
     private MockController controller1;
     private MockController controller2;
     private MockController controller3;
     
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() {
         actor = new TestActor("TestActor", "Description");
         controller1 = new MockController();
         controller2 = new MockController();
         controller3 = new MockController();
     }
     
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After
+    public void tearDown() {
+        // Cleanup if needed
     }
     
-    // Test 1: No controller to New controller
+    @Test
     public void testSetController_FromNullToNewController() {
         // Precondition
         assertNull("Actor should not have an initial controller", actor.getController());
@@ -108,7 +111,7 @@ public class ActorSetControllerTeststruct extends TestCase {
         assertEquals("unbindActor should not be called", 0, controller1.getUnbindCallCount());
     }
     
-    // Test 2: Old controller to Same controller already bound
+    @Test
     public void testSetController_FromOldToSameControllerAlreadyBound() {
         // Preparation
         controller1.bindActor(actor);
@@ -128,7 +131,7 @@ public class ActorSetControllerTeststruct extends TestCase {
         assertEquals("unbindActor should not be called", initialUnbindCount, controller1.getUnbindCallCount());
     }
     
-    // Test 3: Old controller to New controller already bound to this actor
+    @Test
     public void testSetController_FromOldToNewControllerAlreadyBoundToThisActor() {
         // Preparation
         controller2.bindActor(actor);
@@ -143,12 +146,12 @@ public class ActorSetControllerTeststruct extends TestCase {
         // Verifications
         assertEquals("Actor should have the new controller", controller1, actor.getController());
         assertEquals("Controller1 should be bound to the actor", actor, controller1.getActor());
-        assertEquals("Controller2 should be unbound", null, controller2.getActor());
+        assertNull("Controller2 should be unbound", controller2.getActor());
         assertEquals("Controller2.unbindActor should be called once", 1, controller2.getUnbindCallCount());
         assertEquals("Controller1.bindActor should not be called again", 1, controller1.getBindCallCount());
     }
     
-    // Test 4: Old controller to New controller bound to another actor
+    @Test
     public void testSetController_FromOldToNewControllerBoundToOtherActor() {
         // Preparation
         actor.setController(controller1);
@@ -166,12 +169,12 @@ public class ActorSetControllerTeststruct extends TestCase {
         // Verifications
         assertEquals("Actor should have the new controller", controller2, actor.getController());
         assertEquals("Controller2 should now be bound to the actor", actor, controller2.getActor());
-        assertEquals("Controller1 should be unbound", null, controller1.getActor());
+        assertNull("Controller1 should be unbound", controller1.getActor());
         assertEquals("Controller1.unbindActor should be called once", 1, controller1.getUnbindCallCount());
         assertEquals("Controller2.bindActor should be called once more", initialBindCount2 + 1, controller2.getBindCallCount());
     }
     
-    // Test 5: Old controller to New controller without actor
+    @Test
     public void testSetController_FromOldToNewControllerWithoutActor() {
         // Preparation
         actor.setController(controller1);
@@ -188,12 +191,12 @@ public class ActorSetControllerTeststruct extends TestCase {
         // Verifications
         assertEquals("Actor should have the new controller", controller2, actor.getController());
         assertEquals("Controller2 should be bound to the actor", actor, controller2.getActor());
-        assertEquals("Controller1 should be unbound", null, controller1.getActor());
+        assertNull("Controller1 should be unbound", controller1.getActor());
         assertEquals("Controller1.unbindActor should be called once", 1, controller1.getUnbindCallCount());
         assertEquals("Controller2.bindActor should be called", initialBindCount2 + 1, controller2.getBindCallCount());
     }
     
-    // Additional test: Verify correct sequence
+    @Test
     public void testSetController_SequenceOfControllers() {
         // Step 1: No controller to controller1
         actor.setController(controller1);
@@ -216,7 +219,7 @@ public class ActorSetControllerTeststruct extends TestCase {
         assertEquals("Step 3: controller3 bind called", 1, controller3.getBindCallCount());
     }
     
-    // Test: Verify that clearController works with setController
+    @Test
     public void testSetController_AfterClearController() {
         // Preparation
         actor.setController(controller1);
@@ -233,4 +236,6 @@ public class ActorSetControllerTeststruct extends TestCase {
         assertEquals("Controller2 should be bound to the actor", actor, controller2.getActor());
         assertEquals("Controller2.bindActor should be called", 1, controller2.getBindCallCount());
     }
+    
+
 }
