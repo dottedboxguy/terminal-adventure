@@ -29,6 +29,7 @@ public class Equipment {
 	public boolean equipItem(Item item, Controller controller) {
 	
 		List<Slot> matching = this.findMatchingSlots(item);
+				
 		
 		int index = -1;
 		
@@ -50,7 +51,8 @@ public class Equipment {
 			
 			if (controller == null) index = 0;
 			else index = controller.equipChooseSlot(choicesNames);
-		
+			
+			if (index == -1) return false;
 		}
 		
 		return matching.get(index).equip(item); 
@@ -64,7 +66,7 @@ public class Equipment {
 	private List<Slot> findMatchingSlots(Item item){
 		List<Slot> slotRes = new ArrayList<>();		
 		
-		for (Slot s : slots) {
+		for (Slot s : this.slots) {
 			if (s.canEquip(item)) {
 				slotRes.add(s);
 			}
