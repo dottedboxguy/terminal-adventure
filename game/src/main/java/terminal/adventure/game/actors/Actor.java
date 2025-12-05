@@ -219,12 +219,6 @@ public abstract class Actor implements Lookable, java.io.Serializable{
 		int newHealth = currentHealth - damage;
 		this.getBaseStats().setCurrentHealth(newHealth);
 		
-		// Debug 
-		System.out.println("DEBUG takeAttack: " + this.getName() + 
-						" took " + damage + " damage (armor=" + 
-						this.getTotalStats().getArmor() + ")" +
-						" HP: " + newHealth + "/" + this.getBaseStats().getMaxHealth());
-		
 		// CRÉER le rapport AVANT la mort
 		Stats ret = new Stats();
 		ret.setStrength(damage);
@@ -234,13 +228,10 @@ public abstract class Actor implements Lookable, java.io.Serializable{
 		// ENVOYER le rapport AVANT la mort
 		if (this.controller != null) {
 			this.controller.takeAttackReport(ret);
-		} else {
-			System.out.println("WARN: No controller to report attack for " + this.getName());
 		}
 		
 		// Death check APRÈS avoir envoyé le rapport
 		if (newHealth <= 0) {
-			System.out.println("DEBUG: " + this.getName() + " should die now");
 			this.die();
 		}
 		
@@ -252,7 +243,6 @@ public abstract class Actor implements Lookable, java.io.Serializable{
      * Tells the controller its actor is dead, which disconnects it.
      */
     public void die() {
-		System.out.println("DEBUG Actor die() starting for: " + this.getName());
 		
 		// 1. Leave the fight (safe)
 		if (this.currentFight != null) {
@@ -276,8 +266,6 @@ public abstract class Actor implements Lookable, java.io.Serializable{
 			this.controller.die();
 		}
 		
-		// debug
-		System.out.println("DEBUG Actor die() completed for: " + this.getName());
 	}
     
     /**
@@ -298,13 +286,6 @@ public abstract class Actor implements Lookable, java.io.Serializable{
      * @return A Stats Object containing the Remaining health, and the effective damage dealt as Strenght stat.
      */
     public Stats attack(Actor target) {
-    	
-    	System.out.println("DEBUG attack:"+ this.getFight() + target.getFight() );
-    	if (this.getFight() != null) {
-    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.goodGuys));    	
-    		System.out.println(this.getFight().getFightersByFaction(terminal.adventure.game.controllers.Faction.badGuys));    	    		
-    	}
-    	
     	
     	if (this.getFight() != target.getFight() || target.getFight() == null) {
     		

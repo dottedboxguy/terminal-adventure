@@ -37,7 +37,7 @@ public abstract class GameState implements java.io.Serializable {
                 continue;
             }
         
-            System.out.println("It's "+ c.getActor().NAME+" turn");
+            //System.out.println("It's "+ c.getActor().NAME+" turn");
 
             c.playTurn();
 

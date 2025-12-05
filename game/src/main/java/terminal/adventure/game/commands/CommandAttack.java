@@ -45,7 +45,7 @@ public class CommandAttack extends Command{
 
 	@Override
 	public String help() {
-		return "who do you want to ATTACK ?\nUsage : ATTACK <target name>\n";
+		return "who do you want to FIGHT ?\nUsage : FIGHT <target name>\n";
 	}
 
 }

@@ -25,8 +25,6 @@ public class CommandCast extends Command{
 			return this.help()+this.spellList(allSpells);
 		}
 		
-		System.out.println("DEBUG execute : got spell name "+args[0]);
-		
 		for( Spell s : allSpells) {
 			if(s.getName().equals(args[0])) {
 				spell = s;
