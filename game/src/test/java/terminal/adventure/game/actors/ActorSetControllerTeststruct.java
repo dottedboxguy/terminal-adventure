@@ -3,6 +3,7 @@ package terminal.adventure.game.actors;
 import java.util.List;
 
 import junit.framework.TestCase;
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 
 // Mock Controller for testing
@@ -47,12 +48,15 @@ class MockController extends Controller {
 
     @Override
     public int equipChooseSlot(List<String> candidatesNames) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return 1;
     }
 
     @Override
     protected void play() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void takeAttackReport(Stats report) {
     }
 }
 
@@ -68,7 +72,7 @@ class TestActor extends Actor {
     }
 }
 
-public class ActorSetControllerTest extends TestCase {
+public class ActorSetControllerTeststruct extends TestCase {
     
     private TestActor actor;
     private MockController controller1;
