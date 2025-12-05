@@ -32,11 +32,20 @@ public class Fight {
 	 * Removes an Actor from the Fight.
 	 * Warning : the fight will not be removed from the Actor.
 	 * Will not do anything if the Actor isn't already in the fight.
+	 * if the remaining fighters are all in the same Faction,
+	 * makes everyone leave the fight.
 	 * @param c The Actor to remove.
 	 */
 	public void removeFighter(Actor c) {
 		fighters.remove(c);
-		refreshFight();
+
+		if (this.allSameFaction()) {
+			for (Actor f : this.fighters) {
+				f.leaveFight();
+			}	
+		}
+	
+	
 	}
 	
 	/**
@@ -79,6 +88,12 @@ public class Fight {
 	 * @return if all fighters are of the same faction.
 	 */
 	public boolean allSameFaction() {
+		List <Actor> fighters = this.getFighters();
+		
+		if (fighters.size() == 0) {
+			return false;
+		}
+		
 		Faction factionA = this.fighters.get(0).getController().getFaction();
 		
 		for (Actor a : this.fighters) {
@@ -89,16 +104,12 @@ public class Fight {
 	return true;
 	}
 
-	public void refreshFight() {
-		if(allSameFaction()) {
 
-			for (Actor f : fighters) {
-				f.leaveFight();
-			}
-		
-		}
-
+	/**
+	 * @return the list of fighters
+	 */
+	public List<Actor> getFighters(){
+		return this.fighters;
 	}
-	
 
 }

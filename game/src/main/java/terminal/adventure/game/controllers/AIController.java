@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
 
@@ -68,4 +69,7 @@ public class AIController extends Controller {
 		
 		System.out.println("End Turn.");
 	}
+
+	@Override
+	public void takeAttackReport(Stats report) {/*foo*/}
 }

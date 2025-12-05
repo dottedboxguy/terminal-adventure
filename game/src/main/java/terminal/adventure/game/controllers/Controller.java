@@ -2,6 +2,7 @@ package terminal.adventure.game.controllers;
 
 import java.util.List;
 
+import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.inventory.items.Item;
 
@@ -142,5 +143,12 @@ public abstract class Controller {
 			this.play();
 		}	
 	}
+	
+	/**
+	 * Called by the controlled actor when attacked.
+	 * @param a Stats object containting the remaining HP, Max HP, Damage taken as Strength stat.
+	 */
+	public abstract void takeAttackReport( Stats report ) ;
+	
 	
 }

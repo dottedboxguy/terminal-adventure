@@ -23,6 +23,9 @@ public class Console{
     private final PrintStream printStream;
     private final Scanner inputScanner;
     private final Map<String, Function<String[], Command>> commands = new HashMap<>();
+    
+    String latestEntry = ""; 
+    
     public Console(){
         
         printStream = System.out;
@@ -65,6 +68,13 @@ public class Console{
     	printStream.print("\n");
     	String input = this.inputScanner.nextLine();
     	printStream.print("\n");
+    	
+    	if (input.equals("r")) {
+    		printStream.print(latestEntry);
+    		input = latestEntry;
+    	} else {
+    		latestEntry = input;    		
+    	}
     	
     	// ----------- Command identification ---------
     	
