@@ -67,7 +67,18 @@ public class CommandLook extends Command {
         for (String arg : args) {
             boolean foundSomething = false;
             
-            
+            if (args[0].toUpperCase().equals("INVENTORY")){
+                for (Storage s : actor.getAllStorages()) {
+            	
+            	List<Item> items = s.getItems();
+            	
+            	for (Item i : items) {
+            		result += i.look()+"\n";
+            	}
+                return result;
+            	
+            }
+            }
             // Examine player's Storages for Item matching the argument
             for (Storage s : actor.getAllStorages()) {
             	
