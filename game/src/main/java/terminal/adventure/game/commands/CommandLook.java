@@ -4,6 +4,8 @@ import java.util.List;
 
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.exits.Exit;
+import terminal.adventure.game.inventory.Storage;
+import terminal.adventure.game.inventory.items.Item;
 
 /**
  * Concrete command implementation for examining the environment.
@@ -42,7 +44,7 @@ public class CommandLook extends Command {
      * 
      *   - If no arguments are provided: returns a general description of the current location
      *   - If arguments are provided: examines each argument sequentially
-     *   - For each argument, searches for matching actors and exits in the current location
+     *   - For each argument, searches for matching actors, exits and items in the current location, and items int the actor's Storages.
      *   - Returns descriptive information about found actors and exits
      *   - Provides feedback when nothing matches the given argument
      *
@@ -64,6 +66,27 @@ public class CommandLook extends Command {
         // Process each argument: examine specific elements
         for (String arg : args) {
             boolean foundSomething = false;
+            
+            
+            // Examine player's Storages for Item matching the argument
+            for (Storage s : actor.getAllStorages()) {
+            	
+            	List<Item> items = s.searchItems(arg);
+            	
+            	for (Item i : items) {
+            		result+=i.look()+"\n";
+            		foundSomething = true;
+            	}
+            	
+            }
+            
+            // Examine Location's Storage for item matching the argument
+            for (Item i : actor.getCurrentLocation().searchItems(arg)) {
+            	
+            	result+=i.look()+"\n";
+            	foundSomething = true;
+            }
+
             
             // Examine actors matching the argument
             List<Actor> actors = actor.getCurrentLocation().getActorByName(arg);

@@ -40,8 +40,10 @@ public class BloodCultScenario extends GameState{
 		
 		this.map.get(0).addExit(new OpenExit(this.map.get(1), "Ruined Door", "A small wooden door, barely holding."));
 		this.map.get(0).addExit(new OpenExit(this.map.get(2), "Floor Hole", "Just a hole in the ground. You think you could slip in."));
+		this.map.get(1).addExit(new OpenExit(this.map.get(0), "Ruined Door", "A small wooden door, barely holding."));
 		this.map.get(2).addExit(new HiddenExit(this.map.get(3), "Wall crack", "A crack barely visible in the Wall. You think you could crawl through."));
-
+		
+		
 		this.map.get(0).addItem(new Item("Rock", "Just a rock. What did you expect ?", new Stats()));
 		// Adding a chest 
 		Chest chest = new Chest("A rusty old chest, in pretty good condition nevertheless.", "Old Chest");
@@ -57,7 +59,7 @@ public class BloodCultScenario extends GameState{
 		tempController = new AIController(Faction.badGuys);
 		tempController.bindActor(tempActor);
 		
-		this.map.get(3).addActor(tempActor);
+		this.map.get(0).addActor(tempActor); // supposed to be room 3
 		this.controllers.add(tempController);
 		//
 		
@@ -66,7 +68,7 @@ public class BloodCultScenario extends GameState{
 		tempController = new AIController(Faction.badGuys);
 		tempController.bindActor(tempActor);
 		
-		this.map.get(3).addActor(tempActor);
+		this.map.get(0).addActor(tempActor);// supposed to be room 3
 		this.controllers.add(tempController);
 		//
 		

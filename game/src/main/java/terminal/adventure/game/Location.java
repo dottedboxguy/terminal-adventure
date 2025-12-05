@@ -98,6 +98,16 @@ public class Location implements Lookable, Storage{
     }
 
 	/**
+	 * @return the list of actors currently in the location.
+	 */
+	public List<Actor> getActors(){
+		return this.actors;
+	}
+	
+	
+	
+	
+	/**
 	 * Looks for Exits with the given name.
 	 * @param name The name that is looked for
 	 * @return A list of found Exits
@@ -172,13 +182,29 @@ public class Location implements Lookable, Storage{
     	
     	List<Item> groundItems = this.getItems();
     	
+    	res += "You see :\n";
+    	for (Interactable i : this.interactables) {
+    		res += "- "+i.getName()+"\n";
+    	}
+    	
+    	for (Exit e : this.getVisibleExits().values()) {
+    		res += "A "+ e.getName() + " that leads to the "+e.getDestination().getName()+"\n";
+    	}
+    	
+    	
     	if(groundItems.size() > 0) {
-    		res+="Items are scattered around :\n";
+    		res+="Items on the ground around :\n";
     	}
     	
     	for (Item item : groundItems) {
     		res+= " - "+item.getName()+"\n";
     	}
+    	
+    	for (Actor actor : this.getActors()) {
+    		res+=actor.getName()+" is here\n";
+    	}
+    	
+    	
     	
     	
     	return res; 
