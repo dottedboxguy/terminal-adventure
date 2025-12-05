@@ -13,12 +13,12 @@ public class VisionSpell extends Spell {
     /**
      * see {@link Spell}
      */
-    public void cast(Actor actor, Object target) {
+    public String cast(Actor actor, Object target) {
         if (target instanceof HiddenExit) {
-            ((HiddenExit)target).unveil();
+            return ((HiddenExit)target).unveil();
         }
         else {
-            System.out.println("You've cast such a great spell...   but nothing happened.");
+            return "You've cast such a great spell...   but nothing happened.";
         }
     }
 }
