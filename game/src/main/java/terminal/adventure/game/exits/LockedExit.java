@@ -35,7 +35,8 @@ public class LockedExit extends Exit implements Interactable{
      * see {@link Interactable}
      */
     public String action(Actor actor) {
-        return "that's not going to work";
+        this.isLocked = false;
+        return "You forcibly opened the door's lock !";
     }
 
     /**
