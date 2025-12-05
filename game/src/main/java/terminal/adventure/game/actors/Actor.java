@@ -208,46 +208,77 @@ public abstract class Actor implements Lookable{
      * @return a Stats Object, containg the remaining health, and the real damage amount as the Strength stat,
      */
     public Stats takeAttack(int attackPower) {
-    	
-    	int currentHealth = this.getBaseStats().getCurrentHealth();
-    	
-    	int damage = (attackPower - this.getTotalStats().getArmor());
-    	if (damage < 0) damage = 1;
-    	
-    	this.getBaseStats().setCurrentHealth(currentHealth - damage);
-    	
-    	if (this.isDead()) {
-    		this.die();
-    	}     
-    	
-    	Stats ret = new Stats();
-    	ret.setStrength(damage);
-    	ret.setCurrentHealth(this.getBaseStats().getCurrentHealth());
-    	ret.setMaxHealth(this.getBaseStats().getMaxHealth());
-    	
-    	this.getController().takeAttackReport(ret);
-    	
-    	return ret;
+    
+		int currentHealth = this.getBaseStats().getCurrentHealth();
 
-    }
+		// Damage calcul minimum damage = 1
+		int damage = attackPower - this.getTotalStats().getArmor();
+		if (damage < 1) damage = 1;
+		
+		// apply damages
+		int newHealth = currentHealth - damage;
+		this.getBaseStats().setCurrentHealth(newHealth);
+		
+		// Debug 
+		System.out.println("DEBUG takeAttack: " + this.getName() + 
+						" took " + damage + " damage (armor=" + 
+						this.getTotalStats().getArmor() + ")" +
+						" HP: " + newHealth + "/" + this.getBaseStats().getMaxHealth());
+		
+		// CRÉER le rapport AVANT la mort
+		Stats ret = new Stats();
+		ret.setStrength(damage);
+		ret.setCurrentHealth(newHealth);
+		ret.setMaxHealth(this.getBaseStats().getMaxHealth());
+		
+		// ENVOYER le rapport AVANT la mort
+		if (this.controller != null) {
+			this.controller.takeAttackReport(ret);
+		} else {
+			System.out.println("WARN: No controller to report attack for " + this.getName());
+		}
+		
+		// Death check APRÈS avoir envoyé le rapport
+		if (newHealth <= 0) {
+			System.out.println("DEBUG: " + this.getName() + " should die now");
+			this.die();
+		}
+		
+		return ret;
+	}
     
     /**
      * Called whenever the actor should die.
      * Tells the controller its actor is dead, which disconnects it.
      */
     public void die() {
-    	// Actions to perform at death (loot drop, events, etc)
-    	
-    	this.leaveFight();
-    
-    	this.getFirstStorage().dump(this.currentLocation);
-
-    	this.getCurrentLocation().removeActor(this);
-    	
-    	this.controller.die();
-    	
-    	System.out.println("DEBUG Actor die() : "+ this.getFight().getFighters());
-    }
+		System.out.println("DEBUG Actor die() starting for: " + this.getName());
+		
+		// 1. Leave the fight (safe)
+		if (this.currentFight != null) {
+			Fight fight = this.currentFight;
+			this.currentFight = null;  // unleach
+			fight.removeFighter(this);  // then remove
+		}
+		
+		// 2. check inventory
+		if (this.getFirstStorage() != null && this.currentLocation != null) {
+			this.getFirstStorage().dump(this.currentLocation);
+		}
+		
+		// 3. remove from location
+		if (this.getCurrentLocation() != null) {
+			this.getCurrentLocation().removeActor(this);
+		}
+		
+		// 4. tell the controller
+		if (this.controller != null) {
+			this.controller.die();
+		}
+		
+		// debug
+		System.out.println("DEBUG Actor die() completed for: " + this.getName());
+	}
     
     /**
      * @return If the actor's current Health is 0 or less.
@@ -444,14 +475,10 @@ public abstract class Actor implements Lookable{
 	}
 	
 	/**
-	 * Removes this actor from the specified fight and
-	 * resets the current actor's fight attribute
+	 * Resets the current actor's fight attribute
 	 */
 	public void leaveFight() {
-		if (this.currentFight != null) {
-			this.currentFight.removeFighter(this);
-			this.currentFight = null;
-		}
+		this.currentFight = null;
 	}
 	
 	/**

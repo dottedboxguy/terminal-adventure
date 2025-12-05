@@ -3,12 +3,12 @@ package terminal.adventure.game;
 import java.util.ArrayList;
 import java.util.List;
 
-import terminal.adventure.game.controllers.Faction;
 import terminal.adventure.game.actors.Actor;
+import terminal.adventure.game.controllers.Faction;
 
 public class Fight {
 
-	List<Actor> fighters;
+	private List<Actor> fighters;
 		
 	public Fight() {
 		this.fighters = new ArrayList<>();
@@ -38,14 +38,21 @@ public class Fight {
 	 */
 	public void removeFighter(Actor c) {
 		fighters.remove(c);
-
-		if (this.allSameFaction()) {
-			for (Actor f : this.fighters) {
-				f.leaveFight();
-			}	
+		
+		// Détacher l'acteur
+		if (c.getFight() == this) {
+			c.leaveFight();  // Maintenant safe car juste currentFight = null
 		}
-	
-	
+		
+		if (this.allSameFaction()) {
+			// Copie défensive
+			for (Actor f : new ArrayList<>(this.fighters)) {
+				if (f.getFight() == this) {
+					f.leaveFight();  // Safe
+				}
+			}
+			this.fighters.clear();
+		}
 	}
 	
 	/**
