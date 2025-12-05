@@ -11,12 +11,12 @@ import terminal.adventure.game.Stats;
 import terminal.adventure.game.controllers.Controller;
 
 // Mock Controller for testing
-class MockController extends Controller {
+class MockController2 extends Controller {
     private Actor boundActor = null;
     private int unbindCallCount = 0;
     private int bindCallCount = 0;
     
-    public MockController() {
+    public MockController2() {
         super(null);
     }
     
@@ -80,12 +80,12 @@ class TestActor extends Actor {
 public class ActorClearControllerTeststruct {
     
     private TestActor actor;
-    private MockController controller1;
+    private MockController2 controller1;
     
     @Before
     public void setUp() {
         actor = new TestActor("TestActor", "Description");
-        controller1 = new MockController();
+        controller1 = new MockController2();
     }
     
     // ==== STRUCTURAL TESTS FOR clearController() ====
@@ -221,7 +221,7 @@ public class ActorClearControllerTeststruct {
         actor.setController(controller1);
         actor.clearController();
         
-        MockController controller2 = new MockController();
+        MockController2 controller2 = new MockController2();
         
         // Set new controller
         actor.setController(controller2);
