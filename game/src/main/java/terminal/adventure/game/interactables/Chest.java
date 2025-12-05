@@ -15,10 +15,10 @@ public class Chest implements Storage, Interactable {
     private Inventory inventory;
     private boolean isOpened = true;
 
-	public Chest(String description, String name, Inventory inventory){
+	public Chest(String description, String name){
 		this.DESCRIPTION = description;
 		this.NAME = name;
-		this.inventory = inventory;
+		this.inventory = new Inventory();
 	}
     
 	
