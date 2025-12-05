@@ -6,11 +6,10 @@ import terminal.adventure.game.controllers.PlayerController;
 
 /**
  * Concrete command implementation for terminating the game session.
- * <p>
+ * 
  * The QUIT command provides a controlled way to exit the game. When executed,
  * it displays a farewell message and terminates the application via System.exit().
  * This is a terminal command that ends the game session completely.
- * </p>
  * 
  * @see Command
  * @see Console
