@@ -39,7 +39,7 @@ public abstract class Actor implements Lookable{
 		slots.add(new BackpackSlot());
 		this.equipment = new Equipment(slots);
 		
-		this.knownSpells = new ArrayList<Spell>();
+		this.knownSpells = new ArrayList<>();
 	}
 
 	public abstract List<Slot> makeSlots();
