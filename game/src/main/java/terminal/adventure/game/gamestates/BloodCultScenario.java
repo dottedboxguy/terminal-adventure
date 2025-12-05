@@ -165,7 +165,7 @@ public class BloodCultScenario extends GameState {
         Actor cultist1 = new Cultist("Small cultist");
         Controller controller1 = new AIController(Faction.badGuys);
         controller1.bindActor(cultist1);
-        this.map.get(0).addActor(cultist1);
+        this.map.get(3).addActor(cultist1);
         this.controllers.add(controller1);
         
         // Second cultist in Dark Room
@@ -176,7 +176,7 @@ public class BloodCultScenario extends GameState {
 		cultist2.equip(satchel, null);
         Controller controller2 = new AIController(Faction.badGuys);
         controller2.bindActor(cultist2);
-        this.map.get(0).addActor(cultist2);
+        this.map.get(3).addActor(cultist2);
         this.controllers.add(controller2);
     }
     
