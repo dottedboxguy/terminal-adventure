@@ -17,6 +17,8 @@ public abstract class GameState {
     
     protected final Queue<Controller> controllers;
     protected final List<Location> map;
+    public static boolean winCondition = false;
+    public static boolean loseCondition = false;
     
     public GameState(Queue<Controller> controllers, List<Location> map){
         this.controllers = controllers;
@@ -27,8 +29,6 @@ public abstract class GameState {
      * Starts the game loop
      */
     public void play(){
-        boolean winCondition = false;
-        boolean loseCondition = false;
         while (!winCondition && !loseCondition ) { // "main" loop
             Controller c = controllers.poll();
             
