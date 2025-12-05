@@ -59,7 +59,7 @@ public class CommandLook extends Command {
             return actor.getCurrentLocation().look();
         }
         
-        StringBuilder result = new StringBuilder();
+        String result = "";
         
         // Process each argument: examine specific elements
         for (String arg : args) {
@@ -68,7 +68,7 @@ public class CommandLook extends Command {
             // Examine actors matching the argument
             List<Actor> actors = actor.getCurrentLocation().getActorByName(arg);
             for (Actor a : actors) {
-                result.append(a.look()).append("\n");
+                result += a.look() + "\n";
                 foundSomething = true;
             }
             
@@ -76,17 +76,17 @@ public class CommandLook extends Command {
 			List<Exit> exits = actor.getCurrentLocation().getExitsByName(arg);
 			
             for (Exit exit : exits) {
-                result.append(exit.look()).append("\n");
+                result += exit.look() + "\n";
                 foundSomething = true;
             }
             
             // Provide feedback if nothing was found for this argument
             if (!foundSomething) {
-                result.append("There is nothing to show for '").append(arg).append("' in here.\n");
+                result += "There is nothing to show for '" + arg +"' in here.\n";
             }
         }
         
-        return result.toString();
+        return result;
     }
 
     /**
