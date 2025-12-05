@@ -102,7 +102,7 @@ public class Location implements Lookable, Storage{
 	 * @param name The name that is looked for
 	 * @return A list of found Exits
 	 */
-	public List<Exit> getExitByName(String name){
+	public List<Exit> getExitsByName(String name){
 		List<Exit> res = new ArrayList<>();
 		for (Exit exit : exits.values()) {
 			if(exit.getName().equals(name)){
@@ -114,10 +114,11 @@ public class Location implements Lookable, Storage{
 	
 	/**
 	 * Looks for Exits that can be visible to the Actors.
-	 * @return a map of the visible Exits // TODO : Change structure to List/other collection.
+	 * @return a map of the visible Exits
 	 */
 	public Map<String, Exit> getVisibleExits() {
         Map<String, Exit> visibleExits = new HashMap<>();
+        
         for (Map.Entry<String, Exit> entry : exits.entrySet()) {
             if (!(entry.getValue() instanceof HiddenExit) || 
                 !((HiddenExit) entry.getValue()).isHidden()) {
@@ -126,6 +127,23 @@ public class Location implements Lookable, Storage{
         }
         return visibleExits;
     }
+	
+	/**
+	 * Looks for Exits that are invisible to the Actors.
+	 * @return a map of the invisible Exits
+	 */
+	public Map<String, Exit> getInvisibleExits() {
+        Map<String, Exit> visibleExits = new HashMap<>();
+        
+        for (Map.Entry<String, Exit> entry : exits.entrySet()) {
+            if ((entry.getValue() instanceof HiddenExit) && 
+                ((HiddenExit) entry.getValue()).isHidden()) {
+                visibleExits.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return visibleExits;
+    }
+	
 	
 	/**
 	 * Gets a list of all Interactable Objects in this Location.

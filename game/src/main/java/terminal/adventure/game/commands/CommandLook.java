@@ -26,7 +26,7 @@ public class CommandLook extends Command {
                 result += a.look() + "\n";
             }
             
-            List<Exit> exits = actor.getCurrentLocation().getExitByName(arg);
+            List<Exit> exits = actor.getCurrentLocation().getExitsByName(arg);
             for (Exit exit : exits) {
                 result += exit.look() + "\n";
             }
