@@ -5,10 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 import terminal.adventure.game.Stats;
-import terminal.adventure.game.controllers.Controller;
-import terminal.adventure.game.controllers.Faction;
-import terminal.adventure.game.inventory.Equipment;
-import terminal.adventure.game.inventory.Storage;
 import terminal.adventure.game.inventory.items.Item;
 import terminal.adventure.game.inventory.slots.Slot;
 

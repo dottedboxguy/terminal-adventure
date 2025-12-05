@@ -2,9 +2,7 @@ package terminal.adventure.game;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.Arrays;
 import java.util.List;
-import terminal.adventure.game.Stats;
 import terminal.adventure.game.actors.Actor;
 import terminal.adventure.game.controllers.Controller;
 import terminal.adventure.game.controllers.Faction;
@@ -122,11 +120,9 @@ public class ControllerTest {
     public void testPlayTurn() {
         Actor actor = new Actor("TestActor", "A test actor") {};
         Controller controller = new TestController(actor, Faction.goodGuys) {
-            private boolean played = false;
 
             @Override
             protected void play() {
-                played = true;
             }
 
             @Override
