@@ -167,7 +167,22 @@ public class Location implements Lookable, Storage{
      * Location Description getter.
      * @return The location's description
      */
-    public String look() { return this.DESCRIPTION; }
+    public String look() { 
+    	String res = this.DESCRIPTION+"\n";
+    	
+    	List<Item> groundItems = this.getItems();
+    	
+    	if(groundItems.size() > 0) {
+    		res+="Items are scattered around :\n";
+    	}
+    	
+    	for (Item item : groundItems) {
+    		res+= " - "+item.getName()+"\n";
+    	}
+    	
+    	
+    	return res; 
+    	}
 	
 	//------------------- Storage Methods -------------
 	// For Documentation of these methods, see Storage
@@ -187,7 +202,7 @@ public class Location implements Lookable, Storage{
 	 * See {@link Storage}
 	 */
 	public void removeItem(Item item) {
-		this.inventory.add(item);
+		this.inventory.remove(item);
 	}
 
 	@Override
